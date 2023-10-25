@@ -1,1 +1,164 @@
+CHICKEN:
+  Skills:
+  - skill{s=chicken_summon} @self ~onSpawn
+  - remove @self ~onSpawn
 
+COW:
+  Skills:
+  - skill{s=cow_summon} @self ~onSpawn
+  - remove @self ~onSpawn
+
+PIG:
+  Skills:
+  - skill{s=pig_summon} @self ~onSpawn
+  - remove @self ~onSpawn
+
+SHEEP:
+  Skills:
+  - skill{s=sheep_summon} @self ~onSpawn
+  - remove @self ~onSpawn
+
+#SQUID:
+#  Skills:
+#  - skill{s=squid_watercheck} @self ~onTimer:1
+
+
+CAVE_SPIDER:
+  Skills:
+  - summon{t=bv_cavespider;amount=1;radius=0} @self ~onSpawn
+  - remove @self ~onSpawn
+
+PIGLIN:
+  Health: 16
+  Damage: 8
+  Options:
+    PreventOtherDrops: false
+  Drops:
+  - PiglinDrop 1 0.5
+
+SPIDER:
+  Skills:
+  - randomskill{skills=bv_SummonSpider,bv_SummonSpider1,bv_SummonSpider2,bv_SummonSpider3,bv_SummonSpider4,bv_SummonSpider5,bv_SummonSpider6,bv_SummonSpider7,bv_SummonSpider8,bv_SummonSpider9,bv_SummonSpider10,bv_SummonSpiderJockey} @self ~onSpawn
+  - remove @self ~onSpawn
+  
+ZOMBIFIED_PIGLIN:
+  Health: 20
+  Damage: 8
+  Options:
+    PreventOtherDrops: false
+  Drops:
+  - PiglinDrop 1 0.3
+
+BLAZE:
+  Health: 30
+  Damage: 5
+  Options:
+    PreventOtherDrops: false
+  Drops:
+  - StrayDrop 1 1
+
+CREEPER:
+  Skills:
+  - summon{t=bv_creeper;amount=1;radius=0} @self ~onSpawn
+  - remove @self ~onSpawn
+
+ENDER_DRAGON:
+  Health: 50000
+  Damage: 100
+  BossBar:
+    Enabled: true
+    Title: '&f௝ <GRADIENT:#AA336A:#770737>ᴇɴᴅᴇʀ ᴅʀᴀɢᴏɴ &8- &c<caster.hp>❤'
+    Range: 200
+    Color: WHITE
+    Style: SOLID
+    CreateFog: true
+  Drops:
+  - mmoitems{type=MATERIAL;id=VOID_STONE} 15-30 1
+  - mmoitems{type=MATERIAL;id=IRIDIUM_SHARD} 25-64 1
+  - mmoitems{type=MATERIAL;id=DRAGON_SCALE} 3-10 1
+  - mmoitems{type=MATERIAL;id=ENDERCORE} 1 0.0001
+
+
+PIGLIN_BRUTE:
+  Health: 50
+  Damage: 13
+  Options:
+    PreventOtherDrops: false
+  Drops:
+  - PiglinDrop 1 0.5
+
+SKELETON:
+  Skills:
+  - summon{t=bv_skeleton;amount=1;radius=0} @self ~onSpawn
+  - remove @self ~onSpawn
+
+STRAY:
+  Health: 30
+  Damage: 5
+  Options:
+    PreventOtherDrops: false
+  Drops:
+  - StrayDrop 1 1
+
+ZOMBIE:
+  Skills:
+  - randomskill{skills=SummonZOMBIEPack,SummonZOMBIEgrounded} @self ~onSpawn
+  - remove @self ~onSpawn
+
+BABY_ZOMBIE:
+  Skills:
+  - remove @self ~onSpawn
+  
+BABY_ZOMBIE_VILLAGER:
+  Skills:
+  - remove @self ~onSpawn
+  
+#ZOMBIE_VILLAGER:
+#  Skills:
+#  - remove @self ~onSpawn
+
+WANDERING_TRADER:
+  #Conditions:
+  #- world{w=world_spawn} true
+  Skills:
+  - remove @self ~onSpawn
+
+LLAMA:
+  #Conditions:
+  #- world{w=world_spawn} true
+  Skills:
+  - remove @self ~onSpawn
+
+TRADER_LLAMA:
+  #Conditions:
+  #- world{w=world_spawn} true
+  Skills:
+  - remove @self ~onSpawn
+
+DONKEY:
+  #Conditions:
+  #- world{w=world_spawn} true
+  Skills:
+  - remove @self ~onSpawn
+
+MULE:
+  #Conditions:
+  #- world{w=world_spawn} true
+  Skills:
+  - remove @self ~onSpawn
+
+HORSE:
+  #Conditions:
+  #- world{w=world_spawn} true
+  Skills:
+  - remove @self ~onSpawn
+
+OCELOT:
+  Skills:
+  - randomskill{skills=Summon_cats,Summon_cats1,Summon_cats2,Summon_cats3,Summon_cats4,Summon_cats5,Summon_cats6,Summon_cats7,Summon_cats8,Summon_cats9,Summon_cats10,Summon_cats11,Summon_cats12,Summon_cats13,Summon_cats14,Summon_cats15,Summon_cats16,Summon_cats17,Summon_cats18,Summon_cats19,Summon_cats20,Summon_cats21,Summon_cats22,Summon_cats23,Summon_cats24,Summon_cats25,Summon_cats26,Summon_cats27,Summon_cats28,Summon_cats29,Summon_cats30,Summon_cats31,Summon_cats32,Summon_cats33,Summon_cats34,Summon_cats35,Summon_cats36,Summon_cats37,Summon_cats38} @self ~onSpawn
+  - remove @self ~onSpawn
+
+SLIME:
+  Skills:
+  - summon{t=bv_slime;amount=1;radius=0} @self ~onSpawn
+  - remove @self ~onSpawn
