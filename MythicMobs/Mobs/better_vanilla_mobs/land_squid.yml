@@ -1,0 +1,21 @@
+land_squid:
+  Type: SQUID
+  Display: 'Beached Squid' 
+  Health: 5
+  AITargetSelectors:
+  - clear
+  Options:
+    PreventSlimeSplit: true
+    PreventOtherDrops: true
+    Silent: false
+    Collidable: true
+    Size: 1
+  Skills:
+  - skill{s=land_squid_death} @self ~onDeath
+  - damage{a=.25;pkb=true} @self ~onTimer:20
+  - effect:particles{particle=falling_water;amount=1;hS=.1;vS=.3;speed=0;y=.25} @self ~onTimer:5
+  - skill{s=land_squid_aircheck} @self ~onTimer:1
+  - skill{s=land_squid_watercheck} @self ~onTimer:1
+  - skill{s=land_squid_land} @self ~onTimer:1
+  - model{mid=land_squid;d=true;i=true} @self ~onSpawn
+  - model{mid=land_squid;d=true;i=true} @self ~onLoad  

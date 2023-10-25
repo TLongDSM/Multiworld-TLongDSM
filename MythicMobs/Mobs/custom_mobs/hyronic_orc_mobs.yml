@@ -1,0 +1,307 @@
+Orc_template_dungeon:
+  Type: ZOMBIE
+  Options:
+    MovementSpeed: 0.18
+    ShowHealth: true
+    PreventRandomEquipment: true
+    AlwaysShowName: false
+    Persistent: false
+    Despawn: true
+    PreventOtherDrops: true
+    FollowRange: 20
+    Silent: true
+    KnockbackResistance: 1
+    PreventSunburn: true
+  Modules:
+    ThreatTable: true
+  AIGoalSelectors:
+  - 0 clear
+  - 1 meleeattack
+  - 2 movetowardstarget
+  - 3 randomstroll
+  AITargetSelectors:
+  - 0 clear
+  - 1 players
+  Skills:
+  - effect:sound{s=orc_sounds:samus.orc_idle;volume=1;pitch=1.2} @self ~onTimer:140 0.35
+  - effect:sound{s=orc_sounds:samus.orc_idle;volume=1;pitch=1.2} @self ~onDeath
+
+  - skill{s=Changetarget} ~onTimer:160 <99%
+
+  - skill{s=Hyronic_CancelEvent;sync=true} ~onAttack
+
+Orc_template_dungeon_bowattack:
+  Type: SKELETON
+  Options:
+    Options:
+    MovementSpeed: 0.2
+    ShowHealth: false
+    PreventRandomEquipment: true
+    AlwaysShowName: false
+    Persistent: false
+    Despawn: true
+    PreventOtherDrops: true
+    FollowRange: 20
+    Silent: true
+    KnockbackResistance: 1
+    PreventSunburn: true
+  Equipment:
+  - bow:HAND
+  Modules:
+    ThreatTable: true
+  AIGoalSelectors:
+  - 0 clear
+  - 1 lookatplayers
+  AITargetSelectors:
+  - 0 clear
+  - 1 players
+  Skills:
+  - effect:sound{s=orc_sounds:samus.orc_idle;volume=1;pitch=1.2} @self ~onTimer:140 0.35
+  - effect:sound{s=orc_sounds:samus.orc_idle;volume=1;pitch=1.2} @self ~onDeath
+
+  - skill{s=Changetarget} ~onTimer:160 <99%
+  - skill{s=Hyronic_CancelEvent;sync=true} ~onShoot
+
+  - bodyclamp{mh=30} @self ~onSpawn
+  - bodyclamp{mh=30} @self ~onLoad
+
+##############################################################################################################################################
+
+Orc_Arrow:
+  Type: ARMOR_STAND
+  ItemHead: orc_arrow
+  Options:
+    Marker: true
+    Small: false
+    Invisible: true
+    Invincible: true
+  Skills:
+  - look{headOnly=false;immediately=true} @forward{f=5;y=1.5} ~onSpawn
+  #- effect:particles{particle=lava;amount=12;hS=1;vS=1;speed=0.1;delay=1} @self ~onSpawn
+  - equip{item=orc_arrow:4} ~onSpawn
+  
+Orc_Stone:
+  Type: ARMOR_STAND
+  Pose:
+      Head: 0,0,0
+  ItemHead: orc_stone
+  Options:
+    Marker: true
+    Small: false
+    Invisible: true
+    Invincible: true
+  Skills:
+  - equip{item=orc_stone:4} ~onSpawn
+  
+Orc_Glaive:
+  Type: ARMOR_STAND
+  Pose:
+      Head: 0,0,0
+  ItemHead: orc_glaive
+  Options:
+    Marker: true
+    Small: false
+    Invisible: true
+    Invincible: true
+  Skills:
+  - equip{item=orc_glaive:4} ~onSpawn
+  - look{headOnly=false;immediately=true} @forward{f=5;y=1.5} ~onSpawn
+  
+Orc_Skull:
+  Type: ARMOR_STAND
+  Pose:
+      Head: 0,0,0
+  ItemHead: orc_skull
+  Options:
+    Marker: true
+    Small: false
+    Invisible: true
+    Invincible: true
+  Skills:
+  - equip{item=orc_skull:4} ~onSpawn
+  
+Orc_Warrior_Shield:
+  Type: ZOMBIE
+  Display: '&c'
+  Health: 5
+  Damage: 1
+  Options:
+    MovementSpeed: 0.01
+    PreventRandomEquipment: true
+    Collidable: true
+    PreventOtherDrops: true
+    Silent: true
+    KnockbackResistance: 1
+    PreventSunburn: true
+  AIGoalSelectors:
+  - clear
+  AITargetSelectors:
+  - clear
+  Skills:
+  - skill{s=Hyronic_CancelEvent;sync=true} @self ~onDamaged
+  
+  - setAI{ai=false} @self ~onSpawn
+  - skill{s=Orc_Warrior_Shield_BLOCK} ~onDamaged
+  - skill{s=Orc_Warrior_Shield_BLOCK_PRO} ~onDamaged
+  - model{mid=orc_shield;n=false;step=1} @self ~onSpawn
+  - skill{s=Orc_Warrior_Shield_DIE} @Parent ~onTimer:1
+
+##############################################################################################################################################
+
+Orc_Minion_dungeon1:
+  Template: Orc_template_dungeon
+  Display: '&2Orc Minion'
+  Health: 30
+  Damage: 2
+  #Drops:
+  #- MP_Mine1-Drop-Table 1 0.01
+  Skills:
+  - skill{s=Orc_Minion_Attack} ~onTimer:10
+  - skill{s=Orc_Minion_Run} ~onEnterCombat
+  - skill{s=Orc_Minion_Walk} ~onDropCombat
+  - currencygive{amount=5} @Trigger ~onDeath
+  - holo{t="&a+5$";time=55} @Sphere{radius=0.25;points=1;yoffset=1.1} ~onDeath
+
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=Orc_Minion;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_Orc_Minion_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_Orc_Minion_show} @self ~onDamaged
+  - model{mid=Orc_Minion;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=Orc_Minion;d=true;i=true;step=1} @self ~onLoad
+
+
+Orc_Minion_dungeon2:
+  Template: Orc_template_dungeon
+  Display: '&2Orc Minion'
+  Health: 45
+  Damage: 2
+  #Drops:
+  #- MP_Mine2-Drop-Table 1 0.01
+  Skills:
+  - skill{s=Orc_Minion_Attack} ~onTimer:10
+  - skill{s=Orc_Minion_Run} ~onEnterCombat
+  - skill{s=Orc_Minion_Walk} ~onDropCombat
+  - currencygive{amount=5} @Trigger ~onDeath
+  - holo{t="&a+5$";time=55} @Sphere{radius=0.25;points=1;yoffset=1.1} ~onDeath
+
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=Orc_Minion;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_Orc_Minion_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_Orc_Minion_show} @self ~onDamaged
+  - model{mid=Orc_Minion;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=Orc_Minion;d=true;i=true;step=1} @self ~onLoad
+
+
+Orc_Archer_dungeon1:
+  Template: Orc_template_dungeon_bowattack
+  Display: '&2Orc Archer'
+  Health: 60
+  Damage: 5
+  #Drops:
+  #- MP_Mine3-Drop-Table 1 0.01
+  Skills:
+  - skill{s=Orc_Archer_Attack} ~onTimer:60
+  - currencygive{amount=10} @Trigger ~onDeath
+  - holo{t="&a+10$";time=55} @Sphere{radius=0.25;points=1;yoffset=1.1} ~onDeath
+
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=Orc_Archer;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_Orc_Archer_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_Orc_Archer_show} @self ~onDamaged
+  - model{mid=Orc_Archer;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=Orc_Archer;d=true;i=true;step=1} @self ~onLoad
+
+
+Orc_Warrior_dungeon1:
+  Template: Orc_template_dungeon
+  Display: '&2Orc Warrior'
+  Health: 100
+  Damage: 5
+  #Drops:
+  #- MP_Mine4-Drop-Table 1 0.01
+  Skills:
+  - skill{s=Orc_Warrior_Run} ~onEnterCombat
+  - skill{s=Orc_Warrior_Walk} ~onDropCombat
+  - setstance{stance=combat} @self ~onSpawn
+  - skill{s=Orc_Warrior_Attack} ~onTimer:10
+  - skill{s=Orc_Warrior_Shield_Blockmode_ON} ~onDamaged 0.4
+  - skill{s=Orc_Warrior_Shield_Blockmode_OFF} ~onTimer:40
+  - currencygive{amount=15} @Trigger ~onDeath
+  - holo{t="&a+15$";time=55} @Sphere{radius=0.25;points=1;yoffset=1.1} ~onDeath
+
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=Orc_Warrior;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_Orc_Warrior_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_Orc_Warrior_show} @self ~onDamaged
+  - model{mid=Orc_Warrior;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=Orc_Warrior;d=true;i=true;step=1} @self ~onLoad
+
+
+Orc_King_dungeon1:
+  Template: Orc_template_dungeon
+  Display: '&2Orc King'
+  Health: 650
+  Damage: 6
+  #Drops:
+  #- oraxen orc_glaive 1 1
+  DamageModifiers:
+  - FALL 0
+  Skills:
+  - partvisibility{m=orc_king;p=skulls;v=false;delay=1} @self ~onSpawn
+  - skill{s=Orc_King_Attack} ~onTimer:10
+  - skill{s=Orc_King_Skill} ~onTimer:30
+
+  - changepart{m=Orc_King;pid=hp_bar;nm=Orc_King;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_Orc_King_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_Orc_King_show} @self ~onDamaged
+  - model{mid=Orc_King;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=Orc_King;d=true;i=true;step=1} @self ~onLoad
+
+##############################################################################################################################################
+
+# Orc Giant #
+
+Orc_Giant:
+  Template: Orc_template_dungeon_bowattack
+  Display: '&2Orc Giant'
+  Health: 350
+  Damage: 6
+  DamageModifiers:
+  - FALL 0
+  Skills:
+  - partvisibility{m=orc_giant;p=stone;v=false;delay=1} @self ~onSpawn
+  - skill{s=Orc_Giant_Attack} ~onTimer:10
+  - skill{s=Orc_Giant_Skill} ~onTimer:40
+
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=Orc_Giant;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_Orc_Giant_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_Orc_Giant_show} @self ~onDamaged
+  - model{mid=Orc_Giant;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=Orc_Giant;d=true;i=true;step=1} @self ~onLoad
+
+##############################################################################################################################################
+
+Orc_Boar:
+  Type: wolf
+  Display: '&cOrc Boar'
+  Health: 40
+  Damage: 2
+  Options:
+    MovementSpeed: 0.39
+    ShowHealth: false
+    PreventRandomEquipment: true
+    AlwaysShowName: true
+    Persistent: false
+    Invincible: true
+    Despawn: false
+    PreventOtherDrops: true
+    FollowRange: 20
+    Silent: true
+    KnockbackResistance: 1
+    PreventSunburn: true
+  DamageModifiers:
+  - FALL 0
+  AIGoalSelectors:
+  - 0 clear
+  - 1 randomstroll
+  - 2 lookatplayers
+  AITargetSelectors:
+  - 0 clear
+  Skills:
+  - model{mid=orc_boar;n=false;step=1;drive=true} @self ~onSpawn

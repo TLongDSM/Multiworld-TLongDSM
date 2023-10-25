@@ -1,0 +1,109 @@
+captain_template_mobs:
+  Type: IRON_GOLEM
+  AIGoalSelectors:
+  - 0 clear
+  - meleeattack
+  AITargetSelectors:
+  - 1 players
+  - 2 monsters
+  Modules:
+    ThreatTable: true
+  Options:
+    PreventOtherDrops: true
+    Despawn: true
+    Persistent: false
+    KnockbackResistance: 1
+    Collidable: true
+    Silent: true
+    ShowHealth: false
+    AlwaysShowName: false
+  Skills:
+  - effect:particles{p=block_crack;m=red_stained_glass;amount=15;speed=0.25;hs=0.5;vs=0.5} @origin{y=1} ~onDamaged
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_show} @self ~onEnterCombat ?!mythicmobtype{t=captain_narcissistic_gama05}
+  - skill{s=LR_hpbar_show} @self ~onDamaged ?!mythicmobtype{t=captain_narcissistic_gama05}
+  - skill{s=LR_hpbar_boss_show} @self ~onEnterCombat ?mythicmobtype{t=captain_narcissistic_gama05}
+  - skill{s=LR_hpbar_boss_show} @self ~onDamaged ?mythicmobtype{t=captain_narcissistic_gama05} 
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onLoad
+  
+  - skill{s=Hyronic_CancelEvent;sync=true} @self ~onAttack
+
+captain_template_skills:
+  Type: cat
+  Health: 1000
+  Damage: 0
+  AIGoalSelectors:
+  - 0 clear
+  AITargetSelectors:
+  - 0 clear
+  - 1 players
+  Options:
+    FollowRange: 30
+    KnockbackResistance: 1
+    Silent: true
+    Despawn: true
+    Invincible: true
+    PreventBlockInfection: true
+    PreventOtherDrops: true
+    MaxCombatDistance: 20
+  Skills:
+  - skill{s=Hyronic_CancelEvent;sync=true} @self ~onAttack
+
+############################################################################################################################################
+
+captain_angry_gama05:
+  Template: captain_template_mobs
+  Display: Angry Captain
+  Health: 250
+  Damage: 3
+  Options:
+    FollowRange: 10
+  Skills:
+  - randomskill{skills=magicangrycaptain_2skillcaptainangry2_gama05,magicangrycaptain_1skillcaptainangry1_gama05,soldiercaptainangrygama05_attack1,soldiercaptainangrygama05_attack2,soldiercaptainangrygama05_jumpfire,soldiercaptainangrygama05_supertajo1,soldiercaptainangrygama05_saltotajo1,captain_estocadaangry_gama05;sync=true} @target ~onTimer:5
+
+captain_narcissistic_gama05:
+  Template: captain_template_mobs
+  Display: Narcissistic captain
+  Health: 1050
+  Damage: 10
+  Options:
+    FollowRange: 32
+  Skills:
+  - randomskill{skills=soldiercaptainnarcissisticgama05_magic2ultihammer,soldiercaptainnarcissisticgama05_golpeton1,soldiercaptainnarcissisticgama05_supergolpe,soldiercaptainnarcissisticgama05_saltosupergolpe2,soldiercaptainnarcissisticgama05_shieldfriends,soldiercaptainnarcissisticgama05_girogolpeton,soldiercaptainnarcissisticgama05_agarre1;sync=true} @target ~onTimer:5
+
+############################################################################################################################################
+
+captainnacisistagama05skill:
+  Type: armor_stand
+  Pose:
+      Head: 0,0,0
+  Options:
+    Marker: true
+    NoAI: true
+    Small: false
+    Invisible: true
+    NoGravity: true
+    Invincible: true
+  Skills:
+  - look{headOnly=false;immediately=true} @forward{f=5;y=1.5} ~onSpawn
+  - skill{s=captainskilspawnnacisistagama05skillmob;sync=true} @self ~onSpawn
+  - remove{delay=300} @self ~onSpawn
+
+1skillcaptainangry1_gama05:
+  Template: captain_template_skills
+  Skills:
+  - model{mid=1skillcaptainangry1_gama05;n=false;tint=false} @self ~onSpawn
+  - skill{s=magicangrycaptain_1skillcaptainangry1_gama05_spawn;sync=true} @self ~onSpawn
+
+2skillcaptainangry2_gama05_gama05:
+  Template: captain_template_skills
+  Skills:
+  - model{mid=2skillcaptainangry2_gama05;n=false;tint=false} @self ~onSpawn
+  - skill{s=magicangrycaptain_2skillcaptainangry2_gama05_spawn;sync=true} @self ~onSpawn
+
+magichammernarcisssistchability_gama05:
+  Template: captain_template_skills
+  Skills:
+  - model{mid=captainmagichammer_narcissistic_gama05;n=false;tint=false} @self ~onSpawn
+  - skill{s=magicangrycaptain_1skillcaptainangry1_gama05_spawn;sync=true} @self ~onSpawn

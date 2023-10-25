@@ -1,0 +1,188 @@
+NPCGREETFX:
+  Type: CAT
+  Display: "GREETFX"
+  AIGoalSelectors:
+  - 0 clear
+  - 1 lookatplayers
+  AITargetSelectors:
+  - 0 clear
+  Skills:
+  - model{mid=npcgreeting;d=false;n=false} @self ~onSpawn
+  - skill{s=NPCvolgreetfx} @self ~onSpawn
+  - skill{s=NPCgreetfx} @self ~onSpawn
+  Options:
+    PreventBlockInfection: true
+    Invincible: true
+    Silent: true
+    NoGravity: true
+
+NPCGREETFX_villager:
+  Type: CAT
+  Display: "GREETFX"
+  AIGoalSelectors:
+  - 0 clear
+  - 1 lookatplayers
+  AITargetSelectors:
+  - 0 clear
+  Skills:
+  - model{mid=npcgreeting;d=false;n=false} @self ~onSpawn
+  - skill{s=NPCgreetfx} @self ~onSpawn
+  Options:
+    PreventBlockInfection: true
+    Invincible: true
+    Silent: true
+    NoGravity: true
+
+#############################################################################################
+
+NPC_template_NPC:  
+  Type: IRON_GOLEM
+  Health: 20
+  Damage: 3
+  Options:
+    Despawn: false
+    Silent: true
+    FollowRange: 12
+    MovementSpeed: 0.25
+    KnockbackResistance: 0.5
+    AlwaysShowName: false
+    PreventOtherDrops: true
+    PreventMobKillDrops: true
+    HasTrades: false
+    Collidable: false
+  Modules:
+    ThreatTable: true
+  DamageModifiers:
+  - DROWNING 0
+  - BLOCK_EXPLOSION 0
+  - ENTITY_EXPLOSION 0
+  - VOID 0
+  - LIGHTNING 0
+  - SUICIDE 0
+  - STARVATION 0
+  - POISON 0
+  - MAGIC 0
+  - DRAGON_BREATH 0
+  - WITHER 0
+  - FALLING_BLOCK 0
+  - THORNS 0
+  - CUSTOM 0
+  - LAVA 0
+  - MELTING 0
+  - FIRE_TICK 0
+  - FIRE 0
+  - HOT_FLOOR 0
+  - FALL 0
+  - SUFFOCATION 0
+  - PROJECTILE 0
+  - ENTITY_ATTACK 0
+  - CONTACT 0
+
+NPC_template_NPC_skill:  
+  Type: IRON_GOLEM
+  AIGoalSelectors:
+  - 0 clear
+  - 1 lookatplayers
+  AITargetSelectors:
+  - 0 clear
+  Options:
+    Collidable: true
+  Skills:
+  - effect:particles{p=block_crack;m=red_stained_glass;amount=15;speed=0.25;hs=0.5;vs=0.5} @origin{y=1} ~onDamaged
+  
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - changepart{m=<caster.mythic_type>;pid=tag_name;nm=<caster.mythic_type>;npid=tag_name} @self ~onDeath ?mythicmobtype{t=blacksmith,jarvis_model64,daisy_model64}
+  - skill{s=LR_tagmane_template} @self ~onTimer:40
+
+  - model{mid=<caster.mythic_type>;n=false;d=false} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;n=false;d=false} @self ~onLoad
+
+  - skill{s=NPC_template_Timer} ~onTimer:20
+  - skill{s=NPC_template_Cooloff} ~onTimer:20
+  - skill{s=NPC_template_Signal} ~onSignal:HIT
+  - skill{s=NPC_template_onDamaged} ~onDamaged
+
+  - setstance{s=alone} @self ~onSpawn
+  - skill{s=NPCAlone} @self ~onTimer:20
+  - throw{v=1;yv=0} @PIR{r=1} ~onTimer:1
+  - skill{s=NPCplayercheck} @self ~onTimer:40 
+  - skill{s=NPCGreet} @self ~onTimer:40
+  - skill{s=NPCfidget} @self ~onTimer:120 .1
+
+NPC_template_Guard_Skill:
+  Type: IRON_GOLEM
+  Display: "ꑥ"
+  Faction: ThreadBall
+  AITargetSelectors:
+  - 0 clear
+  #- 1 monsters
+  - 1 OtherFactionMonsters
+  Skills:
+  - effect:particles{p=block_crack;m=red_stained_glass;amount=15;speed=0.25;hs=0.5;vs=0.5} @origin{y=1} ~onDamaged
+
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - changepart{m=<caster.mythic_type>;pid=tag_name;nm=<caster.mythic_type>;npid=tag_name} @self ~onDeath ?mythicmobtype{t=blacksmith,jarvis_model64,daisy_model64}
+  - skill{s=LR_tagmane_template} @self ~onTimer:40
+  - model{mid=<caster.mythic_type>;n=false;d=false} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;n=false;d=false} @self ~onLoad
+
+  - skill{s=NPC_template_Timer} ~onTimer:20
+  - skill{s=NPC_template_Cooloff} ~onTimer:20
+  - skill{s=NPC_template_Signal} ~onSignal:HIT
+  - skill{s=NPC_template_onDamaged} ~onDamaged
+
+  - stance{s=idle} @Self ~onSpawn
+  - skill{s=guardNPCattack;sync=true} @self ~onAttack
+  - skill{s=guardNPCsheathsword} @self ~onDropCombat
+  - skill{s=guardNPCdrawsword} @self ~onEnterCombat 
+  - potion{type=INVISIBILITY;duration=130;level=0;p=false} @self ~onTimer:120
+  - skill{s=guardNPConspawn} @self ~onSpawn
+  - skill{s=guardNPCnight} @self ~onTimer:20
+  - skill{s=guardNPCtorchFX} @self ~onTimer:5
+  - skill{s=guardNPCday} @self ~onTimer:20
+
+NPC_template_villager_Skill:
+  Type: IRON_GOLEM
+  Display: 'ꑦ'
+  AITargetSelectors:
+  - 0 clear
+  - 1 monsters
+  AIGoalSelectors:
+  - 0 clear
+  - 1 avoidzombies
+  - 2 avoidskeletons
+  - 3 avoidcreepers
+  - 4 lookatplayers
+  - 5 randomstroll
+  - 6 randomlookaround
+  - 7 float
+  Skills:
+  - effect:particles{p=block_crack;m=red_stained_glass;amount=15;speed=0.25;hs=0.5;vs=0.5} @origin{y=1} ~onDamaged
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - changepart{m=<caster.mythic_type>;pid=tag_name;nm=<caster.mythic_type>;npid=tag_name} @self ~onDeath ?mythicmobtype{t=blacksmith,jarvis_model64,daisy_model64}
+  - skill{s=LR_tagmane_template} @self ~onTimer:40
+  - model{mid=<caster.mythic_type>;n=false;d=false} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;n=false;d=false} @self ~onLoad
+
+  - skill{s=NPC_Timer} ~onTimer:20
+  - skill{s=NPC_Cooloff} ~onTimer:20
+  - skill{s=NPC_Aggressive_Calm} ~onTimer:20
+  - skill{s=NPC_Aggressive_Signal} ~onSignal:HIT
+  - skill{s=NPC_Normal_Interact} ~onInteract
+  - skill{s=NPC_FightBack} ~onDamaged
+  - stance{s=idle} @Self ~onSpawn
+  - skill{s=NPC_AddIdle} ~onTimer:10
+
+NPC_template_crate_skill: 
+  Type: IRON_GOLEM
+  AIGoalSelectors:
+  - 0 clear
+  AITargetSelectors:
+  - 0 clear
+  Skills:
+  - skill{s=crateSMOKE} @self ~onTimer:10
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - changepart{m=<caster.mythic_type>;pid=tag_name;nm=<caster.mythic_type>;npid=tag_name} @self ~onDeath
+  - skill{s=LR_tagmane_template_crate} @self ~onTimer:40
+  - model{mid=<caster.mythic_type>;n=false;d=false} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;n=false;d=false} @self ~onLoad

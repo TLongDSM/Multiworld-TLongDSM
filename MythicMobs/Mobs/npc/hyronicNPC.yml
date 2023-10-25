@@ -1,0 +1,113 @@
+daisy_model64:
+  Template: NPC_template_NPC, NPC_template_NPC_skill
+  Display: 'ড় ᴅᴀɪsʏ'
+  Skills:
+  - skill{s=daisyNPCInteract} @self ~onInteract
+
+frogger_model64:
+  Template: NPC_template_NPC, NPC_template_NPC_skill
+  Display: '৙ ꜰʀᴏɢɢᴇʀ'
+  Skills:
+  - skill{s=froggerNPCInteract} @self ~onInteract
+
+vivian_model64:
+  Template: NPC_template_NPC, NPC_template_NPC_skill
+  Display: '৘ ᴠɪᴠɪᴀɴ'
+  Skills:
+  - skill{s=vivivanNPCInteract} @self ~onInteract
+
+tristina_model64:
+  Template: NPC_template_NPC, NPC_template_NPC_skill
+  Display: 'ঢ় ᴛʀɪsᴛɪɴᴀ'
+  Skills:
+  - skill{s=tristinaNPCInteract} @self ~onInteract
+
+dustin_model:
+  Template: NPC_template_NPC, NPC_template_NPC_skill
+  Display: "dustin"
+  Skills:
+  - skill{s=dustinNPCInteract} @self ~onInteract
+
+jarvis_model64:
+  Template: NPC_template_NPC, NPC_template_NPC_skill
+  Display: 'ꑧ ᴊᴀʀᴠɪs'
+  Skills:
+  - skill{s=jarvisNPCInteract} @self ~onInteract
+
+abigail_model64:
+  Template: NPC_template_NPC, NPC_template_NPC_skill
+  Display: "abigail"
+  Skills:
+  - skill{s=abigailNPCInteract} @self ~onInteract
+  
+wizard:
+  Template: NPC_template_NPC, NPC_template_NPC_skill
+  Display: '৚ ɴᴏᴅᴀᴍᴜs'
+  Skills:
+  - effect:particles{particle=end_rod;amount=1;hS=.1;vS=.1;speed=0.01} @ModelPart{m=wizard;p=righthand;offset=LOCAL;x=0;y=-0.5;z=1.2} ~onTimer:15
+  - skill{s=wizardNPCInteract} @self ~onInteract
+   
+fisherman:
+  Template: NPC_template_NPC, NPC_template_NPC_skill
+  Display: "ꑛ fisherman"
+  Skills:
+  - skill{s=fishermanSMOKE} @self ~onTimer:60
+  - bodyclamp{m=fisherman;c=10} @self ~onSpawn
+  - skill{s=fishermanNPCInteract} @self ~onInteract
+
+archer:
+  Template: NPC_template_NPC, NPC_template_NPC_skill
+  Display: "Archer"
+  Skills:
+  - skill{s=archerNPCInteract} @self ~onInteract
+    
+blacksmith:
+  Template: NPC_template_NPC, NPC_template_NPC_skill
+  Display: '৛ Rumble'
+  Skills:
+  - skill{s=blacksmithNPCInteract} @self ~onInteract
+    
+npc_lola:
+  Template: NPC_template_NPC, NPC_template_NPC_skill
+  Display: 'LoLa'
+  Skills:
+  - skill{s=lolaNPCInteract} @self ~onInteract
+
+##############################################################################################
+
+npc_aggressive:
+  Template: NPC_template_NPC, NPC_template_villager_Skill
+
+npc_aggressive_slim:
+  Template: NPC_template_NPC, NPC_template_villager_Skill
+
+npc_normal:
+  Template: NPC_template_NPC, NPC_template_villager_Skill
+
+npc_normal_slim:
+  Template: NPC_template_NPC, NPC_template_villager_Skill
+
+npc_timid:
+  Template: NPC_template_NPC, NPC_template_villager_Skill
+
+npc_timid_slim:
+  Template: NPC_template_NPC, NPC_template_villager_Skill
+
+
+##############################################################################################
+  
+guardcyan:
+  Template: NPC_template_NPC, NPC_template_Guard_Skill
+  
+  
+###############################################################################################
+
+black_silver_crate:
+  Template: NPC_template_NPC, NPC_template_crate_skill
+  Skills:
+  - skill{s=black_silver_crateNPCInteract} @self ~onInteract
+
+purple_light_purple_crate:
+  Template: NPC_template_NPC, NPC_template_crate_skill
+  Skills:
+  - skill{s=purple_light_purple_crateNPCInteract} @self ~onInteract

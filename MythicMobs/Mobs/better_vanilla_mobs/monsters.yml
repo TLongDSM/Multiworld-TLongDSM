@@ -1,0 +1,225 @@
+zombiepack:
+  Type: ZOMBIE
+  Display: 'zombiepack'
+  Options:
+    MovementSpeed: 0.18
+    ShowHealth: true
+    PreventRandomEquipment: true
+    AlwaysShowName: false
+    Persistent: false
+    Despawn: true
+    PreventOtherDrops: true
+    FollowRange: 20
+    Silent: true
+    KnockbackResistance: 1
+    PreventSunburn: true
+  Health: 5
+  Modules:
+    ThreatTable: true
+  Skills:
+  - skill{s=zombieGAP} @forward{f=2;y=-1} ~onTimer:20
+  - skill{s=zombieGROUNDED_skill} @self ~onTimer:2
+  - skill{s=zombieFALLING} @self ~onTimer:2
+
+  - velocity{m=set;x=0;y=0;z=0} @self ~onDeath
+  - state{s=flinch} @self ~onDamaged
+  - randomskill{skills=zombieATTACK1sync,zombieATTACK2sync;sync=true} @self ~onAttack
+  - skill{s=zombieSHAMBLER} @self ~onSpawn .25
+
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_show} @self ~onDamaged
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onLoad 
+  
+zombiegrounded:
+  Type: ZOMBIE
+  Health: 5
+  Options:
+    MovementSpeed: .1
+    KnockbackResistance: 1
+  Skills:
+  - skill{s=zombiegroundATTACKsync;sync=true} @self ~onAttack
+
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_show} @self ~onDamaged
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onLoad
+
+bv_skeleton:
+  Type: SKELETON
+  Display: 'Skeleton'
+  Modules:
+    ThreatTable: true  
+  Options:
+    MovementSpeed: .2
+    KnockbackResistance: .5
+  Skills:
+  - CancelEvent{sync=true} @self ~onShoot
+  - effect:itemspray{item=bone;amount=1;velocity=1;d=20} @self ~onDamaged
+  #- skill{s=BV_INAIR} @self ~onTimer:5
+  - skill{s=BV_LAND} @self ~onTimer:5
+  - skill{s=BV_burning} @self ~onTimer:1
+  - skill{s=BV_RANDOMFLINCH} @self ~onDamaged
+  - skill{s=BV_SKELETON_DEATH} @self ~onDeath
+  - skill{s=BV_SKELETON_SHOVE} @target ~onTimer:5
+  - skill{s=BV_SKELETON_SHOOT;sync=true} @target ~onShoot
+  - skill{s=BV_SKELETON_RUN} @self ~onEnterCombat
+  - skill{s=BV_SKELETON_WALK} @self ~onDropCombat
+
+  - BodyClamp{mh=15;mb=15;rde=30;rdu=60} @self ~onSpawn
+  - partvis{pid=bow_pulled;v=false} @self ~onSpawn
+
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_show} @self ~onDamaged
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onLoad  
+
+
+bv_creeper:
+  Type: CREEPER
+  Display: 'Creeper'
+  Modules:
+    ThreatTable: true  
+  Options:
+    MovementSpeed: .2
+  Skills:
+  - SudoSkill{s=BV_GREENBLOOD;cat=true} @trigger ~onDamaged
+  - skill{s=BV_CREEPER_UNDISGUISE} @self ~onTimer:5 ?!playerwithin{d=20}
+  - skill{s=BV_CREEPER_UNDISGUISE} @self ~onSignal:UNVIEW
+  - skill{s=BV_CREEPER_DISGUISE} @self ~onSignal:VIEW
+  - sudoskill{s=BV_CREEPER_LOOKCHECK_SUDO;cat=true} @pir{r=16} ~onTimer:10
+  - skill{s=BV_CREEPER_PRIME} @self ~onTimer:5
+  #- skill{s=BV_INAIR} @self ~onTimer:5
+  - skill{s=BV_LAND} @self ~onTimer:5
+  - skill{s=BV_RANDOMFLINCH} @self ~onDamaged
+  - skill{s=BV_CREEPER_DEATH} @self ~onDeath
+
+  - BodyClamp{mh=15;mb=15;rde=30;rdu=60} @self ~onSpawn
+
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_show} @self ~onDamaged
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onLoad 
+
+
+bv_spider:
+  Type: SPIDER
+  Display: 'Spider'
+  Modules:
+    ThreatTable: true  
+  Skills:
+  - skill{s=BV_SPIDERAGGRO} @self ~onTimer:5
+  #- skill{s=BV_INAIR} @self ~onTimer:5
+  - SudoSkill{s=BV_GREENBLOOD;cat=true} @trigger ~onDamaged
+  - skill{s=BV_SPIDERBLOCKCHECKER} @self ~onTimer:1
+  - skill{s=BV_LAND} @self ~onTimer:5
+  - skill{s=BV_RANDOMFLINCH} @self ~onDamaged
+  - skill{s=BV_SPIDER_DEATH} @self ~onDeath
+
+  - BodyClamp{mh=0;mb=0;rde=0;rdu=0} @self ~onSpawn
+
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_show} @self ~onDamaged
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onLoad 
+
+
+bv_cavespider:
+  Type: CAVE_SPIDER
+  Display: 'Cave Spider'
+  Modules:
+    ThreatTable: true  
+  Skills:
+  - skill{s=BV_SPIDERAGGRO} @self ~onTimer:5
+  #- skill{s=BV_INAIR} @self ~onTimer:5
+  - SudoSkill{s=BV_GREENBLOOD;cat=true} @trigger ~onDamaged
+  - skill{s=BV_SPIDERBLOCKCHECKER} @self ~onTimer:1
+  - skill{s=BV_LAND} @self ~onTimer:5
+  - skill{s=BV_RANDOMFLINCH} @self ~onDamaged
+  - skill{s=BV_SPIDER_DEATH} @self ~onDeath
+
+  - BodyClamp{mh=0;mb=0;rde=0;rdu=0} @self ~onSpawn
+
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_show} @self ~onDamaged
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onLoad 
+
+
+bv_spiderjockey:
+  Type: SPIDER
+  Display: 'Spider Jockey'
+  Modules:
+    ThreatTable: true  
+  Skills:
+  - skill{s=BV_SKELETON_SHOOT} @target ~onTimer:60
+  - skill{s=BV_SPIDERAGGRO} @self ~onTimer:5
+  #- skill{s=BV_INAIR} @self ~onTimer:5
+  - SudoSkill{s=BV_GREENBLOOD;cat=true} @trigger ~onDamaged
+  - skill{s=BV_SPIDERBLOCKCHECKER} @self ~onTimer:1
+  - skill{s=BV_LAND} @self ~onTimer:5
+  - skill{s=BV_RANDOMFLINCH} @self ~onDamaged
+  - skill{s=BV_SPIDERJOCKEY_DEATH} @self ~onDeath
+
+  - BodyClamp{mh=10;mb=10;rde=15;rdu=15} @self ~onSpawn
+  - partvis{pid=skeleton_bow_pulled;v=false} @self ~onSpawn
+
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_show} @self ~onDamaged
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onLoad 
+
+
+######################################################################################################################################################
+
+bv_slime:
+  Type: ZOMBIE
+  Display: '&fCommon Slime'
+  Health: 25
+  Damage: 2
+  Faction: Slime
+  Options:
+    MovementSpeed: 0.25
+    ShowHealth: false
+    PreventRandomEquipment: true
+    AlwaysShowName: false
+    Persistent: false
+    Despawn: true
+    PreventOtherDrops: true
+    FollowRange: 20
+    Silent: true
+    KnockbackResistance: 1
+    PreventSunburn: true
+  Modules:
+    ThreatTable: true
+  AIGoalSelectors:
+  - 0 clear
+  - 1 meleeattack
+  - 2 movetowardstarget
+  - 3 randomstroll
+  - 4 float
+  AITargetSelectors:
+  - 0 clear
+  - 1 players
+  Skills:
+  - effect:sound{s=entity.slime.death;volume=0.6;pitch=1.1} @self ~onDeath
+  - skill{s=Changetarget_slime} ~onTimer:160 <99%
+  - skill{s=bv_Slime_Attack} ~onTimer:10 0.7
+  - skill{s=bv_Slime_Hit} ~onDamaged
+
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_show} @self ~onDamaged
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onLoad 
+  
+  - skill{s=Hyronic_CancelEvent;sync=true} ~onAttack
+  Drops:
+  - SLIME_BALL 1 1

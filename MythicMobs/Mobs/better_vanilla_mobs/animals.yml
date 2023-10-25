@@ -1,0 +1,416 @@
+####################################################################################################
+# Templates
+
+AoF_AnimalEntity_Base:
+  Type: POLAR_BEAR
+  Skills:
+  - cancelevent{sync=true} ~onAttack
+  ##======[Fleeing]=======
+  - Aura{
+    auraName=flee;
+    onStart=[
+        - defaultstate{m=<caster.mythic_type>;t=WALK;s=run} @self
+        - setspeed{speed=1.5;type=walking}
+        - runaigoalselector{target=clear}
+        - runaigoalselector{target=fleeplayers}
+        ];
+    onEnd=[
+        - defaultstate{m=<caster.mythic_type>;t=WALK;s=walk} @self
+        - setspeed{speed=1;type=walking}
+        - skill{s=AoF_ResetGoal}
+        ];
+    duration=100;
+    mergeAll=true} @self ~onDamaged ?!stance{s=mating} ?~isPlayer{}
+  ##======[Sleeping]=======
+  - skill{s=AoF_Sleep} ~onTimer:100 0.33 ?night{}
+  - skill{s=AoF_Sleep} ~onLoad ?night{}
+  - skill{s=AoF_WakeUp} ~onTimer:100 0.33 ?!night{}
+  - skill{s=AoF_WakeUp} ~onDamaged
+  - skill{s=AoF_WakeUp_onLoad} ~onLoad ?!night{}
+
+
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_show} @self ~onDamaged
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onLoad 
+  Options:
+    Despawn: persistent
+    Silent: true
+    FollowRange: 8
+    MovementSpeed: 0.22
+    PreventOtherDrops: true
+
+AoF_AnimalEntity_Adult:
+  Template: AoF_AnimalEntity_Base
+  AIGoalSelectors:
+  - clear
+  - meleeattack
+  - randomlookaround
+  - randomstroll
+  - lookatplayers
+  - float
+  Skills:
+  ##======[Mating Cooldown]=======
+  - skill{s=AoF_MatingRecovery} ~onTimer:100
+  Drops:
+  - EXP 1to3 1
+
+AoF_AnimalEntity_Baby:
+  Template: AoF_AnimalEntity_Base
+  AIGoalSelectors:
+  - clear
+  - gotoparent
+  - meleeattack
+  - randomlookaround
+  - randomstroll
+  - lookatplayers
+  - float
+  Skills:
+  ##======[Grow Up Timer]=======
+  - skill{s=AoF_GrowUpCounter} ~onTimer:200
+  Options:
+    Baby: true
+    AgeLock: true
+
+##====================================
+AoF_CowEntity:
+  Type: POLAR_BEAR
+  Health: 10
+  AITargetSelectors:
+  - clear
+  - nearestConditionalTarget{conditions=[  
+      - isPlayer{}
+      - holding{m=WHEAT}
+      - targetwithin{d=8}  
+    ]}
+  Skills:
+  ##======[Luring Check]=======
+  - skill{s=AoF_StopFollowingPlayer} @target{conditions=[  - holding{m=WHEAT} false ]} ~onTimer:20
+  ##======[Sound Effects]=======
+  - skill{s=AoF_SE_CowAmbient;cd=5} ~onTimer:20 0.1 ?!hasaura{n=sleeping}
+  - skill{s=AoF_SE_CowHurt;cd=0.5} ~onDamaged ?~!mythicmobtype{t=pb_aof_dairy_cow_male,pb_aof_dairy_cow_female,pb_aof_brown_cow_male,pb_aof_brown_cow_female}
+
+AoF_ChickenEntity:
+  Type: POLAR_BEAR
+  Health: 4
+  AITargetSelectors:
+  - clear
+  - nearestConditionalTarget{conditions=[  
+      - isPlayer{}
+      - holding{m=WHEAT_SEEDS}
+      - targetwithin{d=8}  
+    ]}
+  - nearestConditionalTarget{conditions=[  
+      - isPlayer{}
+      - holding{m=BEETROOT_SEEDS}
+      - targetwithin{d=8}  
+    ]}
+  - nearestConditionalTarget{conditions=[  
+      - isPlayer{}
+      - holding{m=MELON_SEEDS}
+      - targetwithin{d=8}  
+    ]}
+  - nearestConditionalTarget{conditions=[  
+      - isPlayer{}
+      - holding{m=PUMPKIN_SEEDS}
+      - targetwithin{d=8}  
+    ]}
+  - nearestConditionalTarget{conditions=[  
+      - isPlayer{}
+      - holding{m=TORCHFLOWER_SEEDS}
+      - targetwithin{d=8}  
+    ]}
+  Skills:
+  ##======[Luring Check]=======
+  - skill{s=AoF_StopFollowingPlayer} @target{conditions=[  - (holding{m=WHEAT_SEEDS} || holding{m=BEETROOT_SEEDS} || holding{m=MELON_SEEDS} || holding{m=PUMPKIN_SEEDS} || holding{m=TORCHFLOWER_SEEDS}) false ]} ~onTimer:20
+  ##======[Sound Effects]=======
+  - skill{s=AoF_SE_ChickenAmbient;cd=5} ~onTimer:20 0.1 ?!hasaura{n=sleeping}
+  - skill{s=AoF_SE_ChickenHurt;cd=0.5} ~onDamaged ?~!mythicmobtype{t=pb_aof_rooster_white,pb_aof_hen_white,pb_aof_rooster_brown,pb_aof_hen_brown}
+
+AoF_SheepEntity:
+  Type: POLAR_BEAR
+  Health: 8
+  AITargetSelectors:
+  - clear
+  - nearestConditionalTarget{conditions=[  
+      - isPlayer{}
+      - holding{m=WHEAT}
+      - targetwithin{d=8}  
+    ]}
+  Skills:
+  ##======[Luring Check]=======
+  - skill{s=AoF_StopFollowingPlayer} @target{conditions=[  - holding{m=WHEAT} false ]} ~onTimer:20
+  ##======[Sound Effects]=======
+  - skill{s=AoF_SE_SheepAmbient;cd=5} ~onTimer:20 0.1 ?!hasaura{n=sleeping}
+  - skill{s=AoF_SE_SheepHurt;cd=0.5} ~onDamaged ?~!mythicmobtype{t=pb_aof_sheep_male,pb_aof_sheep_female}
+
+AoF_PigEntity:
+  Type: POLAR_BEAR
+  Health: 10
+  AITargetSelectors:
+  - clear
+  - nearestConditionalTarget{conditions=[  
+      - isPlayer{}
+      - holding{m=CARROT}
+      - targetwithin{d=8}  
+    ]}
+  Skills:
+  ##======[Luring Check]=======
+  - skill{s=AoF_StopFollowingPlayer} @target{conditions=[  - holding{m=CARROT} false ]} ~onTimer:20
+  ##======[Sound Effects]=======
+  - skill{s=AoF_SE_PigAmbient;cd=5} ~onTimer:20 0.1 ?!hasaura{n=sleeping}
+  - skill{s=AoF_SE_PigHurt;cd=0.5} ~onDamaged ?~!mythicmobtype{t=pb_aof_pig_male,pb_aof_pig_female,pb_aof_spotted_pig_male,pb_aof_spotted_pig_female}
+  
+##====================================
+AoF_CowEntity_Adult:
+  Template: AoF_CowEntity
+  Skills:
+  - skill{s=AoF_SE_CowDeath} ~onDeath
+  ##======[Feeding]=======
+  - skill{s=AoF_FeedItem} ~onInteract ?~holding{m=WHEAT}
+  ##======[Milking]=======
+  - skill{s=AoF_Cow_Milk} ~onInteract
+  Drops:
+  - AoF_CowDrops
+  - AoF_CowDrops_Burning
+
+AoF_CowEntity_Baby:
+  Template: AoF_CowEntity
+  Skills:
+  - skill{s=AoF_SE_CowDeath_Baby} ~onDeath
+
+AoF_ChickenEntity_Adult:
+  Template: AoF_ChickenEntity
+  Skills:
+  - skill{s=AoF_SE_ChickenDeath} ~onDeath
+  ##======[Feeding]=======
+  - skill{s=AoF_FeedItem} ~onInteract ?~holding{m=WHEAT_SEEDS}
+  - skill{s=AoF_FeedItem} ~onInteract ?~holding{m=BEETROOT_SEEDS}
+  - skill{s=AoF_FeedItem} ~onInteract ?~holding{m=MELON_SEEDS}
+  - skill{s=AoF_FeedItem} ~onInteract ?~holding{m=PUMPKIN_SEEDS}
+  - skill{s=AoF_FeedItem} ~onInteract ?~holding{m=TORCHFLOWER_SEEDS}
+  ##======[Egg Laying]=======
+  - skill{s=AoF_Chicken_LayEgg} ~onTimer:100 0.016
+  Drops:
+  - AoF_ChickenDrops
+  - AoF_ChickenDrops_Burning
+
+AoF_ChickenEntity_Baby:
+  Template: AoF_ChickenEntity
+  Skills:
+  - skill{s=AoF_SE_ChickenDeath_Baby} ~onDeath
+
+AoF_SheepEntity_Adult:
+  Template: AoF_SheepEntity
+  Skills:
+  - skill{s=AoF_SE_SheepDeath} ~onDeath
+  ##======[Feeding]=======
+  - skill{s=AoF_FeedItem} ~onInteract ?~holding{m=WHEAT}
+  ##======[Shearing & Grazing]=======
+  - skill{s=AoF_Sheep_Shear} ~onInteract
+  - skill{s=AoF_Sheep_Graze} ~onTimer:10 0.01
+  - removetag{t=sheared} @self ~onLoad
+  Drops:
+  - AoF_SheepDrops
+  - AoF_SheepDrops_Burning
+
+AoF_SheepEntity_Baby:
+  Template: AoF_SheepEntity
+  Skills:
+  - skill{s=AoF_SE_SheepDeath_Baby} ~onDeath
+
+AoF_PigEntity_Adult:
+  Template: AoF_PigEntity
+  Skills:
+  - skill{s=AoF_SE_PigDeath} ~onDeath
+  ##======[Feeding]=======
+  - skill{s=AoF_FeedItem} ~onInteract ?~holding{m=CARROT}
+  Drops:
+  - AoF_PigDrops
+  - AoF_PigDrops_Burning
+
+AoF_PigEntity_Baby:
+  Template: AoF_PigEntity
+  Skills:
+  - skill{s=AoF_SE_PigDeath_Baby} ~onDeath
+
+##======[Chicken]=======
+pb_aof_rooster_white:
+  Template: AoF_AnimalEntity_Adult, AoF_ChickenEntity_Adult
+
+pb_aof_rooster_brown:
+  Template: AoF_AnimalEntity_Adult, AoF_ChickenEntity_Adult
+
+pb_aof_hen_white:
+  Template: AoF_AnimalEntity_Adult, AoF_ChickenEntity_Adult
+
+pb_aof_hen_brown:
+  Template: AoF_AnimalEntity_Adult, AoF_ChickenEntity_Adult
+
+pb_aof_chick_baby:
+  Template: AoF_AnimalEntity_Baby, AoF_ChickenEntity_Baby
+
+##======[Cow]=======
+pb_aof_dairy_cow_male:
+  Template: AoF_AnimalEntity_Adult, AoF_CowEntity_Adult
+  
+pb_aof_dairy_cow_female:
+  Template: AoF_AnimalEntity_Adult, AoF_CowEntity_Adult
+
+pb_aof_dairy_cow_baby:
+  Template: AoF_AnimalEntity_Baby, AoF_CowEntity_Baby
+
+pb_aof_brown_cow_male:
+  Template: AoF_AnimalEntity_Adult, AoF_CowEntity_Adult
+  
+pb_aof_brown_cow_female:
+  Template: AoF_AnimalEntity_Adult, AoF_CowEntity_Adult
+
+pb_aof_brown_cow_baby:
+  Template: AoF_AnimalEntity_Baby, AoF_CowEntity_Baby
+
+##======[Sheep]=======
+pb_aof_sheep_male:
+  Template: AoF_AnimalEntity_Adult, AoF_SheepEntity_Adult
+
+pb_aof_sheep_female:
+  Template: AoF_AnimalEntity_Adult, AoF_SheepEntity_Adult
+
+pb_aof_sheep_baby:
+  Template: AoF_AnimalEntity_Baby, AoF_SheepEntity_Baby
+
+##======[Pig]=======
+pb_aof_pig_male:
+  Template: AoF_AnimalEntity_Adult, AoF_PigEntity_Adult
+
+pb_aof_pig_female:
+  Template: AoF_AnimalEntity_Adult, AoF_PigEntity_Adult
+
+pb_aof_pig_baby:
+  Template: AoF_AnimalEntity_Baby, AoF_PigEntity_Baby
+
+pb_aof_spotted_pig_male:
+  Template: AoF_AnimalEntity_Adult, AoF_PigEntity_Adult
+
+pb_aof_spotted_pig_female:
+  Template: AoF_AnimalEntity_Adult, AoF_PigEntity_Adult
+
+pb_aof_spotted_pig_baby:
+  Template: AoF_AnimalEntity_Baby, AoF_PigEntity_Baby
+
+
+
+#############################################################################################################################
+
+nocsy_cat_template:
+  Type: OCELOT
+  Health: 10
+  Damage: 0
+  Options:
+    Collidable: false
+    Invincible: false
+    Despawn: true
+    AlwaysShowName: false
+    PreventOtherDrops: true
+    Silent: true
+    KnockbackResistance: 1
+    FollowRange: 16
+    PreventItemPickup: true
+    PreventRandomEquipment: true
+    MovementSpeed: 0.28
+  AIGoalSelectors:
+  - clear
+  - meleeattack
+  - lookatplayers
+  - randomstroll
+  AITargetSelectors:
+  - clear
+  - specificfactionmonsters ThreadBall
+  Drops: []
+  Equipment: []
+  Modules:
+    ThreatTable: true
+  Skills:
+  - skill{s=Nocsy_KingdomCat_Sound_Hurt} ~onDamaged
+  - skill{s=Nocsy_KingdomCat_Interact} @self ~onInteract
+  - skill{s=Nocsy_KingdomCat_Thread_Signal} ~onSignal:PLAY
+  - skill{s=Nocsy_KingdomCat_Attack} @self ~onAttack
+  - skill{s=Nocsy_KingdomCat_PrepareAttack} @self ~onEnterCombat
+  - skill{s=Nocsy_KingdomCat_FollowBack} @self ~onDropCombat
+  - skill{s=Nocsy_KingdomCat_Sound_Ambient} @self ~onTimer:600
+
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  #- skill{s=LR_hpbar_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_show} @self ~onDamaged
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;d=true;i=true;step=1} @self ~onLoad 
+  
+  - skill{s=Hyronic_CancelEvent;sync=true} ~onAttack
+
+nocsy_cat1:
+  Template: nocsy_cat_template
+  Display: "&6Munchkin cat"
+
+nocsy_cat2:
+  Template: nocsy_cat_template
+  Display: "&9Bombay cat"
+
+nocsy_cat3:
+  Template: nocsy_cat_template
+  Display: "&fSiamese cat"
+
+nocsy_cat4:
+  Template: nocsy_cat_template
+  Display: "&7Scottish Fold cat"
+
+nocsy_cat5:
+  Template: nocsy_cat_template
+  Display: "&6Maine Coon cat"
+
+nocsy_cat6:
+  Template: nocsy_cat_template
+  Display: "&9European cat"
+
+nocsy_cat_fallen:
+  Template: nocsy_cat_template
+  Display: "&cFallen cat"
+
+############################################
+#              Thread ball                 #
+############################################
+
+Nocsy_Cat-ThreadBall:
+  Type: ENDERMITE
+  AIGoalSelectors:
+  - 0 clear
+  AITargetSelectors:
+  - 0 clear
+  Drops: []
+  Equipment: []
+  Faction: ThreadBall
+  Skills:
+   - model{mid=nocsy_thread_ball;n=false;tint=false} @self ~onSpawn
+   - potion{type=SLOW;duration=2147483646;lvl=126;hasParticles=false} @self ~onSpawn
+   - setVariable{var=caster.count_attacks;value=0} @self ~onSpawn
+   - skill{s=Nocsy_KingdomCat_Thread_Roll} ~onTimer:10
+   - skill{s=Nocsy_KingdomCat_Thread_Effect} ~onTimer:10
+   - skill{s=Nocsy_KingdomCat_Thread_Damaged} ~onDamaged
+   - skill{s=[
+              - delay 800
+              - skill{s=Nocsy_KingdomCat_Thread_Remove-Force}
+             ]} ~onSpawn
+  Display: "&cThread Ball"
+  Health: 100
+  Damage: 0
+  Options:
+    Collidable: false
+    Invincible: false
+    Despawn: true
+    AlwaysShowName: false
+    PreventOtherDrops: true
+    Silent: true
+    KnockbackResistance: 1
+    PreventItemPickup: true
+    PreventRandomEquipment: true
+    MovementSpeed: 0.01

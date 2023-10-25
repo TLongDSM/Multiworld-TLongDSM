@@ -1,0 +1,185 @@
+Slime_template:
+  Type: ZOMBIE
+  Faction: Slime
+  Options:
+    MovementSpeed: 0.25
+    ShowHealth: false
+    PreventRandomEquipment: true
+    AlwaysShowName: false
+    Persistent: false
+    Despawn: true
+    PreventOtherDrops: true
+    FollowRange: 30
+    Silent: true
+    KnockbackResistance: 1
+    PreventSunburn: true
+  Modules:
+    ThreatTable: true
+  AIGoalSelectors:
+  - 0 clear
+  - 1 meleeattack
+  - 2 movetowardstarget
+  - 3 randomstroll
+  - 4 float
+  AITargetSelectors:
+  - 0 clear
+  - 1 players
+  Skills:
+  - effect:sound{s=entity.slime.death;volume=0.6;pitch=1.1} @self ~onDeath
+  - skill{s=Slime_pack_Changetarget} ~onTimer:160 <99%
+
+  - skill{s=Slime_Hit} ~onDamaged ?!mythicmobtype{t=Slime_King}
+  - skill{s=Slime_Attack_template} ~onTimer:10 0.7 ?!mythicmobtype{t=Slime_King}
+
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_show} @self ~onDamaged
+  - model{mid=<caster.mythic_type>;n=false;d=false} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;n=false;d=false} @self ~onLoad
+
+  - skill{s=Hyronic_CancelEvent;sync=true} ~onAttack
+
+Slime_template_ske:
+  Type: SKELETON
+  Faction: Slime
+  Options:
+    MovementSpeed: 0.25
+    ShowHealth: false
+    PreventRandomEquipment: true
+    AlwaysShowName: false
+    Persistent: false
+    Despawn: true
+    PreventOtherDrops: true
+    FollowRange: 30
+    Silent: true
+    KnockbackResistance: 1
+    PreventSunburn: true
+  Modules:
+    ThreatTable: true
+  Equipment:
+  - bow:HAND
+  AIGoalSelectors:
+  - 0 clear
+  - 1 meleeattack
+  - 2 movetowardstarget
+  - 3 randomstroll
+  - 4 float
+  AITargetSelectors:
+  - 0 clear
+  - 1 players
+  Skills:
+  - effect:sound{s=entity.slime.death;volume=0.6;pitch=1.1} @self ~onDeath
+
+  - skill{s=Slime_pack_Changetarget} ~onTimer:160 <99%
+
+  - skill{s=Slime_Hit} ~onDamaged
+  - skill{s=Slime_Attack_template} ~onTimer:10 0.7 ?!mythicmobtype{t=Slime_Mage}
+
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self ~onDeath
+  - skill{s=LR_hpbar_show} @self ~onEnterCombat
+  - skill{s=LR_hpbar_show} @self ~onDamaged
+  - model{mid=<caster.mythic_type>;n=false;d=false} @self ~onSpawn
+  - model{mid=<caster.mythic_type>;n=false;d=false} @self ~onLoad
+  
+  - skill{s=Hyronic_CancelEvent;sync=true} ~onAttack
+  - skill{s=Hyronic_CancelEvent;sync=true} ~onShoot
+
+
+# Common Slime #
+
+Slime_Common:
+  Template: Slime_template
+  Display: '&fCommon Slime'
+  Health: 30
+  Damage: 2
+  Drops:
+  - exp 2-5 1
+  
+# Frost Slime #
+
+Slime_Frost:
+  Template: Slime_template
+  Display: '&fFrost Slime'
+  Health: 45
+  Drops:
+  - exp 5-10 1
+  
+# Lava Slime #
+  
+Slime_Lava:
+  Template: Slime_template
+  Display: '&fLava Slime'
+  Health: 65
+  Damage: 2
+  Drops:
+  - exp 10-25 1
+  
+# Healer Slime #
+  
+Slime_Healer:
+  Template: Slime_template_ske
+  Display: '&fHealer Slime'
+  Health: 25
+  Damage: 2
+  Drops:
+  - exp 5-10 1
+  Skills:
+  - skill{s=Slime_Healer_Heal} ~onTimer:100
+  - skill{s=Slime_Healer_Flee} ~onTimer:40
+  
+# Warrior Slime #
+  
+Slime_Warrior:
+  Template: Slime_template
+  Display: '&fWarrior Slime'
+  Health: 80
+  Damage: 2
+  Drops:
+  - exp 30-50 1
+  
+# Triple Slime #
+  
+Slime_Triple:
+  Template: Slime_template
+  Display: '&fTriple Slime'
+  Health: 120
+  Damage: 2
+  Drops:
+  - exp 10-25 1
+  Skills:
+  - partvisibility{p=body3;v=false} @self ~onDamaged <40
+  - partvisibility{p=head3;v=false} @self ~onDamaged <40
+  - partvisibility{p=body2;v=false} @self ~onDamaged <20
+  - partvisibility{p=head2;v=false} @self ~onDamaged <20
+  
+# Mage Slime #
+  
+Slime_Mage:
+  Template: Slime_template_ske
+  Display: '&fMage Slime'
+  Health: 50
+  Damage: 2
+  Drops:
+  - exp 10-25 1
+  Skills:
+  - bodyclamp{c=30} @self ~onSpawn
+  - skill{s=Slime_Mage_AttackS} ~onTimer:50 0.8
+  
+# Slime King #
+
+Slime_King:
+  Template: Slime_template
+  Display: '&4Slime King'
+  Health: 300
+  Damage: 2
+  Drops:
+  - exp 150-250 1
+  DamageModifiers:
+  - FALL 0
+  Skills:
+  - skill{s=Slime_King_Death} ~onDeath
+
+  - skill{s=Slime_King_Skills_1} ~onTimer:60 >50%
+  - skill{s=Slime_King_Skills_1} ~onTimer:40 <50%
+  - skill{s=Slime_King_Hit_1} @self ~onDamaged >50%
+  - skill{s=Slime_King_Hit_2} @self ~onDamaged <50%
