@@ -1,0 +1,27 @@
+RPG1_NPC_Aggressive2:
+  World: world_spawn
+  X: 55
+  Y: 119
+  Z: 0
+  Yaw: 0.0
+  Pitch: 0.0
+  Breakable: false
+  MobName: npc_aggressive
+  Radius: 0.0
+  RadiusY: 0.0
+  UseTimer: true
+  MaxMobs: '1'
+  MobLevel: '1'
+  MobsPerSpawn: 1
+  Cooldown: -1
+  Warmup: 0
+  ActivationRange: 32.0
+  ScalingRange: 25.0
+  LeashRange: 32.0
+  HealOnLeash: false
+  ResetThreatOnLeash: false
+  CheckForPlayers: true
+  ShowFlames: false
+  Conditions: &id005 []
+  SpawnConditions: *id005
+  ActiveMobs: 1

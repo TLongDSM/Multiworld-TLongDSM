@@ -1,0 +1,149 @@
+NPCgreetfx:
+  Skills:
+  - delay 60
+  - remove @self
+
+NPCplayercheck:
+  Conditions:
+  - playerwithin{d=5} false
+  Skills:
+  - setstance{stance=alone;li=3;lo=3} @self
+
+NPCfidget:
+  Conditions:
+  - stance{s=player} true
+  Skills:
+  - state{s=fidget;li=3;lo=3} @self
+ 
+NPCGreet:
+  Cooldown: 5
+  Conditions:
+  - stance{s=alone} true
+  - playerwithin{d=5} true
+  - score{objective=mad_test;v=<1}
+  Skills:
+  - state{s=alone;r=true} @self
+  - summon{t=NPCGREETFX} @Forward{f=0;y=1.75} ?!mythicmobtype{t=npc_lola}
+  - setstance{stance=player} @self
+  - state{s=greet;li=3;lo=3} @self
+  - sound{s=entity.villager.yes;p=0.8;v=1} @SelfLocation ?!mythicmobtype{t=npc_lola}
+  - sound{s=entity.fox.ambient;p=0.8;v=1} @SelfLocation ?mythicmobtype{t=npc_lola}
+  #- message{msg="<mob.name>&f<&co> Hello Traveller!"} @PIR{r=6}
+
+NPCvolgreetfx:
+  Skills:
+  - sound{s=hyronic:npc.greetings;v=1;sc=HOSTILE} @self
+  - delay 60
+  - remove @self
+
+NPCAlone:
+  Conditions:
+  - stance{s=alone} true
+  Skills:
+  - state{s=alone} @self
+  - delay 10 ?mythicmobtype{t=blacksmith}
+  - sound{s=block.anvil.place;v=.2} @self ?mythicmobtype{t=blacksmith}
+  - effect:particles{particle=crit;amount=5;hS=.1;vS=.1;speed=.1} @ModelPart{m=blacksmith;p=righthand;offset=LOCAL;z=0.5;y=-1} ?mythicmobtype{t=blacksmith}
+
+#################################################################################################################################
+
+NPC_template_onDamaged:
+  Skills:
+  - stun{d=25;ai=true} @Self
+  - gcd{ticks=80}
+  - stance{s=mad_test} @Self
+  - stun{d=20} @Self
+  - randomskill{skills=NPC_FightBack_template_Message1,NPC_FightBack_template_Message2} @Trigger
+  - randomskill{skills=NPC_MadTimer1_template,NPC_MadTimer2_template,NPC_MadTimer3_template}
+  - signal{s=HIT} @MobsInRadius{r=10;t=npc_aggressive,npc_aggressive_slim,npc_normal,npc_normal_slim,npc_timid,npc_timid_slim}
+  - signal{s=HIT} @MobsInRadius{r=10;t=fisherman,wizard,blacksmith,archer}
+  - signal{s=HIT} @MobsInRadius{r=10;t=daisy_model64,frogger_model64,vivian_model64,tristina_model64,dustin_model,jarvis_model64,abigail_model64}
+  - signal{s=HIT} @MobsInRadius{r=10;t=guardcyan}
+  - delay 20
+  - sound{s=entity.villager.no;p=0.7;v=1} @SelfLocation ~onDamaged ?!mythicmobtype{t=npc_lola}
+  - sound{s=entity.fox.ambient;p=0.8;v=1} @SelfLocation ?mythicmobtype{t=npc_lola}
+
+NPC_template_Timer:
+  Conditions:
+  - score{objective=mad_test;v=>0}
+  Skills:
+  - modifytargetscore{objective=mad_test;action=subtract;value=1} @Self
+  - effect:particles{p=angry_villager;amount=3;hS=0.2;vS=0.2;y=1.8} @SelfLocation
+
+NPC_template_Cooloff:
+  Conditions:
+  - stance mad_test
+  - score{objective=mad_test;v=<1}
+  Skills:
+  - sound{s=entity.villager.ambient;p=0.7;v=1} @SelfLocation ?!mythicmobtype{t=npc_lola}
+  - sound{s=entity.fox.ambient;p=0.8;v=1} @SelfLocation ?mythicmobtype{t=npc_lola}
+  - effect:particles{p=happy_villager;amount=5;hS=0.3;vS=0.2;y=2.1} @SelfLocation
+  - state{s=tired;li=3;lo=3} @Self
+  - stance{s=idle} @Self
+  - modifytargetscore{objective=mad_test;action=set;value=0} @Self
+
+NPC_template_Signal:
+  Cooldown: 5
+  Skills:
+  - gcd{ticks=80}
+  - stance{s=mad_test} @Self
+  - stun{d=20} @Self
+  - randomskill{skills=NPC_MadTimer1_template,NPC_MadTimer2_template,NPC_MadTimer3_template}
+  - sound{s=entity.villager.no;p=0.7;v=1} @SelfLocation ?!mythicmobtype{t=npc_lola}
+  - sound{s=entity.fox.ambient;p=0.8;v=1} @SelfLocation ?mythicmobtype{t=npc_lola}
+
+NPC_MadTimer1_template:
+  Skills:
+  - modifytargetscore{objective=mad_test;action=set;value=8} @Self
+
+NPC_MadTimer2_template:
+  Skills:
+  - modifytargetscore{objective=mad_test;action=set;value=10} @Self
+
+NPC_MadTimer3_template:
+  Skills:
+  - modifytargetscore{objective=mad_test;action=set;value=12} @Self
+
+
+NPC_FightBack_template_Message1:
+  Skills:
+  - message{m="<mob.name>&f<&co> What's your problem!"} @Trigger
+  
+NPC_FightBack_template_Message2:
+  Skills:
+  - message{m="<mob.name>&f<&co> Piss off!"} @Trigger
+
+########################################################################################################################################################
+
+
+LR_tagmane_template:
+  Conditions:
+  - playerwithin{d=5} false
+  Skills:
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_tagname;npid=1} @self >0% ?mythicmobtype{t=blacksmith}
+  - changepart{m=<caster.mythic_type>;pid=tag_name;nm=lr_tagname;npid=2} @self >0% ?mythicmobtype{t=blacksmith}
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_tagname;npid=3} @self >0% ?mythicmobtype{t=wizard}
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_tagname;npid=4} @self >0% ?mythicmobtype{t=frogger_model64}
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_tagname;npid=5} @self >0% ?mythicmobtype{t=vivian_model64}
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_tagname;npid=6} @self >0% ?mythicmobtype{t=tristina_model64}
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_tagname;npid=7} @self >0% ?mythicmobtype{t=daisy_model64}
+  - changepart{m=<caster.mythic_type>;pid=tag_name;nm=lr_tagname;npid=8} @self >0% ?mythicmobtype{t=daisy_model64}
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_tagname;npid=9} @self >0% ?mythicmobtype{t=dustin_model}
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_tagname;npid=11} @self >0% ?mythicmobtype{t=jarvis_model64}
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_tagname;npid=12} @self >0% ?mythicmobtype{t=guard,guardcyan,guardgreen,guardorange,guardpink,guardpurple,guardred,guardyellow}
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_tagname;npid=13} @self >0% ?mythicmobtype{t=fisherman}
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_tagname;npid=15} @self >0% ?mythicmobtype{t=npc_lola}
+
+########################################################################################################################################################
+
+
+LR_tagmane_template_crate:
+  Conditions:
+  - playerwithin{d=5} false
+  Skills:
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_tagname;npid=16} @self >0%
+  - changepart{m=<caster.mythic_type>;pid=tag_name;nm=lr_tagname;npid=17} @self >0% ?mythicmobtype{t=black_silver_crate}
+  - changepart{m=<caster.mythic_type>;pid=tag_name;nm=lr_tagname;npid=18} @self >0% ?mythicmobtype{t=purple_light_purple_crate}
+
+########################################################################################################################################################
+ 

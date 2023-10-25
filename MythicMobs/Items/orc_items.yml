@@ -1,0 +1,27 @@
+orc_arrow:
+  Id: arrow
+  Display: "&2Orc Arrow"
+  Model: 1000
+  Hide:
+  - ATTRIBUTES
+
+orc_glaive:
+  Id: stone_sword
+  Display: "&2Orc Glaive"
+  Model: 1002
+  Hide:
+  - ATTRIBUTES
+
+orc_skull:
+  Id: paper
+  Display: "&2"
+  Model: 1212
+  Hide:
+  - ATTRIBUTES
+  
+orc_stone:
+  Id: paper
+  Display: "&2"
+  Model: 1213
+  Hide:
+  - ATTRIBUTES

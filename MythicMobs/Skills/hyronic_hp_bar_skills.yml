@@ -1,0 +1,63 @@
+LR_hpbar_show:
+  Skills:
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=20} @self =100%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=19} @self =95%-99%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=18} @self =95%-90%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=17} @self =85%-90%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=16} @self =80%-85%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=15} @self =75%-80%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=14} @self =70%-75%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=13} @self =65%-70%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=12} @self =60%-65%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=11} @self =55%-60%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=10} @self =50%-55%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=9} @self =45%-50%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=8} @self =40%-45%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=7} @self =35%-40%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=6} @self =30%-35%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=5} @self =25%-30%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=4} @self =20%-25%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=3} @self =15%-20%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=2} @self =10%-15%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar;npid=1} @self =0%-10%
+  - delay 480
+  - cast{oc=LR_hpbar_remove;cb=false;duration=20} @self
+  
+LR_hpbar_remove:
+  Conditions:
+  - incombat false
+  Skills:
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self
+
+########################################################################################################################################################
+
+LR_hpbar_boss_show:
+  Skills:
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=20} @self =100%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=19} @self =95%-99%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=18} @self =95%-90%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=17} @self =85%-90%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=16} @self =80%-85%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=15} @self =75%-80%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=14} @self =70%-75%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=13} @self =65%-70%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=12} @self =60%-65%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=11} @self =55%-60%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=10} @self =50%-55%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=9} @self =45%-50%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=8} @self =40%-45%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=7} @self =35%-40%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=6} @self =30%-35%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=5} @self =25%-30%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=4} @self =20%-25%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=3} @self =15%-20%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=2} @self =10%-15%
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=lr_healthbar_boss;npid=1} @self =0%-10%
+  - delay 480
+  - cast{oc=LR_hpbar_boss_remove;cb=false;duration=20} @self
+  
+LR_hpbar_boss_remove:
+  Conditions:
+  - incombat false
+  Skills:
+  - changepart{m=<caster.mythic_type>;pid=hp_bar;nm=<caster.mythic_type>;npid=hp_bar} @self

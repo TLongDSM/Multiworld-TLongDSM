@@ -1,0 +1,12 @@
+RPG1_NPC_Timid:
+  MobName: npc_timid
+  World: world_spawn
+  X: 49
+  Y: 119
+  Z: 24
+  Yaw: 0.0
+  Pitch: 0.0
+  MobLevel: '1'
+  Cooldown: -1
+  Warmup: 0
+  ActiveMobs: 1

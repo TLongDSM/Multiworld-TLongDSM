@@ -1,0 +1,516 @@
+daisyNPCInteract:
+  Conditions:
+  - score{objective=mad_test;v=<1}
+  Skills:
+  - message{msg="%hrn_getIcon:avt_daisy% &f&lᴅᴀɪsʏ &8(Daily Quest) "} @trigger ~onInteract
+  - message{msg="&r             &7Hey &f%player_name%&7! Complete &a8 random"} @trigger ~onInteract
+  - message{msg="&r             &aquests &7and I will reward you an extra "} @trigger ~onInteract
+  - message{msg="&r             &7attractive reward every day."} @trigger ~onInteract
+  - message{msg="&r "} @trigger ~onInteract
+  - sound{s=entity.villager.yes;p=0.8;v=1} @SelfLocation
+  - potion{type=SLOW;duration=20;level=1} @trigger ~onInteract
+  - delay 10
+  - command{c="quests";asTarget=true;asOp=true} @trigger ~onInteract
+
+##################################################################################################################################
+
+froggerNPCInteract:
+  Conditions:
+  - score{objective=mad_test;v=<1}
+  Skills:
+  - message{msg="%hrn_getIcon:avt_frogger% &f&lFrogger &8(Exp Exchange) "} @trigger ~onInteract
+  - message{msg="&r             &7Please store your experience in"} @trigger ~onInteract
+  - message{msg="&r             &7a bottle to avoid losing it when you"} @trigger ~onInteract
+  - message{msg="&r             &7die or you can also sell it to other"} @trigger ~onInteract
+  - message{msg="&r             &7players for gems. I can help you with that."} @trigger ~onInteract
+  - message{msg="&r "} @trigger ~onInteract
+  - sound{s=entity.villager.yes;p=0.8;v=1} @SelfLocation
+  - potion{type=SLOW;duration=20;level=1} @trigger ~onInteract
+  - delay 10
+  - command{c="cp ExperienceExchange <target.name>"} @trigger ~onInteract
+
+##################################################################################################################################
+
+vivivanNPCInteract:
+  Conditions:
+  - score{objective=mad_test;v=<1}
+  Skills:
+  - message{msg="%hrn_getIcon:avt_vivian% &f&lVivian &8(Gem Shop) "} @trigger ~onInteract
+  - message{msg="&r             &7Hey &f%player_name%&7! One of the fastest ways"} @trigger ~onInteract
+  - message{msg="&r             &7to make gems is go to the resource world,"} @trigger ~onInteract
+  - message{msg="&r             &7mine ores, materials and then sell them to me."} @trigger ~onInteract
+  - message{msg="&r "} @trigger ~onInteract
+  - sound{s=entity.villager.yes;p=0.8;v=1} @SelfLocation
+  - potion{type=SLOW;duration=20;level=1} @trigger ~onInteract
+  - delay 10
+  - command{c="cp GemShop <target.name>"} @trigger ~onInteract
+
+##################################################################################################################################
+
+tristinaNPCInteract:
+  Conditions:
+  - score{objective=mad_test;v=<1}
+  Skills:
+  - message{msg="%hrn_getIcon:avt_tristina% &f&lTristina &8(Online Rewards) "} @trigger ~onInteract
+  - message{msg="&r             &7Hey &f%player_name%&7! Dont forget to claim your"} @trigger ~onInteract
+  - message{msg="&r             &fDaily/Online Rewards.&7 And also vote for us"} @trigger ~onInteract
+  - message{msg="&r             &7by using &a/vote&7 command. &f෋"} @trigger ~onInteract
+  - message{msg="&r "} @trigger ~onInteract
+  - sound{s=entity.villager.yes;p=0.8;v=1} @SelfLocation
+  - potion{type=SLOW;duration=20;level=1} @trigger ~onInteract
+  - delay 10
+  - command{c="cp Rewards <target.name>"} @trigger ~onInteract
+
+##################################################################################################################################
+
+dustinNPCInteract:
+  Conditions:
+  - score{objective=mad_test;v=<1}
+  Skills:
+  - message{msg="%hrn_getIcon:avt_dustin% &f&lDustin &8(Auction House) "} @trigger ~onInteract
+  - message{msg="&r             &7Hey &f%player_name%&7, dont miss the opportunity to"} @trigger ~onInteract
+  - message{msg="&r             &7do business with the Auction House, I know a"} @trigger ~onInteract
+  - message{msg="&r             &7player who bought a house in real life"} @trigger ~onInteract
+  - message{msg="&r             &7thanks to it."} @trigger ~onInteract
+  - message{msg="&r "} @trigger ~onInteract
+  - sound{s=entity.villager.yes;p=0.8;v=1} @SelfLocation
+  - potion{type=SLOW;duration=20;level=1} @trigger ~onInteract
+  - delay 10
+  - command{c="ah";asTarget=true;asOp=true} @trigger ~onInteract
+
+##################################################################################################################################
+
+jarvisNPCInteract:
+  Conditions:
+  - score{objective=mad_test;v=<1}
+  Skills:
+  - message{msg="%hrn_getIcon:avt_jarvis% &f&lJarvis &8(Store) "} @trigger ~onInteract
+  - message{msg="&r "} @trigger ~onInteract
+  - message{msg="&r "} @trigger ~onInteract
+  - message{msg="&r "} @trigger ~onInteract
+  - message{msg="&r "} @trigger ~onInteract
+  - sound{s=entity.villager.yes;p=0.8;v=1} @SelfLocation
+  - potion{type=SLOW;duration=20;level=1} @trigger ~onInteract
+  - delay 10
+  - command{c="cp Ranks <target.name>"} @trigger ~onInteract
+##################################################################################################################################
+
+lolaNPCInteract:
+  Conditions:
+  - score{objective=mad_test;v=<1}
+  Skills:
+  - sound{s=entity.fox.ambient;p=0.8;v=1} @SelfLocation
+  - potion{type=SLOW;duration=20;level=1} @trigger ~onInteract
+  - delay 10
+  - command{c="cp TradeLoLa <target.name>"} @trigger ~onInteract
+
+##################################################################################################################################
+
+abigailNPCInteract:
+  Conditions:
+  - score{objective=mad_test;v=<1}
+  Skills:
+  - message{msg="%hrn_getIcon:avt_abigail% &f&lAbigail &8(Gem Exchange) "} @trigger ~onInteract
+  - message{msg="&r             &dGem Ore &7can be found in &2Resource World."} @trigger ~onInteract
+  - message{msg="&r             &7between the height of &f-50 &7to &f50&7. I will"} @trigger ~onInteract
+  - message{msg="&r             &7buy your gem ingots in exchange for "} @trigger ~onInteract
+  - message{msg="&r             &7balance."} @trigger ~onInteract
+  - message{msg="&r "} @trigger ~onInteract
+  - sound{s=entity.villager.yes;p=0.8;v=1} @SelfLocation
+  - potion{type=SLOW;duration=20;level=1} @trigger ~onInteract
+  - delay 10
+  - command{c="cp GemExchange <target.name>"} @trigger ~onInteract
+
+##################################################################################################################################
+### fisherman ###
+
+fishermanSMOKE:
+  Skills:
+  - effect:particles{particle=campfire_cosy_smoke;amount=1;speed=.1;d=true;dir=0,1,0;size=.1} @ModelPart{m=fisherman;p=head;offset=LOCAL;y=.2;z=.5}
+  - delay 2
+  - effect:particles{particle=campfire_cosy_smoke;amount=1;speed=.1;d=true;dir=0,1,0;size=.1} @ModelPart{m=fisherman;p=head;offset=LOCAL;y=.2;z=.5}
+  - delay 2
+  - effect:particles{particle=campfire_cosy_smoke;amount=1;speed=.1;d=true;dir=0,1,0;size=.1} @ModelPart{m=fisherman;p=head;offset=LOCAL;y=.2;z=.5}
+
+fishermanNPCInteract:
+  Conditions:
+  - score{objective=mad_test;v=<1}
+  Skills:
+  - message{msg="%hrn_getIcon:avt_fishy% &f&lFishy &8(Fisherman) "} @trigger ~onInteract
+  - message{msg="&r             &fFishing&7 is a good way to make gems. You"} @trigger ~onInteract
+  - message{msg="&r             &7can also join &fFishing Competiton&7 at"} @trigger ~onInteract
+  - message{msg="&r             &f09:00&7 and &f18:00&7 every day, especially "} @trigger ~onInteract
+  - message{msg="&r             &7on sunday when there're amazing rewards."} @trigger ~onInteract
+  - message{msg="&r "} @trigger ~onInteract
+  - sound{s=entity.villager.yes;p=0.8;v=1} @SelfLocation
+  - potion{type=SLOW;duration=20;level=1} @trigger ~onInteract
+  - delay 10
+  - command{c="cp FishingShop <target.name>"} @trigger ~onInteract
+
+##################################################################################################################################
+### WIZARD ###
+
+wizardNPCInteract:
+  Conditions:
+  - score{objective=mad_test;v=<1}
+  Skills:
+  - message{msg="%hrn_getIcon:avt_nodamus% &f&lɴᴏᴅᴀᴍᴜs &8(Enchanter) "} @trigger ~onInteract
+  - message{msg="&r             &7You know &f%player_name%&7, Im not a wizard"} @trigger ~onInteract
+  - message{msg="&r             &7but I do have some knowledge of enchanting"} @trigger ~onInteract
+  - message{msg="&r             &7and I also sell some useful things, you"} @trigger ~onInteract
+  - message{msg="&r             &7might be interested."} @trigger ~onInteract
+  - message{msg="&r "} @trigger ~onInteract
+  - sound{s=entity.villager.yes;p=0.8;v=1} @SelfLocation
+  - potion{type=SLOW;duration=20;level=1} @trigger ~onInteract
+  - delay 10
+  - command{c="cp Enchanter <target.name>"} @trigger ~onInteract
+
+##################################################################################################################################
+### ARCHER ###
+
+archerNPCInteract:
+  Conditions:
+  - score{objective=mad_test;v=<1}
+  Skills:
+  - message{msg="%hrn_getIcon:avt_soma% &f&lLion &8(Dungeon) "} @trigger ~onInteract
+  - message{msg="&r             &2Resource World&7 is a dangerous place."} @trigger ~onInteract
+  - message{msg="&r             &7You really want to go there? I can help"} @trigger ~onInteract
+  - message{msg="&r             &7you but the limit is &f15 minutes&7 for"} @trigger ~onInteract
+  - message{msg="&r             &7each trip you make.&6&l'"} @trigger ~onInteract
+  - message{msg="&r "} @trigger ~onInteract
+  - sound{s=entity.villager.yes;p=0.8;v=1} @SelfLocation
+  - potion{type=SLOW;duration=20;level=1} @trigger ~onInteract
+  - delay 10
+  - command{c="cp DungeonMenu <target.name>"} @trigger ~onInteract
+
+##################################################################################################################################
+### BLACKSMITH ###
+
+blacksmithNPCInteract:
+  Conditions:
+  - score{objective=mad_test;v=<1}
+  Skills:
+  - message{msg="%hrn_getIcon:avt_rumble% &f&lRumble &8(Blacksmith) "} @trigger ~onInteract
+  - message{msg="&r             &7Hi &f%player_name%&7! did you know that there"} @trigger ~onInteract
+  - message{msg="&r             &7are items that can only be forged by"} @trigger ~onInteract
+  - message{msg="&r             &7master blacksmiths?"} @trigger ~onInteract
+  - message{msg="&r "} @trigger ~onInteract
+  - sound{s=entity.villager.yes;p=0.8;v=1} @SelfLocation
+  - potion{type=SLOW;duration=20;level=1} @trigger ~onInteract
+  - delay 10
+  - command{c="cp BlackSmith <target.name>"} @trigger ~onInteract
+
+##################################################################################################################################
+### crate ###
+
+crateSMOKE:
+  Skills:
+  - effect:particleorbital{r=1.5;points=16;t=50;i=1;vy=20;particle=flame} @ModelPart{m=<caster.mythic_type>;p=up;offset=LOCAL;x=0.2;y=-1;z=-0.5}
+  - delay 2
+  - effect:particleorbital{r=1.5;points=16;t=50;i=1;vy=20;particle=flame} @ModelPart{m=<caster.mythic_type>;p=up;offset=LOCAL;x=0.2;y=-1;z=-0.5}
+  - delay 2
+  - effect:particleorbital{r=1.5;points=16;t=50;i=1;vy=20;particle=flame} @ModelPart{m=<caster.mythic_type>;p=up;offset=LOCAL;x=0.2;y=-1;z=-0.5}
+  
+##################################################################################################################################
+#### GUARD ####
+
+guardNPCattack:
+  Skills:
+  #- CancelEvent
+  - skill{s=Hyronic_CancelEvent;sync=true}
+  - skill{s=guardNPCattackskill} @self
+
+guardNPCattackskill:
+  TargetConditions:
+  - targetwithin{d=2} true
+  Cooldown: 2.0
+  Skills:
+  - state{s=attack;li=3;lo=2} @self
+  - delay 15
+  - totem{ch=3;onStart=guardNPCattackDamage_notplayer;int=1;hR=3;md=1} @Forward{f=1.0;y=0.0}
+  - totem{ch=3;onStart=guardNPCattackDamage;int=1;hR=3;md=1} @Forward{f=1.0;y=0.0}
+
+guardNPCattackDamage_notplayer:
+  TriggerConditions:
+  - entitytype{t=PLAYER} false
+  Skills:
+  - damage{amount=25} @target
+  - effect:particles{particle=block_crack;m=redstone_block;amount=45;hS=.25;vS=1;speed=.01} @target
+  - effect:particles{particle=sweep_attack;amount=1;hS=.25;vS=.25;speed=.01} @origin
+  - sound{s=entity.iron_golem.attack;p=0.7;v=1} @SelfLocation
+
+guardNPCattackDamage:
+  TriggerConditions:
+  - entitytype{t=PLAYER} true
+  Skills:
+  - damage{amount=10} @target
+  - randomskill{skills=NPC_FightBack_template_Message1,NPC_FightBack_template_Message2} @Trigger
+  - randomskill{skills=NPC_MadTimer1_template,NPC_MadTimer2_template,NPC_MadTimer3_template}
+  - effect:particles{particle=block_crack;m=redstone_block;amount=45;hS=.25;vS=1;speed=.01} @target
+  - effect:particles{particle=sweep_attack;amount=1;hS=.25;vS=.25;speed=.01} @origin
+  - sound{s=entity.iron_golem.attack;p=0.7;v=1} @SelfLocation
+  - clearThreat{} @self
+
+guardNPConspawn:
+  Skills:
+  - delay 1
+  - potion{type=INVISIBILITY;duration=130;level=0;p=false} @self
+  - skill{s=guardNPConspawndaycheck} @self
+  - skill{s=guardNPConspawnnightcheck} @self
+  - ChangePart{model=<caster.mythic_type>;part=handsword;newmodel=<caster.mythic_type>;newpart=empty} @self
+  - ChangePart{model=<caster.mythic_type>;part=torch;newmodel=<caster.mythic_type>;newpart=empty} @self
+  - stance{s=notorch} true
+
+guardNPConspawndaycheck:
+  Conditions:
+  - night true
+  Skills:
+  - setstance{stance=notorch} @self
+
+guardNPConspawnnightcheck:
+  Conditions:
+  - day true
+  Skills:
+  - setstance{stance=torch} @self
+
+guardNPCdrawsword:
+  Skills:
+  - state{s=grabsword} @self
+  - delay 10
+  - ChangePart{model=`;part=hiltsword;newmodel=<caster.mythic_type>;newpart=empty} @self
+  - ChangePart{model=<caster.mythic_type>;part=handsword;newmodel=<caster.mythic_type>;newpart=handsword} @self
+
+guardNPCsheathsword:
+  Skills:
+  - state{s=attack;r=true} @self
+  - state{s=grabsword} @self
+  - delay 10
+  - ChangePart{model=<caster.mythic_type>;part=hiltsword;newmodel=<caster.mythic_type>;newpart=hiltsword} @self
+  - ChangePart{model=<caster.mythic_type>;part=handsword;newmodel=<caster.mythic_type>;newpart=empty} @self
+
+guardNPCtorchFX:
+  Conditions:
+  - stance{s=torch} true
+  - night true
+  Skills:
+  - state{state=torch} @self
+  - effect:particles{particle=flame;amount=1;speed=0.01;hs=0.1;ys=0.1} @ModelPart{m=<caster.mythic_type>;p=torch;offset=LOCAL;z=0.25;y=0.15}
+  - effect:particles{particle=smoke;amount=1;hs=0.1;ys=0.1} @ModelPart{m=<caster.mythic_type>;p=torch;offset=LOCAL;z=0.25;y=0.15}
+
+guardNPCnight:
+  Conditions:
+  - stance{s=notorch} true
+  - night true
+  Skills:
+  - state{s=grabtorch} @self
+  - delay 10
+  - ChangePart{model=<caster.mythic_type>;part=torch;newmodel=<caster.mythic_type>;newpart=torch} @self
+  - equip{item=torch:0} @self
+  - message{msg="<mob.name>&f<&co> Its getting dark out here."} @PIR{r=4}
+  - setstance{stance=torch} @self
+
+guardNPCday:
+  Conditions:
+  - stance{s=torch;str=true} true
+  - day true
+  Skills:
+  - state{s=grabtorch} @self
+  - delay 10
+  - ChangePart{model=<caster.mythic_type>;part=torch;newmodel=<caster.mythic_type>;newpart=empty} @self
+  - setstance{stance=notorch} @self
+  - equip{item=stick:0} @self
+  - message{msg="<mob.name>&f<&co> Ah the suns finally come up."} @PIR{r=4}
+  
+##################################################################################################################################
+
+NPC_Timer:
+  Conditions:
+  - stance idle cancel
+  - score{objective=mad;v=>0}
+  Skills:
+  - modifytargetscore{objective=mad;action=subtract;value=1} @Self
+  - effect:particles{p=angry_villager;amount=3;hS=0.2;vS=0.2;y=1.8} @SelfLocation
+
+NPC_Cooloff:
+  Conditions:
+  - stance mad
+  - score{objective=mad;v=<1}
+  Skills:
+  - sound{s=entity.villager.ambient;p=0.7;v=1} @SelfLocation
+  - effect:particles{p=happy_villager;amount=5;hS=0.3;vS=0.2;y=2.1} @SelfLocation
+  - stance{s=idle} @Self
+  - state{s=tired;li=3;lo=3} @Self
+  - modifytargetscore{objective=mad;action=set;value=0} @Self
+  - defaultstate{mid=<caster.mythic_type>;t=IDLE;s=idle} @Self
+  - defaultstate{mid=<caster.mythic_type>;t=WALK;s=walk} @Self
+
+NPC_AddIdle:
+  Cooldown: 10
+  Conditions:
+  - offgcd
+  - stance idle
+  Skills:
+  - gcd{ticks=80}
+  - randomskill{skills=NPC_Tired,NPC_Look}
+
+NPC_Tired:
+  Skills:
+  - state{s=tired;li=3;lo=3} @Self
+
+NPC_Look:
+  Skills:
+  - state{s=look_around;li=3;lo=3} @Self
+
+NPC_Aggressive_Signal:
+  Cooldown: 5
+  Skills:
+  - gcd{ticks=80}
+  - stance{s=mad} @Self
+  - state{s=shock;li=3;lo=3} @Self
+  - stun{d=20} @Self
+  - randomskill{skills=NPC_MadTimer1,NPC_MadTimer2,NPC_MadTimer3}
+  - sound{s=entity.villager.no;p=0.7;v=1} @SelfLocation
+  - defaultstate{mid=<caster.mythic_type>;t=IDLE;s=mad_idle} @Self
+  - defaultstate{mid=<caster.mythic_type>;t=WALK;s=mad_walk} @Self
+
+NPC_MadTimer1:
+  Skills:
+  - modifytargetscore{objective=mad;action=set;value=8} @Self
+
+NPC_MadTimer2:
+  Skills:
+  - modifytargetscore{objective=mad;action=set;value=10} @Self
+
+NPC_MadTimer3:
+  Skills:
+  - modifytargetscore{objective=mad;action=set;value=12} @Self
+
+NPC_Normal_Interact:
+  Cooldown: 4
+  Conditions:
+  - stance idle
+  Skills:
+  - gcd{ticks=80}
+  - state{s=cheerful_greet;li=5;lo=5} @Self
+  - sound{s=entity.villager.yes;p=0.8;v=1} @SelfLocation
+  - randomskill{skills=NPC_Normal_FleeMessage1,NPC_Normal_FleeMessage2,NPC_Normal_FleeMessage3,NPC_Normal_FleeMessage4}
+  - runaigoalselector{goal=clear}
+  - runaigoalselector{goal=lookatplayers}
+  - stun{d=15;ai=true;delay=5} @Self
+  - summon{t=NPCGREETFX_villager} @Forward{f=0;y=1.75}
+  - delay 15
+  - runaigoalselector{goal=clear}
+  - runaigoalselector{goal=avoidzombies}
+  - runaigoalselector{goal=avoidskeletons}
+  - runaigoalselector{goal=lookatplayers}
+  - runaigoalselector{goal=randomstroll}
+  - runaigoalselector{goal=randomlookaround}
+  - runaigoalselector{goal=float}
+
+NPC_Aggressive_Calm:
+  Conditions:
+  - targetwithin 12 castinstead NPC_Aggressive_Flee
+  - stance flee 
+  Skills:
+  - stance{s=idle} @Self
+  - state{s=tired;li=3;lo=3} @Self
+
+  - sound{s=entity.villager.ambient;p=0.7;v=1} @SelfLocation
+  - effect:particles{p=cloud;amount=4;hS=0.3;vS=0.2;y=2.1} @SelfLocation
+
+  - defaultstate{mid=<caster.mythic_type>;t=IDLE;s=idle} @Self
+  - defaultstate{mid=<caster.mythic_type>;t=WALK;s=walk} @Self
+
+NPC_Aggressive_Flee:
+  Conditions:
+  - stance mad cast NPC_Aggressive_Flee-mad
+  - stance idle cast NPC_Aggressive_Flee-calm
+  Skills:
+  - potion{type=SPEED;duration=20;level=1;hasParticles=false} @Self
+  - effect:particles{p=soul;amount=1;hS=0.2;vS=0.1;y=2} @SelfLocation
+
+NPC_Aggressive_Flee-mad:
+  Skills:
+  - stance{s=flee} @Self
+  - state{s=shock;li=3;lo=3} @Self
+
+  - stun{d=20} @Self
+  - sound{s=entity.villager.no;p=0.7;v=1} @SelfLocation
+  - effect:particles{p=smoke_normal;amount=8;hS=0.3;vS=0.2;y=2.1} @SelfLocation
+
+  - modifytargetscore{objective=mad;action=set;value=0} @Self
+
+  - defaultstate{mid=<caster.mythic_type>;t=IDLE;s=flee_idle} @Self
+  - defaultstate{mid=<caster.mythic_type>;t=WALK;s=flee_walk} @Self
+
+  - state{s=attack;li=3;lo=3} @Self
+
+NPC_Aggressive_Flee-calm:
+  Skills:
+  - stance{s=flee} @Self
+  - state{s=shock;li=3;lo=3} @Self
+  
+  - stun{d=20} @Self
+  - sound{s=entity.villager.no;p=0.7;v=1} @SelfLocation
+  - effect:particles{p=smoke_normal;amount=8;hS=0.3;vS=0.2;y=2.1} @SelfLocation
+
+  - defaultstate{mid=<caster.mythic_type>;t=IDLE;s=flee_idle} @Self
+  - defaultstate{mid=<caster.mythic_type>;t=WALK;s=flee_walk} @Self
+
+  - state{s=attack;li=3;lo=3} @Self
+
+NPC_FightBack:
+  Cooldown: 2
+  Conditions:
+  - stance flee cancel
+  Skills:
+  - gcd{ticks=80}
+  - stance{s=mad} @Self
+  - randomskill{skills=NPC_MadTimer1,NPC_MadTimer2,NPC_MadTimer3}
+  - sound{s=entity.villager.no;p=0.7;v=1} @SelfLocation
+  - defaultstate{mid=<caster.mythic_type>;t=IDLE;s=mad_idle} @Self
+  - defaultstate{mid=<caster.mythic_type>;t=WALK;s=mad_walk} @Self
+  - state{s=attack;li=3;lo=3} @Self
+  - randomskill{skills=NPC_FightBack_template_Message1,NPC_FightBack_template_Message2} @Trigger
+  - stun{d=25;ai=true} @Self
+  - delay 20
+  - sound{s=entity.iron_golem.attack;p=0.7;v=1} @SelfLocation
+  - skill{s=NPC_Melee-Dmg} @Trigger
+
+NPC_Melee-Dmg:
+  TargetConditions:
+  - distance{d=0to4}
+  Skills:
+  - basedamage{m=1}
+
+NPC_Normal_FleeMessage1:
+  Skills:
+  - message{m="<mob.name>&f<&co> How are things?"} @Trigger #Change greet message here
+
+NPC_Normal_FleeMessage2:
+  Skills:
+  - message{m="<mob.name>&f<&co> Hello there!"} @Trigger #Change greet message here
+
+NPC_Normal_FleeMessage3:
+  Skills:
+  - message{m="<mob.name>&f<&co> Have a nice day!"} @Trigger #Change greet message here 
+
+NPC_Normal_FleeMessage4:
+  Skills:
+  - message{m="<mob.name>&f<&co> What's up?"} @Trigger #Change greet message here
+
+##################################################################################################################################
+
+black_silver_crateNPCInteract:
+  Skills:
+  - sound{s=entity.experience_orb.pickup;p=0.8;v=1} @SelfLocation
+  - potion{type=SLOW;duration=20;level=1} @trigger ~onInteract
+  - delay 10
+  - command{c="cp DailyCratePreview <target.name>"} @trigger ~onInteract
+
+purple_light_purple_crateNPCInteract:
+  Skills:
+  - sound{s=entity.experience_orb.pickup;p=0.8;v=1} @SelfLocation
+  - potion{type=SLOW;duration=20;level=1} @trigger ~onInteract
+  - delay 10
+  - command{c="cp TreasureCratePreview <target.name>"} @trigger ~onInteract

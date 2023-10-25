@@ -1,0 +1,27 @@
+NPC-guardNPC_cyan1:
+  World: world_spawn
+  X: 30
+  Y: 115
+  Z: -81
+  Yaw: 0.0
+  Pitch: 0.0
+  Breakable: false
+  MobName: guardcyan
+  Radius: 0.0
+  RadiusY: 0.0
+  UseTimer: true
+  MaxMobs: '1'
+  MobLevel: '1'
+  MobsPerSpawn: 1
+  Cooldown: -1
+  Warmup: 0
+  ActivationRange: 32.0
+  ScalingRange: 25.0
+  LeashRange: 32.0
+  HealOnLeash: false
+  ResetThreatOnLeash: false
+  CheckForPlayers: true
+  ShowFlames: false
+  Conditions: &id004 []
+  SpawnConditions: *id004
+  ActiveMobs: 1

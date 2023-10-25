@@ -1,0 +1,12 @@
+speedpad:
+  MobName: RPG3[MAIN]_Utility_SpeedPad
+  World: world_spawn
+  X: -7
+  Y: 119
+  Z: -102
+  Yaw: 0.0
+  Pitch: 0.0
+  MobLevel: '1'
+  Cooldown: -1
+  Warmup: 0
+  ActiveMobs: 1

@@ -1,0 +1,12 @@
+NPC-daisyNPC:
+  MobName: daisy_model64
+  World: world_spawn
+  X: 1
+  Y: 119
+  Z: -99
+  Yaw: 0.0
+  Pitch: 0.0
+  MobLevel: '1'
+  Cooldown: -1
+  ActiveMobs: 1
+  Warmup: 0

@@ -1,0 +1,269 @@
+Slime_pack_Changetarget:  
+  Cooldown: 0
+  Skills:
+  - runaitargetselector{target=clear}
+  - runaitargetselector{target=players}
+  
+Slime_Hit:
+  Cooldown: 1
+  Skills:
+  - state{s=hit} @self
+  - effect:sound{s=entity.slime.hurt;volume=0.6;pitch=1.1} @self
+
+###############################################################################################################################
+
+Slime_Attack_template:
+  Conditions:
+  - offgcd
+  - targetwithin{d=4} true
+  - hasaurastacks{auraName=JUMPED} false
+  Skills:
+  - gcd{ticks=20}
+  - state{s=attack;li=2;lo=4} @self
+  - potion{type=SLOW;duration=20;level=50;hasParticles=false} @self
+  - lunge{velocity=0.5;velocityY=0.7} @forward{f=3;y=4}
+  - effect:sound{s=entity.slime.attack;volume=0.6;pitch=1} @self
+  - delay 14
+  - effect:sound{s=entity.player.attack.sweep;volume=0.6;pitch=0.6} @self
+  - totem{md=2;c=1;oH=Slime_Attack_DAMAGE_template;hnp=false;hp=true;hR=1.5;vR=1.5;i=1} @forward{f=0.5}
+  
+Slime_Attack_DAMAGE_template:
+  TargetConditions:
+  - isblocking false
+  Skills:
+  - damage{a=5;pkb=false;hnp=false;hp=true} ?mythicmobtype{t=Slime_Common}
+  - damage{a=7;pkb=false;hnp=false;hp=true} ?mythicmobtype{t=Slime_Frost}
+  - damage{a=10;pkb=false;hnp=false;hp=true} ?mythicmobtype{t=Slime_Lava}
+  - damage{a=5;pkb=false;hnp=false;hp=true} ?mythicmobtype{t=Slime_Healer}
+  - damage{a=20;pkb=false;hnp=false;hp=true} ?mythicmobtype{t=Slime_Warrior}
+  - damage{a=15;pkb=false;hnp=false;hp=true} ?mythicmobtype{t=Slime_Triple}
+  - damage{a=35;pkb=false;hnp=false;hp=true} ?mythicmobtype{t=Slime_King}
+  - throw{velocity=5;velocityY=1}
+
+###############################################################################################################################
+
+# Healer Slime #
+  
+Slime_Healer_Heal:
+  Skills:
+  - effect:particlering{particle=redstone;color=#ffff63;radius=2;points=30;amount=1;hS=0;vS=0;y=0.1;repeat=3;repeatinterval=10} @self
+  - skill{s=Slime_Healer_HealHeal;repeat=3;repeatinterval=10} @EIR{r=2}
+  
+Slime_Healer_HealHeal:
+  TargetConditions:
+  - faction{faction=Slime} true
+  Skills:
+  - heal{a=4}
+  
+Slime_Healer_Flee:
+  Conditions:
+  - mobsInRadius{types=Slime_Common,Slime_Frost,Slime_Lava,Slime_Warrior,Slime_Triple,Slime_Mage,Slime_King;amount=1to1000;radius=15} castinstead Slime_Healer_Atk
+  Skills:
+  - runaigoalselector{goal=clear}
+  - runaigoalselector{goal=fleeplayers}
+  - runaigoalselector{goal=randomstroll}
+  - runaigoalselector{goal=float}
+  
+Slime_Healer_Atk:
+  Skills:
+  - runaigoalselector{goal=clear}
+  - runaigoalselector{goal=meleeattack}
+  - runaigoalselector{goal=movetowardstarget}
+  - runaigoalselector{goal=randomstroll}
+  - runaigoalselector{goal=float}
+
+###############################################################################################################################
+  
+# Mage Slime #
+  
+Slime_Mage_AttackS:
+  Conditions:
+  - targetwithin{d=6} castinstead Slime_Mage_Attack
+  Skills:
+  - randomskill{skills=Slime_Attack_template,Slime_Mage_Shoot,Slime_Mage_Shoot,Slime_Mage_Shoot}
+  
+Slime_Mage_Shoot:
+  Conditions:
+  - offgcd
+  - targetwithin{d=15} true
+  - hasaurastacks{auraName=JUMPED} false
+  Skills:
+  - gcd{ticks=24}
+  - state{s=attack;li=2;lo=4} @self
+  - potion{type=SLOW;duration=20;level=50;hasParticles=false} @self
+  - effect:sound{s=entity.slime.attack;volume=0.6;pitch=1} @self
+  - delay 13
+  - effect:sound{s=entity.blaze.shoot;volume=0.7;pitch=1.3} @self
+  - projectile{onTick=Slime_Mage_Shoot_T;onHit=Slime_Mage_Shoot_DAMAGE;v=10;i=1;hR=1;vR=1;mr=30;hnp=false;hO=0;sE=true;sB=true;hs=false;hfs=0;syo=1;tyo=0} @target
+  
+Slime_Mage_Shoot_T:
+  Skills:
+  - effect:particles{particle=crit_magic;amount=6;hS=0;vS=0;y=0.5;speed=0;forwardOffset=0;sideOffset=0} @origin
+
+Slime_Mage_Shoot_DAMAGE:
+  TargetConditions:
+  - isblocking false
+  Skills:
+  - damage{a=3;pkb=false;hnp=false;hp=true} @PlayersNearOrigin{r=2;limit=1;sort=NEAREST}
+
+###############################################################################################################################
+  
+# Slime King #
+
+Slime_King_Skills_1:
+  Cooldown: 0
+  Skills:
+  - randomskill{skills=Slime_King_Leap,Slime_King_Leap,Slime_King_Leap,Slime_King_Leap,Slime_King_Dash}
+  
+Slime_King_Hit_1:
+  Cooldown: 1
+  Conditions:
+  - damagecause{cause=FALL} false
+  Skills:
+  - state{s=hit} @self
+  - tint{m=slime_king;pid=body;em=false;c=ff4747} @self
+  - tint{m=slime_king;pid=stomach;em=false;c=ff4747} @self
+  - tint{m=slime_king;pid=head;em=false;c=ff4747} @self
+  - tint{m=slime_king;pid=crown;em=false;c=ff4747} @self
+  - tint{m=slime_king;pid=body;em=false;c=FFFFFF;delay=5} @self
+  - tint{m=slime_king;pid=stomach;em=false;c=FFFFFF;delay=5} @self
+  - tint{m=slime_king;pid=head;em=false;c=FFFFFF;delay=5} @self
+  - tint{m=slime_king;pid=crown;em=false;c=FFFFFF;delay=5} @self
+  - effect:sound{s=entity.slime.hurt;volume=1;pitch=0.8} @self
+  - skill{s=Slime_King_Summon} 0.15
+
+Slime_King_Hit_2:
+  Cooldown: 1
+  Conditions:
+  - damagecause{cause=FALL} false
+  Skills:
+  - state{s=hit} @self
+  - tint{m=slime_king;pid=body;em=false;c=ff4747} @self
+  - tint{m=slime_king;pid=stomach;em=false;c=ff4747} @self
+  - tint{m=slime_king;pid=head;em=false;c=ff4747} @self
+  - tint{m=slime_king;pid=crown;em=false;c=ff4747} @self
+  - tint{m=slime_king;pid=body;em=false;c=FFFFFF;delay=5} @self
+  - tint{m=slime_king;pid=stomach;em=false;c=FFFFFF;delay=5} @self
+  - tint{m=slime_king;pid=head;em=false;c=FFFFFF;delay=5} @self
+  - tint{m=slime_king;pid=crown;em=false;c=FFFFFF;delay=5} @self
+  - effect:sound{s=entity.slime.hurt;volume=1;pitch=0.8} @self
+  - skill{s=Slime_King_Summon} 0.25
+  
+Slime_King_Death:
+  Skills:
+  - tint{m=slime_king;pid=body;em=false;c=FFFFFF} @self
+  - tint{m=slime_king;pid=stomach;em=false;c=FFFFFF} @self
+  - tint{m=slime_king;pid=head;em=false;c=FFFFFF} @self
+  - tint{m=slime_king;pid=crown;em=false;c=FFFFFF} @self
+  
+Slime_King_Summon:
+  Skills:
+  - summon{type=Slime_Common;amount=1;radius=2;yRadius=2;onSurface=false} @self
+  
+Slime_King_Leap:
+  Conditions:
+  - offgcd
+  - targetwithin{d=20} true
+  Skills:
+  - gcd{ticks=30}
+  - state{s=leap_slam;li=2;lo=5} @self
+  - delay 4
+  - lunge{velocity=1.35;velocityY=0.8} @target
+  - effect:sound{s=entity.ender_dragon.shoot;volume=1;pitch=0.7} @self
+  - effect:sound{s=entity.slime.jump;volume=1;pitch=0.8} @self
+  - delay 11
+  - lunge{velocity=0.4;velocityY=-4} @forward{f=0.1;y=-8}
+  
+Slime_King_Land:
+  Skills:
+  - effect:sound{s=entity.slime.squish;volume=1.7;pitch=0.8;delay=2} @self
+  - effect:sound{s=entity.player.attack.crit;volume=1.3;pitch=0.7} @self
+  - damage{a=4;pkb=false;hnp=false;hp=true} @PIR{r=5}
+  - effect:particles{particle=slime;amount=50;hS=4;vS=0.1;y=0.1;speed=0;forwardOffset=0;sideOffset=0} @self
+  
+  - tint{m=slime_king;pid=body;em=false;c=47ffda;delay=1} @self
+  - tint{m=slime_king;pid=stomach;em=false;c=47ffda;delay=1} @self
+  - tint{m=slime_king;pid=head;em=false;c=47ffda;delay=1} @self
+  - tint{m=slime_king;pid=crown;em=false;c=47ffda;delay=1} @self
+  
+  - tint{m=slime_king;pid=body;em=false;c=73ffe3;delay=5} @self
+  - tint{m=slime_king;pid=stomach;em=false;c=73ffe3;delay=5} @self
+  - tint{m=slime_king;pid=head;em=false;c=73ffe3;delay=5} @self
+  - tint{m=slime_king;pid=crown;em=false;c=73ffe3;delay=5} @self
+  
+  - tint{m=slime_king;pid=body;em=false;c=a8ffee;delay=9} @self
+  - tint{m=slime_king;pid=stomach;em=false;c=a8ffee;delay=9} @self
+  - tint{m=slime_king;pid=head;em=false;c=a8ffee;delay=9} @self
+  - tint{m=slime_king;pid=crown;em=false;c=a8ffee;delay=9} @self
+  
+  - tint{m=slime_king;pid=body;em=false;c=c9fff5;delay=14} @self
+  - tint{m=slime_king;pid=stomach;em=false;c=c9fff5;delay=14} @self
+  - tint{m=slime_king;pid=head;em=false;c=c9fff5;delay=14} @self
+  - tint{m=slime_king;pid=crown;em=false;c=c9fff5;delay=14} @self
+  
+  - tint{m=slime_king;pid=body;em=false;c=FFFFFF;delay=19} @self
+  - tint{m=slime_king;pid=stomach;em=false;c=FFFFFF;delay=19} @self
+  - tint{m=slime_king;pid=head;em=false;c=FFFFFF;delay=19} @self
+  - tint{m=slime_king;pid=crown;em=false;c=FFFFFF;delay=19} @self
+  
+Slime_King_Dash:
+  Cooldown: 4
+  Conditions:
+  - offgcd
+  - targetwithin{d=20} true
+  Skills:
+  - gcd{ticks=45}
+  - state{s=dash} @self
+  - lunge{velocity=0.35;velocityY=-0.1;repeat=39;repeatinterval=1} @forward{f=5;y=-0.1}
+  - skill{s=Slime_King_Stuck;repeat=35;repeatinterval=1} @PIR{r=5}
+  - dismountall{pbone=seat;delay=100} @self
+  - runaitargetselector{target=clear;delay=10} @self
+  - effect:sound{s=entity.slime.squish;volume=0.8;pitch=0.9;repeatinterval=7;repeat=6} @self
+  - delay 40
+  - state{s=dash;remove=true} @self
+  - runaitargetselector{target=clear} @self
+  - runaitargetselector{target=players} @self
+  
+Slime_King_Stuck:
+  Conditions:
+  - ModelHasPassenger{p=seat} false
+  Skills:
+  - mountmodel{mid=slime_king;driver=false;mode=force_walking;pbone=seat}
+
+
+#######################################################################################################################################
+
+  
+Slime_Land:
+  Skills:
+  - effect:sound{s=entity.slime.squish;volume=0.6;pitch=1.1} @self
+  - potion{type=SLOW;duration=16;level=50;hasParticles=false} @self
+  - delay 19
+  - effect:sound{s=entity.slime.jump;volume=0.6;pitch=1.1} @self
+  - Aura{auraName=JUMPED;duration=20} @self
+
+Slime_Frost_Land:
+  Skills:
+  - effect:particles{particle=snowflake;amount=10;hS=0.4;vS=0.3;y=0.4;speed=0;forwardOffset=0;sideOffset=0} @self
+  - effect:sound{s=entity.slime.squish;volume=0.6;pitch=1.1} @self
+  - potion{type=SLOW;duration=16;level=50;hasParticles=false} @self
+  - delay 19
+  - effect:sound{s=entity.slime.jump;volume=0.6;pitch=1.1} @self
+  - Aura{auraName=JUMPED;duration=20} @self
+  
+Slime_Lava_Land:
+  Skills:
+  - effect:particles{particle=flame;amount=10;hS=0.4;vS=0.3;y=0.4;speed=0;forwardOffset=0;sideOffset=0} @self
+  - effect:sound{s=entity.slime.squish;volume=0.6;pitch=1.1} @self
+  - potion{type=SLOW;duration=16;level=50;hasParticles=false} @self
+  - delay 19
+  - effect:sound{s=entity.slime.jump;volume=0.6;pitch=1.1} @self
+  - Aura{auraName=JUMPED;duration=20} @self
+  
+Slime_Triple_Land:
+  Skills:
+  - effect:sound{s=entity.slime.squish;volume=0.6;pitch=1.1} @self
+  - potion{type=SLOW;duration=15;level=50;hasParticles=false} @self
+  - delay 18
+  - effect:sound{s=entity.slime.jump;volume=0.6;pitch=1.1} @self
+  - Aura{auraName=JUMPED;duration=20} @self

@@ -1,0 +1,12 @@
+NPC-jarvisNPC:
+  MobName: jarvis_model64
+  World: world_spawn
+  X: 13
+  Y: 115
+  Z: -21
+  Yaw: 0.0
+  Pitch: 0.0
+  MobLevel: '1'
+  Cooldown: -1
+  ActiveMobs: 1
+  Warmup: 0

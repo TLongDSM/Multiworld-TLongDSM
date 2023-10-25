@@ -1,0 +1,86 @@
+
+##======[No Fall]=======
+
+PB_NoFallDamageAura:
+  Skills:
+  - onDamaged{auraName=NoFall;oH=PB_NoFallCheck;mergeAll=true;d=200;c=1;m=0}
+
+PB_NoFallCheck:
+  Conditions:
+  - damagecause{cause=FALL}
+
+AdjustmentTool_Rotate:
+  TriggerConditions:
+  - wearing{slot=HAND;m=PB_AdjustmentTool}
+  - crouching castinstead AdjustmentTool_Dismantle
+  Skills:
+  - setrotation{relative=true;yaw=10;pitch=0} @Self
+  - sound{s=block.comparator.click;p=2;v=1} @SelfLocation
+
+AdjustmentTool_Dismantle:
+  TriggerConditions:
+  - wearing{slot=HAND;m=PB_AdjustmentTool}
+  - crouching
+  Skills:
+  - sound{s=item.shield.break;p=0.3;v=1} @SelfLocation
+  - sound{s=entity.zombie.attack_iron_door;p=0.3;v=0.45} @SelfLocation
+  - effect:particles{p=smoke_normal;amount=16;hS=0.3;vS=0.3} @SelfLocation
+  - remove @Self
+
+
+##======[Jump Pad]=======
+
+JumpPad_Trigger:
+  TargetConditions:
+  - hasaura{n=JumpPad} false
+  Skills:
+  - state{s=launch;li=3;lo=3} @Self
+  - skill{s=JumpPad_TriggerSound}
+  - SudoSkill{s=JumpPad_Lunge} @PlayersInRadius{r=1}
+  - Aura{auraName=JumpPad;mergeAll=true;d=5} @PlayersInRadius{r=1}
+  - Aura{auraName=JumpPad_Trail;oT=JumpPad_Trail;mergeAll=true;i=2;d=20} @PlayersInRadius{r=1}
+  - skill{s=PB_NoFallDamageAura} @PlayersInRadius{r=1}
+
+JumpPad_TriggerSound:
+  Skills:
+  - sound{s=entity.creeper.death;p=0.8;v=1} @Self
+  - sound{s=block.piston.extend;p=1;v=1} @Self
+
+JumpPad_Lunge:
+  Skills:
+  #- lunge{velocity=1.5;velocityY=0.5} @Self 
+  - lunge{velocity=1.5;velocityY=1} @Self 
+
+JumpPad_Trail:
+  Skills:
+  - effect:particles{p=EXPLOSION_NORMAL;amount=4;hS=0.5;vS=0.2;yOffset=1}  
+
+JumpPad_Trigger-Alternative:
+  TargetConditions:
+  - hasaura{n=JumpPad} false
+  Skills:
+  - state{s=launch;li=3;lo=3} @Self
+  - sound{s=entity.creeper.death;p=0.8;v=1} @Self
+  - sound{s=entity.firework_rocket.launch;p=1;v=1} @Self
+  - throw{velocity=-12;velocityY=10} @PlayersInRadius{r=1}  #Adjust launch power attributes here
+  - Aura{auraName=JumpPad;oT=JumpPad-TICK;mergeAll=true;i=2;d=30} @PlayersInRadius{r=1}  #Adjust launch effect attributes here
+  - skill{s=PB_NoFallDamageAura} @PlayersInRadius{r=1}
+
+##======[Speed Pad]=======
+
+SpeedPad_Trigger:
+  TargetConditions:
+  - hasaura{n=SpeedPad} false
+  Skills:
+  - sound{s=entity.creeper.death;p=0.8;v=1} @Self
+  - sound{s=entity.experience_orb.pickup;p=1;v=1} @Self
+  - throw{velocity=-2;velocityY=0} @PlayersInRadius{r=1} 
+  - Aura{auraName=SpeedPad;oS=SpeedPad-START;oT=SpeedPad-TICK;mergeAll=true;interval=2;duration=20} @PlayersInRadius{r=1}  #Adjust speed aura attributes here
+
+SpeedPad-START:
+  Skills:
+  - potion{type=SPEED;duration=50;level=4;p=false}
+
+SpeedPad-TICK:
+  Skills:
+  - effect:particles{p=EXPLOSION_NORMAL;amount=4;hS=0.5;vS=0.2;yOffset=1} 

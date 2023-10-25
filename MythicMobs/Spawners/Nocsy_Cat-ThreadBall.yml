@@ -1,0 +1,13 @@
+Nocsy_Cat-ThreadBall:
+  MobName: Nocsy_Cat-ThreadBall
+  World: world_spawn
+  X: 19
+  Y: 115
+  Z: 15
+  Yaw: 0.0
+  Pitch: 0.0
+  MobLevel: '1'
+  Cooldown: 20
+  CooldownTimer: 1
+  ActiveMobs: 1
+  Warmup: 0

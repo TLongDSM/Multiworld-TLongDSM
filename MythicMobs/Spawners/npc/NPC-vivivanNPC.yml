@@ -1,0 +1,12 @@
+NPC-vivivanNPC:
+  MobName: vivian_model64
+  World: world_spawn
+  X: 41
+  Y: 115
+  Z: -88
+  Yaw: 0.0
+  Pitch: 0.0
+  MobLevel: '1'
+  ActiveMobs: 1
+  Cooldown: 0
+  Warmup: 0

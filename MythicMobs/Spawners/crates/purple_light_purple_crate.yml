@@ -1,0 +1,11 @@
+purple_light_purple_crate:
+  MobName: purple_light_purple_crate
+  World: world_spawn
+  X: -20
+  Y: 116
+  Z: -97
+  Yaw: 0.0
+  Pitch: 0.0
+  MobLevel: '1'
+  Cooldown: -1
+  Warmup: 0

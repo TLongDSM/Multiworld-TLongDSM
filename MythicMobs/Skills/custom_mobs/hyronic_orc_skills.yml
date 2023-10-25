@@ -1,0 +1,762 @@
+Changetarget:  
+  Cooldown: 0
+  Skills:
+  - runaitargetselector{target=clear}
+  - runaitargetselector{target=players}
+
+########################################################################################################################################################
+
+LR_hpbar_Orc_Minion_show:
+  Skills:
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=20} @self =100%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=19} @self =95%-99%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=18} @self =95%-90%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=17} @self =85%-90%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=16} @self =80%-85%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=15} @self =75%-80%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=14} @self =70%-75%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=13} @self =65%-70%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=12} @self =60%-65%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=11} @self =55%-60%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=10} @self =50%-55%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=9} @self =45%-50%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=8} @self =40%-45%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=7} @self =35%-40%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=6} @self =30%-35%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=5} @self =25%-30%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=4} @self =20%-25%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=3} @self =15%-20%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=2} @self =10%-15%
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=lr_healthbar;npid=1} @self =0%-10%
+  - delay 480
+  - cast{oc=LR_hpbar_Orc_Minion_remove;cb=false;duration=20} @self
+  
+LR_hpbar_Orc_Minion_remove:
+  Conditions:
+  - incombat false
+  Skills:
+  - changepart{m=Orc_Minion;pid=hp_bar;nm=Orc_Minion;npid=hp_bar} @self
+
+Orc_Minion_Run:
+  Conditions:
+  - offgcd
+  Skills:
+  - defaultstate{t=walk;s=run} @self
+  - setspeed{speed=1.5;type=walking} @self
+  
+Orc_Minion_Walk:
+  Conditions:
+  - offgcd
+  Skills:
+  - defaultstate{t=walk;s=walk} @self
+  - setspeed{speed=1;type=walking} @self
+  
+Orc_Minion_Attack:
+  Conditions:
+  - offgcd
+  - targetwithin{d=2.5} true
+  Skills:
+  - gcd{ticks=28}
+  - setAI{ai=false} @self
+  - setAI{ai=true;delay=28} @self
+  - state{s=attack} @self
+  - effect:sound{s=orc_sounds:samus.orc_attack;volume=1;pitch=1.2} @self 0.5
+  - delay 22
+  - effect:sound{s=orc_sounds:samus.orc_minion_swing;volume=1;pitch=1} @self
+  - totem{md=2;c=1;oH=Orc_Minion_Attack_DAMAGE;hnp=false;hp=true;hR=1;vR=1;i=1} @forward{f=2}
+
+Orc_Minion_Attack_DAMAGE:
+  TargetConditions:
+  - isblocking false
+  Skills:
+  - damage{a=2;pkb=false;hnp=false;hp=true}
+
+########################################################################################################################################################
+
+LR_hpbar_Orc_Warrior_show:
+  Skills:
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=20} @self =100%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=19} @self =95%-99%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=18} @self =95%-90%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=17} @self =85%-90%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=16} @self =80%-85%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=15} @self =75%-80%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=14} @self =70%-75%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=13} @self =65%-70%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=12} @self =60%-65%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=11} @self =55%-60%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=10} @self =50%-55%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=9} @self =45%-50%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=8} @self =40%-45%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=7} @self =35%-40%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=6} @self =30%-35%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=5} @self =25%-30%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=4} @self =20%-25%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=3} @self =15%-20%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=2} @self =10%-15%
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=lr_healthbar;npid=1} @self =0%-10%
+  - delay 480
+  - cast{oc=LR_hpbar_Orc_Warrior_remove;cb=false;duration=20} @self
+  
+LR_hpbar_Orc_Warrior_remove:
+  Conditions:
+  - incombat false
+  Skills:
+  - changepart{m=Orc_Warrior;pid=hp_bar;nm=Orc_Warrior;npid=hp_bar} @self
+
+Orc_Warrior_Run:
+  Skills:
+  - defaultstate{t=walk;s=run} @self
+  - setspeed{speed=1.5;type=walking} @self
+  
+Orc_Warrior_Walk:
+  Skills:
+  - defaultstate{t=walk;s=walk} @self
+  - setspeed{speed=1;type=walking} @self
+  
+Orc_Warrior_Attack:
+  Conditions:
+  - stance block false
+  Skills:
+  - randomskill{skills=Orc_Warrior_Attack1,Orc_Warrior_Attack2}
+  
+Orc_Warrior_Attack1:
+  Conditions:
+  - offgcd
+  - targetwithin{d=3} true
+  Skills:
+  - gcd{ticks=36}
+  - setAI{ai=false} @self
+  - setAI{ai=true;delay=36} @self
+  - state{s=attack} @self
+  - effect:sound{s=orc_sounds:samus.orc_attack;volume=1;pitch=1;delay=9} @self 0.7
+  - delay 14
+  - effect:sound{s=orc_sounds:samus.orc_warrior_swing;volume=1;pitch=1} @self
+  - totem{md=2;c=1;oH=Orc_Warrior_Attack_DAMAGE;hnp=false;hp=true;hR=2;vR=2;i=1} @forward{f=2}
+
+Orc_Warrior_Attack2:
+  Conditions:
+  - offgcd
+  - targetwithin{d=3} true
+  Skills:
+  - gcd{ticks=36}
+  - setAI{ai=false} @self
+  - setAI{ai=true;delay=36} @self
+  - state{s=attack2} @self
+  - effect:sound{s=orc_sounds:samus.orc_attack;volume=1;pitch=1;delay=10} @self 0.7
+  - delay 15
+  - effect:sound{s=orc_sounds:samus.orc_warrior_swing;volume=1;pitch=1} @self
+  - totem{md=2;c=1;oH=Orc_Warrior_Attack_DAMAGE;hnp=false;hp=true;hR=2;vR=2;i=1} @forward{f=2}
+  
+Orc_Warrior_Attack_DAMAGE:
+  TargetConditions:
+  - isblocking false
+  Skills:
+  - damage{a=4;pkb=false;hnp=false;hp=true}
+  
+Orc_Warrior_Shield_Blockmode_ON:
+  Conditions:
+  - offgcd
+  - stance combat true
+  Skills:
+  - bindhitbox{m=orc_warrior;p=ob_shield;t=Orc_Warrior_Shield} @self
+  - gcd{ticks=40}
+  - setstance{stance=block} @self
+  - defaultstate{t=idle;s=block_idle} @self
+  - defaultstate{t=walk;s=block_walk} @self
+  - setspeed{speed=0.5;type=walking} @self
+  
+Orc_Warrior_Shield_Blockmode_OFF:
+  Conditions:
+  - offgcd
+  - stance block true
+  - incombat{} castinstead Orc_Warrior_Shield_Blockmode_OFF_RUN
+  Skills:
+  - setstance{stance=combat} @self
+  - defaultstate{t=idle;s=idle} @self
+  - defaultstate{t=walk;s=walk} @self
+  - setspeed{speed=1;type=walking} @self
+  
+Orc_Warrior_Shield_Blockmode_OFF_RUN:
+  Skills:
+  - setstance{stance=combat} @self
+  - defaultstate{t=idle;s=idle} @self
+  - defaultstate{t=walk;s=run} @self
+  - setspeed{speed=1.5;type=walking} @self
+  
+Orc_Warrior_Shield_DIE:
+  TargetConditions:
+  - stance block false
+  Skills:
+  - remove @self
+  
+Orc_Warrior_Shield_BLOCK:
+  Conditions:
+  - damagecause{cause=ENTITY_ATTACK} true
+  Skills:
+  - effect:sound{s=item.shield.block;volume=1;pitch=1} @self
+  
+Orc_Warrior_Shield_BLOCK_PRO:
+  Conditions:
+  - damagecause{cause=PROJECTILE} true
+  Skills:
+  - effect:sound{s=item.shield.block;volume=1;pitch=1} @self
+
+########################################################################################################################################################
+
+LR_hpbar_Orc_Archer_show:
+  Skills:
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=20} @self =100%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=19} @self =95%-99%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=18} @self =95%-90%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=17} @self =85%-90%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=16} @self =80%-85%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=15} @self =75%-80%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=14} @self =70%-75%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=13} @self =65%-70%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=12} @self =60%-65%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=11} @self =55%-60%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=10} @self =50%-55%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=9} @self =45%-50%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=8} @self =40%-45%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=7} @self =35%-40%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=6} @self =30%-35%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=5} @self =25%-30%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=4} @self =20%-25%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=3} @self =15%-20%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=2} @self =10%-15%
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=lr_healthbar;npid=1} @self =0%-10%
+  - delay 480
+  - cast{oc=LR_hpbar_Orc_Archer_remove;cb=false;duration=20} @self
+  
+LR_hpbar_Orc_Archer_remove:
+  Conditions:
+  - incombat false
+  Skills:
+  - changepart{m=Orc_Archer;pid=hp_bar;nm=Orc_Archer;npid=hp_bar} @self
+
+Orc_Archer_Attack:
+  Conditions:
+  - offgcd
+  - targetwithin{d=15} true
+  Skills:
+  - effect:sound{s=item.crossbow.loading_start;volume=1.5;pitch=1} @self
+  - delay 10
+  - effect:sound{s=item.crossbow.loading_middle;volume=1.5;pitch=1} @self
+  - delay 10
+  - effect:sound{s=item.crossbow.loading_end;volume=1.5;pitch=1} @self
+  - delay 10
+  - gcd{ticks=18}
+  - state{mid=orc_archer;s=attack} @self
+  - delay 2
+  - projectile{bulletType=MOB;mob=Orc_Arrow;onHit=Orc_Archer_Attack_HIT;v=30;i=1;hR=1;vR=1;mr=15;hnp=false;hO=0;sE=true;sB=true;hs=false;sfo=2;hfs=0;syo=1.5;tyo=1.5} @Forward{f=15;y=0}
+  - effect:sound{s=item.crossbow.shoot;volume=1.3;pitch=1} @self
+  
+Orc_Archer_Attack_HIT:
+  Skills:
+  - damage{a=5} @PlayersNearOrigin{r=2}
+
+########################################################################################################################################################
+
+LR_hpbar_Orc_King_show:
+  Skills:
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=20} @self =100%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=19} @self =95%-99%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=18} @self =95%-90%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=17} @self =85%-90%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=16} @self =80%-85%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=15} @self =75%-80%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=14} @self =70%-75%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=13} @self =65%-70%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=12} @self =60%-65%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=11} @self =55%-60%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=10} @self =50%-55%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=9} @self =45%-50%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=8} @self =40%-45%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=7} @self =35%-40%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=6} @self =30%-35%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=5} @self =25%-30%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=4} @self =20%-25%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=3} @self =15%-20%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=2} @self =10%-15%
+  - changepart{m=Orc_King;pid=hp_bar;nm=lr_healthbar_boss;npid=1} @self =0%-10%
+  - delay 480
+  - cast{oc=LR_hpbar_Orc_King_remove;cb=false;duration=20} @self
+  
+LR_hpbar_Orc_King_remove:
+  Conditions:
+  - incombat false
+  Skills:
+  - changepart{m=Orc_King;pid=hp_bar;nm=Orc_King;npid=hp_bar} @self
+  
+Orc_King_Skill:
+  Cooldown: 0
+  Skills:
+  - randomskill{skills=Orc_King_Charge 50,Glaive_Throw 30,Orcs_Summon 20}
+  
+# Glaive Attack #
+
+Orc_King_Attack:
+  Cooldown: 0
+  Skills:
+  - randomskill{skills=Orc_King_Attack1,Orc_King_Attack2,Orc_King_Attack3,Glaive_Smash}
+
+Orc_King_Attack1:
+  Conditions:
+  - offgcd
+  - targetwithin{d=5} true
+  Skills:
+  - gcd{ticks=30}
+  - state{s=attack1} @self
+  - effect:sound{s=orc_sounds:samus.orc_king_attack;volume=2;pitch=1} @self
+  - delay 12
+  - effect:sound{s=orc_sounds:samus.orc_king_glaive;volume=1.5;pitch=1} @self
+  - totem{md=2;c=1;oH=Orc_King_Attack_DAMAGE;hnp=false;hp=true;hR=2;vR=2;i=1} @forward{f=3}
+
+Orc_King_Attack2:
+  Conditions:
+  - offgcd
+  - targetwithin{d=5} true
+  Skills:
+  - gcd{ticks=30}
+  - state{s=attack2} @self
+  - effect:sound{s=orc_sounds:samus.orc_king_attack;volume=2;pitch=1} @self
+  - delay 12
+  - effect:sound{s=orc_sounds:samus.orc_king_glaive;volume=1.5;pitch=1} @self
+  - totem{md=2;c=1;oH=Orc_King_Attack_DAMAGE;hnp=false;hp=true;hR=2;vR=2;i=1} @forward{f=3}
+  
+Orc_King_Attack3:
+  Conditions:
+  - offgcd
+  - targetwithin{d=5} true
+  Skills:
+  - gcd{ticks=30}
+  - state{s=attack3} @self
+  - effect:sound{s=orc_sounds:samus.orc_king_attack;volume=2;pitch=1} @self
+  - delay 12
+  - effect:sound{s=orc_sounds:samus.orc_king_glaive;volume=1.5;pitch=1} @self
+  - totem{md=2;c=1;oH=Orc_King_Attack_DAMAGE;hnp=false;hp=true;hR=2;vR=2;i=1} @forward{f=3}
+
+Orc_King_Attack_DAMAGE:
+  TargetConditions:
+  - isblocking false
+  Skills:
+  - damage{a=6;pkb=false;hnp=false;hp=true}
+
+# Charge #
+
+Orc_King_Charge:
+  Conditions:
+  - offgcd
+  - targetwithin{d=30} true
+  Skills:
+  - gcd{ticks=125}
+  - state{s=charge_start} @self
+  - setAI{ai=false} @self
+  - setAI{ai=true;delay=30} @self
+  - potion{type=SLOW;duration=30;level=99;hasParticles=false} @self
+  - effect:sound{s=orc_sounds:samus.orc_king_roar;volume=1.5;pitch=1} @self
+  - delay 43
+  - effect:sound{s=entity.horse.gallop;volume=1.5;pitch=1;repeat=4;repeatInterval=15} @self
+  - state{s=run} @self
+  - lunge{v=0.35;yv=-1.5;repeat=60;repeatInterval=1} @forward{f=1}
+  - skill{s=Orc_King_Charge_Attack;;delay=20}
+  - delay 60
+  - state{s=run;remove=true} @self
+  - state{s=charge_end} @self
+  - potion{type=SLOW;duration=22;level=99;hasParticles=false} @self
+  - lunge{v=0.1;yv=-1.5;repeat=22;repeatInterval=1} @forward{f=1}
+
+Orc_King_Charge_Attack:
+  Cooldown: 0
+  Skills:
+  - randomskill{skills=Orc_King_Charge_Attack1,Orc_King_Charge_Attack2,Orc_King_Charge_Attack3}
+
+Orc_King_Charge_Attack1:
+  Conditions:
+  - targetwithin{d=13} true
+  Skills:
+  - state{s=attack1} @self
+  - effect:sound{s=orc_sounds:samus.orc_king_attack;volume=2;pitch=1} @self
+  - delay 12
+  - effect:sound{s=orc_sounds:samus.orc_king_glaive;volume=1.5;pitch=1} @self
+  - totem{md=2;c=1;oH=Orc_King_Charge_Attack_DAMAGE;hnp=false;hp=true;hR=2;vR=2;i=1} @forward{f=3}
+
+Orc_King_Charge_Attack2:
+  Conditions:
+  - targetwithin{d=13} true
+  Skills:
+  - state{s=attack2} @self
+  - effect:sound{s=orc_sounds:samus.orc_king_attack;volume=2;pitch=1} @self
+  - delay 12
+  - effect:sound{s=orc_sounds:samus.orc_king_glaive;volume=1.5;pitch=1} @self
+  - totem{md=2;c=1;oH=Orc_King_Charge_Attack_DAMAGE;hnp=false;hp=true;hR=2;vR=2;i=1} @forward{f=3}
+  
+Orc_King_Charge_Attack3:
+  Conditions:
+  - targetwithin{d=13} true
+  Skills:
+  - state{s=attack3} @self
+  - effect:sound{s=orc_sounds:samus.orc_king_attack;volume=2;pitch=1} @self
+  - delay 12
+  - effect:sound{s=orc_sounds:samus.orc_king_glaive;volume=1.5;pitch=1} @self
+  - totem{md=2;c=1;oH=Orc_King_Charge_Attack_DAMAGE;hnp=false;hp=true;hR=2;vR=2;i=1} @forward{f=3}
+
+Orc_King_Charge_Attack_DAMAGE:
+  TargetConditions:
+  - isblocking false
+  Skills:
+  - damage{a=8;pkb=false;hnp=false;hp=true}
+
+########################################################################################################################################################
+
+LR_hpbar_Orc_Giant_show:
+  Skills:
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=20} @self =100%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=19} @self =95%-99%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=18} @self =95%-90%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=17} @self =85%-90%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=16} @self =80%-85%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=15} @self =75%-80%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=14} @self =70%-75%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=13} @self =65%-70%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=12} @self =60%-65%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=11} @self =55%-60%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=10} @self =50%-55%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=9} @self =45%-50%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=8} @self =40%-45%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=7} @self =35%-40%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=6} @self =30%-35%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=5} @self =25%-30%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=4} @self =20%-25%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=3} @self =15%-20%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=2} @self =10%-15%
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=lr_healthbar_boss;npid=1} @self =0%-10%
+  - delay 480
+  - cast{oc=LR_hpbar_Orc_Giant_remove;cb=false;duration=20} @self
+  
+LR_hpbar_Orc_Giant_remove:
+  Conditions:
+  - incombat false
+  Skills:
+  - changepart{m=Orc_Giant;pid=hp_bar;nm=Orc_Giant;npid=hp_bar} @self
+
+Orc_Giant_Skill:
+  Cooldown: 0
+  Skills:
+  - randomskill{skills=Stone_Throw,Orc_Roar}
+
+# Orc Giant Punch #
+
+Orc_Giant_Attack:
+  Cooldown: 0
+  Skills:
+  - randomskill{skills=Orc_Giant_Attack1,Orc_Giant_Attack2,Ground_Smash}
+
+Orc_Giant_Attack1:
+  Conditions:
+  - offgcd
+  - targetwithin{d=5} true
+  Skills:
+  - gcd{ticks=50}
+  - setAI{ai=false} @self
+  - setAI{ai=true;delay=50} @self
+  - potion{type=SLOW;duration=50;level=99;hasParticles=false} @self
+  - state{s=attack_left;li=3;lo=2} @self
+  - effect:sound{s=orc_sounds:samus.orc_giant_attack;volume=2;pitch=1;delay=7} @self
+  - delay 25
+  - totem{md=2;c=1;oH=Orc_Giant_Attack_DAMAGE_1;hnp=false;hp=true;hR=2;vR=2;i=1} @forward{f=3}
+
+Orc_Giant_Attack2:
+  Conditions:
+  - offgcd
+  - targetwithin{d=5} true
+  Skills:
+  - gcd{ticks=50}
+  - setAI{ai=false} @self
+  - setAI{ai=true;delay=50} @self
+  - potion{type=SLOW;duration=50;level=99;hasParticles=false} @self
+  - state{s=attack_right;li=3;lo=2} @self
+  - effect:sound{s=orc_sounds:samus.orc_giant_attack;volume=2;pitch=1;delay=7} @self
+  - delay 25
+  - totem{md=2;c=1;oH=Orc_Giant_Attack_DAMAGE_2;hnp=false;hp=true;hR=2;vR=2;i=1} @forward{f=3}
+
+Orc_Giant_Attack_DAMAGE_1:
+  TargetConditions:
+  - isblocking false
+  Skills:
+  - damage{a=6;pkb=false;hnp=false;hp=true}
+  - throw{velocity=15;velocityY=1}
+  - effect:spin{duration=10;velocity=-30} 0.5
+  
+Orc_Giant_Attack_DAMAGE_2:
+  TargetConditions:
+  - isblocking false
+  Skills:
+  - damage{a=6;pkb=false;hnp=false;hp=true}
+  - throw{velocity=15;velocityY=1}
+  - effect:spin{duration=10;velocity=30} 0.5
+  
+Orc_Giant_Attack:
+  Cooldown: 0
+  Skills:
+  - randomskill{skills=Orc_Giant_Attack1,Orc_Giant_Attack2,Ground_Smash}
+
+Orc_Giant_Attack1:
+  Conditions:
+  - offgcd
+  - targetwithin{d=5} true
+  Skills:
+  - gcd{ticks=50}
+  - setAI{ai=false} @self
+  - setAI{ai=true;delay=50} @self
+  - potion{type=SLOW;duration=50;level=99;hasParticles=false} @self
+  - state{s=attack_left;li=3;lo=2} @self
+  - effect:sound{s=orc_sounds:samus.orc_giant_attack;volume=2;pitch=1;delay=7} @self
+  - delay 25
+  - totem{md=2;c=1;oH=Orc_Giant_Attack_DAMAGE_1;hnp=false;hp=true;hR=2;vR=2;i=1} @forward{f=3}
+
+Orc_Giant_Attack2:
+  Conditions:
+  - offgcd
+  - targetwithin{d=5} true
+  Skills:
+  - gcd{ticks=50}
+  - setAI{ai=false} @self
+  - setAI{ai=true;delay=50} @self
+  - potion{type=SLOW;duration=50;level=99;hasParticles=false} @self
+  - state{s=attack_right;li=3;lo=2} @self
+  - effect:sound{s=orc_sounds:samus.orc_giant_attack;volume=2;pitch=1;delay=7} @self
+  - delay 25
+  - totem{md=2;c=1;oH=Orc_Giant_Attack_DAMAGE_2;hnp=false;hp=true;hR=2;vR=2;i=1} @forward{f=3}
+
+Orc_Giant_Attack_DAMAGE_1:
+  TargetConditions:
+  - isblocking false
+  Skills:
+  - damage{a=6;pkb=false;hnp=false;hp=true}
+  - throw{velocity=15;velocityY=1}
+  - effect:spin{duration=10;velocity=-30} 0.5
+
+########################################################################################################################################################
+  
+# Stone Throw #
+
+Stone_Throw:
+  Conditions:
+  - offgcd
+  - targetwithin{d=30} true
+  Skills:
+  - gcd{ticks=88}
+  - setAI{ai=false} @self
+  - setAI{ai=true;delay=88} @self
+  - potion{type=SLOW;duration=88;level=99;hasParticles=false} @self
+  - state{s=throw_ready;li=2;lo=2} @self
+  - effect:sound{s=orc_sounds:samus.orc_giant_attack;volume=2;pitch=1;delay=7} @self
+  - effect:sound{s=orc_sounds:samus.orc_giant_groundsmash;volume=2;pitch=1;delay=15} @self
+  - effect:particles{particle=block_crack;m=STONE;amount=30;y=0.2;hS=1.3;vS=0.1;speed=0;delay=20} @ModelPart{p=left_wrist}
+  - effect:sound{s=orc_sounds:samus.orc_giant_lift;volume=2;pitch=1;delay=25} @self
+  - effect:particles{particle=block_crack;m=STONE;amount=30;y=0.2;hS=1.3;vS=0.1;speed=0;delay=25} @ModelPart{p=left_wrist}
+  - partvisibility{m=orc_giant;p=stone;v=true;delay=20} @self
+  - delay 50
+  - state{s=throw_far} @self
+  - delay 6
+  - partvisibility{m=orc_giant;p=stone;v=false} @self
+  - effect:sound{s=orc_sounds:samus.orc_giant_throw;volume=2;pitch=1} @self
+  - projectile{bulletType=MOB;bulletSpin=15;mob=Orc_Stone;onEnd=Stone_Throw_END;onHit=Stone_Throw_DAMAGE;v=36;i=1;hR=1;vR=1;mr=40;hnp=false;hO=0;sE=true;sB=true;hs=false;hfs=0;syo=3;tyo=2;g=0.6} @target
+  
+Stone_Throw_DAMAGE:
+  TargetConditions:
+  - isblocking false
+  Skills:
+  - damage{a=11;pkb=false;hnp=false;hp=true}
+  - throw{velocity=17;velocityY=1}
+  - effect:spin{duration=30;velocity=30;delay=1}
+  
+Stone_Throw_END:
+  Skills:
+  - effect:sound{s=entity.zombie.break_wooden_door;volume=2;pitch=0.6} @self
+  - effect:particles{particle=block_crack;m=STONE;amount=30;y=1;hS=1.3;vS=1.3;speed=0}
+
+########################################################################################################################################################
+  
+# Ground Smash #
+
+Ground_Smash:
+  Conditions:
+  - offgcd
+  - targetwithin{d=8} true
+  Skills:
+  - gcd{ticks=73}
+  - setAI{ai=false} @self
+  - setAI{ai=true;delay=73} @self
+  - potion{type=SLOW;duration=73;level=99;hasParticles=false} @self
+  - state{s=ground_smash} @self
+  - effect:sound{s=orc_sounds:samus.orc_giant_attack;volume=2;pitch=1;delay=10} @self
+  - effect:sound{s=orc_sounds:samus.orc_giant_groundsmash;volume=2;pitch=1;delay=15} @self
+  - delay 35
+  - effect:particles{particle=block_crack;m=DIRT;amount=50;y=0.15;hS=2;vS=0.1;speed=0} @self
+  - effect:particles{particle=block_crack;m=DIRT;amount=100;y=0.15;hS=4;vS=0.1;speed=0} @self
+  - effect:particles{particle=block_crack;m=DIRT;amount=50;y=0.4;hS=3;vS=0.2;speed=0;delay=2} @self
+  - effect:particles{particle=block_crack;m=DIRT;amount=100;y=0.4;hS=5;vS=0.2;speed=0;delay=2} @self
+  - effect:particles{particle=block_crack;m=DIRT;amount=50;y=0.8;hS=3;vS=0.3;speed=0;delay=4} @self
+  - effect:particles{particle=block_crack;m=DIRT;amount=100;y=0.8;hS=5;vS=0.3;speed=0;delay=4} @self
+  - damage{a=7;pkb=false;hnp=false;hp=true} @PIR{r=7}
+  - throw{velocity=15;velocityY=10} @PIR{r=7}
+
+########################################################################################################################################################
+
+# Orc Roar #
+
+Orc_Roar:
+  Conditions:
+  - offgcd
+  - targetwithin{d=15} true
+  Skills:
+  - gcd{ticks=60}
+  - setAI{ai=false} @self
+  - setAI{ai=true;delay=60} @self
+  - potion{type=SLOW;duration=60;level=99;hasParticles=false} @self
+  - state{s=roar} @self
+  - effect:sound{s=orc_sounds:samus.orc_giant_groundsmash;volume=2;pitch=1} @self
+  - delay 20
+  - effect:sound{s=orc_sounds:samus.orc_giant_roar;volume=3;pitch=0.9} @self
+  - projectile{onTick=Orc_Roar_FX;onHit=Orc_Roar_DAMAGE;v=30;i=1;hR=1;vR=1;mr=30;hnp=false;hO=0;sE=false;sB=false;hs=true;hfs=0} @forward
+  - projectile{onTick=Orc_Roar_FX;onHit=Orc_Roar_DAMAGE;v=30;i=1;hR=1;vR=1;mr=30;hnp=false;hO=36;sE=false;sB=false;hs=true;hfs=0} @forward
+  - projectile{onTick=Orc_Roar_FX;onHit=Orc_Roar_DAMAGE;v=30;i=1;hR=1;vR=1;mr=30;hnp=false;hO=72;sE=false;sB=false;hs=true;hfs=0} @forward
+  - projectile{onTick=Orc_Roar_FX;onHit=Orc_Roar_DAMAGE;v=30;i=1;hR=1;vR=1;mr=30;hnp=false;hO=108;sE=false;sB=false;hs=true;hfs=0} @forward
+  - projectile{onTick=Orc_Roar_FX;onHit=Orc_Roar_DAMAGE;v=30;i=1;hR=1;vR=1;mr=30;hnp=false;hO=144;sE=false;sB=false;hs=true;hfs=0} @forward
+  - projectile{onTick=Orc_Roar_FX;onHit=Orc_Roar_DAMAGE;v=30;i=1;hR=1;vR=1;mr=30;hnp=false;hO=180;sE=false;sB=false;hs=true;hfs=0} @forward
+  - projectile{onTick=Orc_Roar_FX;onHit=Orc_Roar_DAMAGE;v=30;i=1;hR=1;vR=1;mr=30;hnp=false;hO=216;sE=false;sB=false;hs=true;hfs=0} @forward
+  - projectile{onTick=Orc_Roar_FX;onHit=Orc_Roar_DAMAGE;v=30;i=1;hR=1;vR=1;mr=30;hnp=false;hO=252;sE=false;sB=false;hs=true;hfs=0} @forward
+  - projectile{onTick=Orc_Roar_FX;onHit=Orc_Roar_DAMAGE;v=30;i=1;hR=1;vR=1;mr=30;hnp=false;hO=288;sE=false;sB=false;hs=true;hfs=0} @forward
+  - projectile{onTick=Orc_Roar_FX;onHit=Orc_Roar_DAMAGE;v=30;i=1;hR=1;vR=1;mr=30;hnp=false;hO=324;sE=false;sB=false;hs=true;hfs=0} @forward
+  
+Orc_Roar_DAMAGE:
+  Skills:
+  - damage{a=7;pkb=false;hnp=false;hp=true} @PlayersNearOrigin{r=3}
+  - throw{velocity=17;velocityY=5} @PlayersNearOrigin{r=3}
+  - effect:spin{duration=30;velocity=30;delay=1} @PlayersNearOrigin{r=3}
+  
+Orc_Roar_FX:
+  Skills:
+  - effect:particles{particle=explosion_large;amount=10;y=0.1;hS=0;vS=3;speed=0} @origin
+
+########################################################################################################################################################
+  
+# Charge #
+
+########################################################################################################################################################
+
+# Glaive Throw #
+
+Glaive_Throw:
+  Conditions:
+  - offgcd
+  - targetwithin{d=30} true
+  Skills:
+  - gcd{ticks=45}
+  - setAI{ai=false} @self
+  - setAI{ai=true;delay=34} @self
+  - potion{type=SLOW;duration=34;level=99;hasParticles=false} @self
+  - state{s=throw;li=2;lo=2} @self
+  - effect:sound{s=orc_sounds:samus.orc_king_attack;volume=2;pitch=1;delay=7} @self
+  - delay 13
+  - effect:sound{s=orc_sounds:samus.orc_king_glaive;volume=2;pitch=1} @self
+  - projectile{bulletType=MOB;mob=Orc_Glaive;onHit=Glaive_Throw_DAMAGE;v=33;i=1;hR=1;vR=1;mr=35;hnp=false;hO=0;sE=true;sB=true;hs=false;hfs=0;syo=3;tyo=2;g=0.5} @target
+  - effect:sound{s=orc_sounds:samus.orc_giant_groundsmash;volume=2;pitch=1;delay=15} @self
+  - partvisibility{m=orc_king;p=weapon;v=false} @self
+  - delay 32
+  - effect:sound{s=orc_sounds:samus.orc_king_summon_sound;volume=1;pitch=1} @self
+  - partvisibility{m=orc_king;p=weapon;v=true} @self
+  - effect:particles{particle=soul_fire_flame;amount=25;y=0.6;hS=0.5;vS=0.5;speed=0} @ModelPart{p=weapon}
+  
+Glaive_Throw_DAMAGE:
+  TargetConditions:
+  - isblocking false
+  Skills:
+  - damage{a=5;pkb=false;hnp=false;hp=true}
+  - throw{velocity=6;velocityY=0;repeat=10;repeatInterval=1}
+
+########################################################################################################################################################
+  
+# Glaive Smash #
+
+Glaive_Smash:
+  Conditions:
+  - offgcd
+  - targetwithin{d=13} true
+  Skills:
+  - gcd{ticks=74}
+  - state{s=glaive_smash} @self
+  - setAI{ai=false} @self
+  - setAI{ai=true;delay=12} @self
+  - potion{type=SLOW;duration=12;level=99;hasParticles=false} @self
+  - delay 13
+  - effect:sound{s=orc_sounds:samus.orc_king_spin;volume=1.5;pitch=1;delay=9} @self
+  - effect:sound{s=orc_sounds:samus.orc_king_spin;volume=1.5;pitch=0.95;delay=12} @self
+  - effect:sound{s=orc_sounds:samus.orc_king_spin;volume=1.5;pitch=0.9;delay=15} @self
+  - effect:sound{s=orc_sounds:samus.orc_king_spin;volume=1.5;pitch=0.85;delay=18} @self
+  - effect:sound{s=orc_sounds:samus.orc_king_spin;volume=1.5;pitch=0.8;delay=21} @self
+  - lunge{velocity=1;velocityY=1} @forward{f=1.5;y=1}
+  - effect:sound{s=orc_sounds:samus.orc_king_attack;volume=1.5;pitch=1;delay=16} @self
+  - effect:sound{s=orc_sounds:samus.orc_giant_groundsmash;volume=1.5;pitch=1;delay=8} @self
+  - delay 21
+  - lunge{velocity=1;velocityY=-1.3} @forward{f=2;y=-2}
+  - effect:sound{s=orc_sounds:samus.orc_king_heavyswing;volume=1.5;pitch=1} @self
+  - delay 5
+  - effect:particles{particle=block_crack;m=DIRT;amount=50;y=0.15;hS=2;vS=0.1;speed=0} @self
+  - effect:particles{particle=block_crack;m=DIRT;amount=100;y=0.15;hS=4;vS=0.1;speed=0} @self
+  - effect:particles{particle=block_crack;m=DIRT;amount=50;y=0.4;hS=3;vS=0.2;speed=0;delay=2} @self
+  - effect:particles{particle=block_crack;m=DIRT;amount=100;y=0.4;hS=5;vS=0.2;speed=0;delay=2} @self
+  - effect:particles{particle=block_crack;m=DIRT;amount=50;y=0.8;hS=3;vS=0.3;speed=0;delay=4} @self
+  - effect:particles{particle=block_crack;m=DIRT;amount=100;y=0.8;hS=5;vS=0.3;speed=0;delay=4} @self
+  - damage{a=8;pkb=false;hnp=false;hp=true} @PIR{r=5}
+  - throw{velocity=1;velocityY=8} @PIR{r=5}
+  - setAI{ai=false} @self
+  - setAI{ai=true;delay=33} @self
+  - potion{type=SLOW;duration=33;level=99;hasParticles=false} @self
+
+########################################################################################################################################################
+  
+# Orcs Summon #
+
+Orcs_Summon:
+  Cooldown: 40
+  Conditions:
+  - offgcd
+  - targetwithin{d=17} true
+  Skills:
+  - gcd{ticks=70}
+  - setAI{ai=false} @self
+  - setAI{ai=true;delay=70} @self
+  - potion{type=SLOW;duration=70;level=99;hasParticles=false} @self
+  - state{s=summon} @self
+  - delay 20
+  - effect:sound{s=entity.item.break;volume=1.5;pitch=1} @self
+  - partvisibility{m=orc_king;p=skulls;v=true} @self
+  - effect:sound{s=orc_sounds:samus.orc_king_summon;volume=1.5;pitch=1;delay=10} @self
+  - delay 23
+  - effect:sound{s=orc_sounds:samus.orc_king_spin;volume=1.5;pitch=0.8} @self
+  - partvisibility{m=orc_king;p=skulls;v=false} @self
+  - projectile{bulletType=MOB;bulletSpin=10;mob=Orc_Skull;onEnd=Orcs_Summon_SUMMON1;v=10;i=1;hR=1;vR=1;mr=35;hnp=false;hp=false;hO=0;sE=false;sB=true;hs=false;hfs=0;syo=3;tyo=5;g=0.3} @target
+  - projectile{bulletType=MOB;bulletSpin=10;mob=Orc_Skull;onEnd=Orcs_Summon_SUMMON2;v=10;i=1;hR=1;vR=1;mr=35;hnp=false;hp=false;hO=30;sE=false;sB=true;hs=false;hfs=0;syo=3;tyo=5;g=0.3} @target
+  - projectile{bulletType=MOB;bulletSpin=10;mob=Orc_Skull;onEnd=Orcs_Summon_SUMMON3;v=10;i=1;hR=1;vR=1;mr=35;hnp=false;hp=false;hO=-30;sE=false;sB=true;hs=false;hfs=0;syo=3;tyo=5;g=0.3} @target
+  
+Orcs_Summon_SUMMON1:
+  Skills:
+  - summon{type=Orc_Minion_dungeon2;amount=1;radius=0;yRadius=0;onSurface=true} @origin
+  - effect:particles{particle=soul_fire_flame;amount=25;y=1;hS=0.7;vS=0.7;speed=0} @origin
+  - effect:sound{s=orc_sounds:samus.orc_king_summon_sound;volume=1.2;pitch=1} @origin
+  
+Orcs_Summon_SUMMON2:
+  Skills:
+  - summon{type=Orc_Warrior_dungeon1;amount=1;radius=0;yRadius=0;onSurface=true} @origin
+  - effect:particles{particle=soul_fire_flame;amount=25;y=1;hS=0.9;vS=0.9;speed=0} @origin
+  - effect:sound{s=orc_sounds:samus.orc_king_summon_sound;volume=1.2;pitch=1} @origin
+  
+Orcs_Summon_SUMMON3:
+  Skills:
+  - summon{type=Orc_Archer_dungeon1;amount=1;radius=0;yRadius=0;onSurface=true} @origin
+  - effect:particles{particle=soul_fire_flame;amount=25;y=1;hS=0.7;vS=0.7;speed=0} @origin
+  - effect:sound{s=orc_sounds:samus.orc_king_summon_sound;volume=1.2;pitch=1} @origin

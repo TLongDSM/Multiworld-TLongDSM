@@ -1,0 +1,912 @@
+#Staff Skills:
+OverloadedSphere:
+  Skills:
+  - totem{i=4;md=10;onTick=OverloadedSphere-Tick;onEnd=OverloadedSphere-Explode;yo=1.5} @targetlocation
+  - sound{s=block.enchantment_table.use} @targetlocation
+OverloadedSphere-Tick:
+  Skills:
+  - effect:particle{particle=lava;amount=2;hS=0} @origin
+  - effect:particlesphere{particle=redstone;color=#20B2AA;amount=30;radius=0.5} @origin
+  - effect:particlesphere{particle=redstone;color=#40826d;amount=30;radius=0.25} @origin
+  - effect:particlesphere{particle=redstone;color=#264348 ;amount=30;radius=0.75} @origin
+  - effect:particlering{particle=totem;radius=5;points=32;amount=1;hS=0;vS=0;y=-0.2} @origin
+OverloadedSphere-Explode:
+  Skills:
+  - effect:particles{particle=sonic_boom;amount=10;y=0.35} @origin
+  - delay 10
+  - effect:particles{p=hugeexplosion;amount=1;speed=0;hS=0.2;vS=0.2} @origin
+  - effect:particle{particle=sneeze;amount=100;hS=1;vS=1} @origin
+  - effect:particle{particle=smoke_large;amount=200;hS=1;vS=1} @origin{yOffset=-0.2}
+  - sound{s=entity.generic.explode} @origin
+  - mmodamage{amount=250;types=SKILL,MAGIC} @EntitiesNearOrigin{r=5;ignore=players}
+
+Doomsday:
+  Skills:
+  - command{c="mythiclib statmod <caster.name> MOVEMENT_SPEED -100% 50"}
+  - sound{s=block.enchantment_table.use} @targetlocation
+  - delay 10
+  - effect:particlesphere{particle=redstone;color=#D1C2D4;amount=500;radius=3.5} @self
+  - sound{s=block.note_block.bell;p=3} @self
+  - delay 5
+  - effect:particlesphere{particle=redstone;color=#94709C;amount=400;radius=3} @self
+  - sound{s=block.note_block.bell;p=2} @self
+  - delay 5
+  - effect:particlesphere{particle=redstone;color=#6B4274;amount=300;radius=2.5} @self
+  - sound{s=block.note_block.bell;p=1} @self
+  - delay 5
+  - effect:particlesphere{particle=redstone;color=#47234F;amount=200;radius=2} @self
+  - sound{s=block.note_block.bell;p=0} @self
+  - delay 10
+  - effect:particlering{particle=redstone;color=#47234F;radius=1;points=32;amount=1;y=0.5} @self
+  - sound{s=entity.blaze.shoot;p=0} @self
+  - mmodamage{amount="650 + <caster.mhp>*0.1";types=SKILL,MAGIC} @EntitiesNearOrigin{r=5;ignore=players}
+  - delay 2
+  - effect:particlering{particle=redstone;color=#6B4274;radius=2;points=32;amount=1;y=0.5} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#94709C;radius=3;points=32;amount=1;y=0.5} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#D1C2D4;radius=4;points=32;amount=1;y=0.5} @self
+  - delay 2
+
+
+Bloodburst:
+  Skills:
+  - mmodamage{amount="<caster.mhp>*10"} @EntitiesNearOrigin{r=3;ignore=players}
+  - mmodamage{amount="<caster.mhp>*0.1";pk=true} @self
+  - sound{s=ambient.underwater.enter} @targetlocation
+  - effect:particlesphere{particle=redstone;color=#C0606E;amount=500;radius=2} @self
+  - delay 3
+  - effect:particlesphere{particle=redstone;color=#9E3040;amount=400;radius=3} @self
+  - delay 3
+  - effect:particlesphere{particle=redstone;color=#63111D;amount=300;radius=4} @self
+
+Acid_Spray:
+  Skills:
+  - effect:particles{p=reddust;color=#E0FF66;amount=1} @Cone{angle=90.0;points=150;range=6;rotation=0;yoffset=1}
+  - mmodamage{a=35;types=MAGIC,SKILL;pk=true;ia=true} @LivingInCone{a=90.0;r=6.0;rot=0;ignore=players}
+
+Celestial_Aid:
+  Skills:
+  - projectile{bulletType=ITEM;material=NETHER_STAR;onTick=Celestial_Aid-Tick;onEnd=Celestial_Aid-Hit;v=60;i=1;hR=1;vR=1;type=meteor;hfs=7.5;g=0.4} @targetlocation{xoffset=0}
+Celestial_Aid-Tick:
+  Skills:
+  - effect:particles{p=fireworks_spark;amount=2.5;hs=0.2;vs=0.2}
+  - effect:particleorbital{p=redstone;color=#F8C8DC;a=5;points=10;an=1;y=1.75;in=1;r=1;ticks=20}
+  - effect:particleorbital{p=redstone;color=#FDFD96;a=5;points=10;an=1;y=1.75;in=1;r=1;reverse=true;ticks=20}
+Celestial_Aid-Hit:
+  Skills:
+  - effect:particles{p=hugeexplosion;amount=1;speed=0;hS=0.2;vS=0.2} @origin
+  - effect:particles{p=end_rod;amount=100;hs=1;vs=1} @origin
+  - effect:particles{p=redstone;color=#F8C8DC;a=100;hs=1.25;vs=1.25} @origin
+  - effect:particles{p=redstone;color=#FDFD96;a=100;hs=1.25;vs=1.25} @origin
+  - sound{s=entity.generic.explode} @origin
+  - mmodamage{a=350;types=MAGIC,SKILL;pk=true} @ENO{r=3;ignore=players}
+
+
+Icy_Fury:
+  Skills:
+  - effect:particlering{particle=reddust;color=#d3fafb;amount=40;radius=5;;points=32} @self
+  - effect:particlering{particle=block_crack;material=ICE;amount=40;radius=2;p=32} @self
+  - effect:particlering{particle=reddust;color=#d3fafb;amount=40;radius=2;} @self
+  - sound{s=block.glass.break} @self
+  - effect:particlering{particle=block_crack;material=ICE;amount=40;radius=3;p=32} @self
+  - effect:particlering{particle=reddust;color=#d3fafb;amount=40;radius=3} @self
+  - sound{s=block.glass.break} @self
+  - effect:particlering{particle=block_crack;material=ICE;amount=40;radius=4;p=32} @self
+  - effect:particlering{particle=reddust;color=#d3fafb;amount=40;radius=4} @self
+  - sound{s=block.glass.break} @self
+  - effect:particlering{particle=block_crack;material=ICE;amount=40;radius=5;p=32} @self
+  - effect:particlering{particle=reddust;color=#d3fafb;amount=40;radius=5} @self
+  - mmodamage{a=35;types=MAGIC,SKILL;pk=true} @EntitiesInRadius{r=3;ignore=players,animals}
+  - potion{type=SLOW;duration=100;level=9;p=false;i=false} @EntitiesInRadius{r=3;ignore=players,animals}
+
+
+Comet:
+  Skills:
+  - projectile{onTick=Supernova-Tick;onEnd=Supernova-Hit;i=1;hR=1;vR=1;type=meteor;hfs=12;g=0.6} @targetlocation{xoffset=0}
+Comet-Tick:
+  Skills:
+  - effect:particleorbital{p=redstone;color=#ffa500;a=5;points=10;an=1;y=1.75;in=1;r=1;ticks=20} @Origin
+  - effect:particleorbital{p=redstone;color=#ffff00;a=5;points=10;an=1;y=1.75;in=1;r=1.25;reverse=true;ticks=20} @origin
+  - effect:particleorbital{p=redstone;color=#008000;a=5;points=10;an=1;y=1.75;in=1;r=1.5;ticks=20} @Origin
+  - effect:particleorbital{p=redstone;color=#0000ff;a=5;points=10;an=1;y=1.75;in=1;r=1.75;reverse=true;ticks=20} @origin
+  - effect:particleorbital{p=redstone;color=#0000ff;a=5;points=10;an=1;y=1.75;in=1;r=2;ticks=20} @Origin
+  - effect:particleorbital{p=redstone;color=#4b0082;a=5;points=10;an=1;y=1.75;in=1;r=2.5;reverse=true;ticks=20} @origin
+  - effect:particleorbital{p=redstone;color=#ee82ee;a=5;points=10;an=1;y=1.75;in=1;r=2.25;ticks=20} @Origin
+  - effect:particles{p=warped_spore;amount=5;hs=0} @origin
+Comet-Hit:
+  Skills:
+  - effect:particle{particle=explosion_huge;amount=1;hS=0;vS=0} @origin
+  - effect:particle{particle=smoke_normal;amount=200;hS=1;vS=1} @origin
+  - mmodamage{amount=5000;types=SKILL} @EntitiesNearOrigin{r=3;ignore=players}
+  - sound{s=entity.generic.explode} @origin
+Supernova-Tick:
+  Skills:
+  - effect:particlering{particle=reddust;color=#ffffba;amount=1;radius=2;points=32} @origin
+  - effect:particlering{particle=reddust;color=#ffb3ba;amount=1;radius=2.5;points=32} @origin
+  - effect:particlering{particle=reddust;color=#ffdfba;amount=1;radius=3;points=32} @origin
+  - effect:particlering{particle=reddust;color=#baffc9;amount=1;radius=3.5;points=32} @origin
+  - effect:particlering{particle=reddust;color=#bae1ff;amount=1;radius=4;points=32} @origin
+  - effect:particleorbital{p=redstone;color=#ffa500;a=1;points=10;an=1;y=1.75;in=1;r=1;ticks=20} @Origin
+  - effect:particleorbital{p=redstone;color=#ffff00;a=1;points=10;an=1;y=1.75;in=1;r=1.25;reverse=true;ticks=20} @origin
+  - effect:particleorbital{p=redstone;color=#008000;a=1;points=10;an=1;y=1.75;in=1;r=1.5;ticks=20} @Origin
+  - effect:particleorbital{p=redstone;color=#0000ff;a=1;points=10;an=1;y=1.75;in=1;r=1.75;reverse=true;ticks=20} @origin
+  - effect:particleorbital{p=redstone;color=#0000ff;a=1;points=10;an=1;y=1.75;in=1;r=2;ticks=20} @Origin
+  - effect:particleorbital{p=redstone;color=#4b0082;a=1;points=10;an=1;y=1.75;in=1;r=2.5;reverse=true;ticks=20} @origin
+  - effect:particleorbital{p=redstone;color=#ee82ee;a=1;points=10;an=1;y=1.75;in=1;r=2.25;ticks=20} @Origin
+  - effect:particles{p=warped_spore;amount=5;hs=0} @origin
+Supernova-Hit:
+  Skills:
+  - mmodamage{amount=25000;types=SKILL} @EntitiesNearOrigin{r=10;ignore=players}
+  - skill:Stun{duration=60} @EntitiesNearOrigin{r=10;ignore=players}
+  - effect:particle{particle=explosion_huge;amount=5;hS=0;vS=0} @origin
+  - effect:particle{particle=smoke_normal;amount=200;hS=1;vS=1} @origin
+  - sound{s=entity.generic.explode} @origin
+  - effect:particlering{particle=smoke_large;amount=5;radius=2;points=32;y=0.2} @origin
+  - effect:particlering{particle=cloud;amount=5;radius=3;points=32;y=0.2} @origin
+  - delay 2
+  - effect:particlering{particle=smoke_large;amount=5;radius=4;points=32;y=0.2} @origin
+  - effect:particlering{particle=cloud;amount=5;radius=5;points=32;y=0.2} @origin
+  - delay 2
+  - effect:particlering{particle=smoke_large;amount=5;radius=6;points=32;y=0.2} @origin
+  - effect:particlering{particle=cloud;amount=5;radius=7;points=64;y=0.2} @origin
+  - delay 2
+  - effect:particlering{particle=smoke_large;amount=5;radius=8;points=32;y=0.2} @origin
+  - effect:particlering{particle=cloud;amount=5;radius=9;points=64;y=0.2} @origin
+  - delay 2
+  - effect:particlering{particle=cloud;amount=5;radius=10;points=64;y=0.2} @origin
+  - delay 2
+
+
+Dark_Ritual:
+  Skills:
+  - effect:particlering{particle=fireworks_spark;radius=1;points=10;amount=1;hS=0;vS=0;y=1;repeat=9;repeatinterval=10} @self
+  - effect:particlering{particle=fireworks_spark;radius=10;points=32;amount=1;hS=0;vS=0;y=0.5;repeat=9;repeatinterval=10} @self
+  - effect:particles{p=reddust;color=#FFC0CB;amount=250;hs=7;vs=1;repeat=9;repeatinterval=10} @self
+  - effect:particles{p=reddust;color=#A020F0;amount=250;hs=7;vs=1;repeat=9;repeatinterval=10} @self
+  - sound{s=entity.evoker.cast_spell} @origin
+  - stun{d=100;kb=true} @self
+  - mmodamage{amount="125 + <caster.mhp>*0.5";types=SKILL,MAGIC;repeat=9;repeatinterval=10} @EntitiesInRadius{r=10;ignore=players}
+  - potion{type=SLOW;duration=20;level=<modifier.slow>;repeatinterval=10} @EIR{r=10;ignore=players}
+
+
+
+
+
+
+
+Doppelganger:
+  Skills:
+  - summon{type=DOPPELGANGER;amount=1} @self
+
+Cosmic_Ally:
+  Skills:
+  - projectile{bulletType=BLOCK;material=CRYING_OBSIDIAN;bulletSpin=1;onTick=Cosmic_Ally-Tick;onEnd=Cosmic_Ally-Hit;i=1;hR=1;vR=1;type=meteor;hfs=12;g=0.6} @targetlocation{xoffset=5}
+  - projectile{bulletType=BLOCK;material=CRYING_OBSIDIAN;bulletSpin=1;onTick=Cosmic_Ally-Tick;onEnd=Cosmic_Ally-Hit;i=1;hR=1;vR=1;type=meteor;hfs=12;g=0.6} @targetlocation{xoffset=0}
+  - projectile{bulletType=BLOCK;material=CRYING_OBSIDIAN;bulletSpin=1;onTick=Cosmic_Ally-Tick;onEnd=Cosmic_Ally-Hit;i=1;hR=1;vR=1;type=meteor;hfs=12;g=0.6} @targetlocation{xoffset=-5}
+Cosmic_Ally-Tick:
+  Skills:
+  - effect:particles{p=redstone;color=#ff0000;amount=3;speed=0;hS=0.7;vS=0.7} @origin
+  - effect:particles{p=redstone;color=#ffa500;amount=3;speed=0;hS=0.7;vS=0.7} @origin
+  - effect:particles{p=redstone;color=#ffff00;amount=3;speed=0;hS=0.7;vS=0.7} @origin
+  - effect:particles{p=redstone;color=#008000;amount=3;speed=0;hS=0.7;vS=0.7} @origin
+  - effect:particles{p=redstone;color=#0000ff;amount=3;speed=0;hS=0.7;vS=0.7} @origin
+  - effect:particles{p=redstone;color=#4b0082;amount=3;speed=0;hS=0.7;vS=0.7} @origin
+  - effect:particles{p=redstone;color=#ee82ee;amount=3;speed=0;hS=0.7;vS=0.7} @origin
+  - effect:particles{p=largesmoke;amount=2;hs=0} @origin
+  - effect:particles{p=warped_spore;amount=5;hs=0} @origin
+Cosmic_Ally-Hit:
+  Skills:
+  - effect:particle{particle=explosion_huge;amount=1;hS=0;vS=0} @origin
+  - effect:particle{particle=smoke_normal;amount=200;hS=1;vS=1} @origin
+  - mmodamage{amount=500;types=SKILL} @EntitiesNearOrigin{r=3;ignore=players}
+  - sound{s=entity.generic.explode} @origin
+  - summon{type=COSMIC_TERROR;amount=1} @origin
+
+Stellar_Strike:
+  Skills:
+  - onAttack{damageMultiplier=3.0;oH=Stellar_Strike-Hit;Charges=1} @self
+  - effect:particlering{particle=fireworks_spark;amount=50;yOffset=0.5;r=1;p=50} @self
+  - sound{s=entity.ravager.roar} @self
+Stellar_Strike-Hit:
+  Skills:
+  - skill:Stun{duration=100}
+  - effect:particles{p=redstone;color=#F8C8DC;amount=100;hs=0.5;vs=0.5}
+  - effect:particles{p=redstone;color=#FDFD96;amount=100;hs=0.5;vs=0.5}
+  - effect:lightning{l=true}
+
+Cobra_Curse:
+  Skills: 
+  - effect:particleorbital{p=redstone;color=#E0FF66;a=2;points=15;y=1.75;in=2;r=1;rx=1;ticks=160;oy=-0.5} @self
+  - effect:particleorbital{p=redstone;color=#a2c42f;a=2;points=15;y=1.75;in=2;r=1;rz=1;ticks=160;oy=-0.5} @self
+  - mmodamage{a=50;types=MAGIC,SKILL;pk=true;repeat=8;repeatinterval=20} @EIR{r=3;ignore=players}
+  - sound{s=entity.illusioner.cast_spell} @self
+
+Cosmic_Ally-Heal:
+  Skills:
+  - healpercent{m=0.01} @Owner
+Cosmic_Ally-Death:
+  Skills:
+  - effect:particles{p=redstone;color=#ff0000;amount=50;speed=0;hS=0.3;vS=0} @self
+  - effect:particles{p=redstone;color=#ffa500;amount=50;speed=0;hS=0.3;vS=0} @self
+  - effect:particles{p=redstone;color=#ffff00;amount=50;speed=0;hS=0.3;vS=0} @self
+  - effect:particles{p=redstone;color=#008000;amount=50;speed=0;hS=0.3;vS=0} @self
+  - effect:particles{p=redstone;color=#0000ff;amount=50;speed=0;hS=0.3;vS=0} @self
+  - effect:particles{p=redstone;color=#4b0082;amount=50;speed=0;hS=0.3;vS=0} @self
+  - effect:particles{p=redstone;color=#ee82ee;amount=50;speed=0;hS=0.3;vS=0} @self
+  - remove @self
+
+Tread:
+  Skills:
+  - command{c="mythiclib statmod <caster.name> MOVEMENT_SPEED 100% 100"} @self
+
+Undead_Slayer:
+  TargetConditions:
+  - entitytype{t=ZOMBIE,SKELETON,DROWNED,HUSK,PHANTOM,STRAY,WITHER,WITHER_SKELETON} true
+  Skills:
+  - multiplydamage{amount="1 + 0.5"}
+
+Wither_Slayer:
+  TargetConditions:
+  - entitytype{t=WITHER} true
+  Skills:
+  - multiplydamage{amount="1 + 3"}
+
+Simultaneous:
+  Skills:
+  - multiplydamage{amount="1 + (<stat.DEFENSE> * 0.1)"}
+
+Blood_For_Blood:
+  Skills:
+  - command{c="mythiclib statmod <caster.name> WEAPON_DAMAGE 15 100"} @self
+  - mmodamage{amount="<caster.mhp>*0.15";pk=true} @self
+  - sound{s=entity.phantom.hurt } @self
+  - effect:particlering{particle=redstone;color=#5e0000;radius=0.8;points=32;amount=1;y=1.5} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#850000;radius=1;points=32;amount=1;y=1.3} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#ad0000;radius=1.2;points=32;amount=1;y=1.1} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#d40000;radius=1.4;points=32;amount=1;y=0.9} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#fb0000;radius=1.6;points=32;amount=1;y=0.7} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#ff5e5e;radius=1.8;points=32;amount=1;y=0.5} @self
+
+Intimidate:
+  Skills:
+  - sound{s=entity.phantom.hurt} @self
+  - effect:particlesphere{particle=villager_angry;amount=10;radius=2} @self
+  - onDamaged{auraName=Weakened;duration=200;multiplier=1.1} @EntitiesNearOrigin{r=4;ignore=players}
+  - potion{type=SLOW;duration=200;level=1;p=false;i=false} @EntitiesNearOrigin{r=4;ignore=players}
+
+Execute:
+  Skills:
+  - setvariable{var=skill.targetphp;type=integer;value="<target.php>"}
+
+  - skill:Execution @target ?variableinrange{var=skill.targetphp;value=<5}
+  - command{c="mythiclib statmod <caster.name> WEAPON_DAMAGE 10 100"} @self ?variableinrange{var=skill.targetphp;value=<5}
+
+Sudden_Strike:
+  CancelIfNoTargets: true
+  Skills:
+  - teleport{spreadh=1;spreadv=0} @target
+  - skill:Stun{duration=100} @target
+
+  - sound{s=entity.enderman.teleport} @self
+  - command{c="mythiclib statmod <caster.name> WEAPON_DAMAGE 25 100"} @self
+
+Muscle_Memory:
+  Skills:
+  - setvariable{var=skill.sethp;type=integer;value="<caster.hp>"}
+  - sound{s=block.note_block.pling;p=1} @self
+  - delay 20
+  - sound{s=block.note_block.pling;p=0.75} @self
+  - delay 20
+  - sound{s=block.note_block.pling;p=0.5} @self
+  - delay 20
+  - sound{s=block.note_block.pling;p=0.25} @self
+  - delay 20
+  - sound{s=block.note_block.pling;p=0} @self
+  - delay 20
+  - sound{s=block.beacon.power_select;p=1} @self
+  - sethealth{a=<skill.var.sethp>} @self
+  - effect:particlering{particle=redstone;color=#ee4b2b;radius=1;points=32;amount=1;y=0.2} @self
+  - effect:particlering{particle=redstone;color=#eba698;radius=1;points=32;amount=1;y=0.4} @self
+  - effect:particlering{particle=redstone;color=#ee4b2b;radius=1;points=32;amount=1;y=0.6} @self
+  - effect:particlering{particle=redstone;color=#eba698;radius=1;points=32;amount=1;y=0.8} @self
+  - effect:particlering{particle=redstone;color=#ee4b2b;radius=1;points=32;amount=1;y=1} @self
+
+Respite:
+  Skills:
+  - sound{s=block.beacon.power_select;p=1} @self
+  - onDamaged{auraName=Respite;duration=100;multiplier=0} @PlayersNearOrigin{r=4}
+  - onDamaged{auraName=Respite;duration=100;multiplier=0} @self
+  - effect:particlering{particle=redstone;color=#d4af37;radius=4;points=64;amount=20;y=2} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#fbf1de;radius=4;points=64;amount=20;y=1.5} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#d4af37;radius=4;points=64;amount=20;y=1} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#fbf1de;radius=4;points=64;amount=20;y=0.5} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#d4af37;radius=4;points=64;amount=20;y=0} @self
+  - delay 2
+  - delay 90
+  - healpercent{m=0.1} @self
+  - healpercent{m=0.1} @PlayersNearOrigin{r=4}
+
+Frozen_Tomb:
+  Skills:
+  - sound{s=entity.player.hurt_freeze;p=1} @self
+  - onDamaged{auraName=Frozen_Tomb;duration=100;multiplier=0} @self
+  - effect:particlering{particle=redstone;color=#c0d6e4;radius=2;points=32;amount=1;y=0} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#22486d;radius=1.5;points=32;amount=1;y=0} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#5b7a92;radius=1;points=32;amount=1;y=0} @self
+  - delay 2
+  - prison{material=ICE;duration=80;breakable=false} @self
+
+  - delay 5
+  - effect:particlering{particle=block_crack;material=ICE;amount=40;radius=1;p=32} @self
+  - effect:particlering{particle=redstone;color=#5b7a92;radius=1;points=32;amount=1;y=0} @self
+  - sound{s=block.glass.break} @self
+  - mmodamage{amount="250";t=SKILL,MAGIC} @EntitiesNearOrigin{r=1;ignore=players}
+  - skill:Stun{duration=60} @EntitiesNearOrigin{r=1;ignore=players}
+
+  - delay 20
+  - effect:particlering{particle=block_crack;material=ICE;amount=40;radius=2;p=32} @self
+  - effect:particlering{particle=redstone;color=#5b7a92;radius=2;points=32;amount=1;y=0} @self
+  - sound{s=block.glass.break} @self
+  - mmodamage{amount="250";t=SKILL,MAGIC} @EntitiesNearOrigin{r=2;ignore=players}
+  - skill:Stun{duration=60} @EntitiesNearOrigin{r=2;ignore=players}
+
+  - delay 20
+  - effect:particlering{particle=block_crack;material=ICE;amount=40;radius=3;p=32} @self
+  - effect:particlering{particle=redstone;color=#5b7a92;radius=3;points=32;amount=1;y=0} @self
+  - sound{s=block.glass.break} @self
+  - mmodamage{amount="250";t=SKILL,MAGIC} @EntitiesNearOrigin{r=3;ignore=players}
+  - skill:Stun{duration=60} @EntitiesNearOrigin{r=3;ignore=players}
+
+  - delay 20
+  - effect:particlering{particle=block_crack;material=ICE;amount=40;radius=4;p=32} @self
+  - effect:particlering{particle=redstone;color=#5b7a92;radius=4;points=32;amount=1;y=0} @self
+  - sound{s=block.glass.break} @self
+  - mmodamage{amount="250";t=SKILL,MAGIC} @EntitiesNearOrigin{r=4;ignore=players}
+  - skill:Stun{duration=60} @EntitiesNearOrigin{r=4;ignore=players}
+  
+  - delay 15
+  - effect:particle{particle=block_crack;material=ICE;amount=300;hs=1;vs=1;y=0.5} @self
+  - sound{s=block.glass.break} @self
+
+
+Leap_Of_Faith:
+  Skills:
+  - onDamaged{auraName=Leap_Of_Faith;duration=60;multiplier=0} @self
+  - sound{s=nature_uproar;soundcategory=RECORDS} @self
+  - velocity{m=set;x=0;y=1;z=0} @self
+  - delay 13
+  - velocity{m=set;x=0;y=-2;z=0} @self
+  - delay 5
+  - effect:particles{p=explosion_large;amount=10;hs=1;y=0.3} @self
+  - effect:particlering{particle=block_crack;material=DIRT;amount=40;radius=1;p=64} @self
+  - effect:particlering{particle=block_crack;material=DIRT;amount=40;radius=2;p=64;delay=2} @self
+  - effect:particlering{particle=block_crack;material=DIRT;amount=40;radius=3;p=64;delay=4} @self
+  - effect:particlering{particle=block_crack;material=DIRT;amount=40;radius=4;p=64;delay=6} @self
+  - sound{s=block.grass.break} @self
+  - sound{s=entity.generic.explode} @self
+  - mmodamage{amount=1000;types=SKILL,PHYSICAL} @EntitiesNearOrigin{r=4;ignore=players}
+  - onDamaged{auraName=LEAPOFFAITH;duration=200;multiplier=1.25} @EntitiesNearOrigin{r=4;ignore=players}
+  - velocity{m=set;x=0;y=1;z=0} @EntitiesNearOrigin{r=4;ignore=players}
+  - potion{type=SLOW;duration=200;level=9;p=false} @EntitiesNearOrigin{r=4;ignore=players}
+
+
+Hemmorhage:
+  Skills:
+  - Aura{auraName=Bleed;onTick=Hemmorhage-Tick;d=100;i=20;rd=true;bt=false;mc=true;ma=true;maxStacks=5} @target
+
+Hemmorhage-Tick:
+  Skills:
+  - mmodamage{a=100;types=DOT,ON-HIT;pk=true;ia=true}
+  - effect:particles{particle=block_crack;material=REDSTONE_BLOCK;amount=5;hS=0.5;vS=1;speed=0;y=1}
+
+Justice_Served:
+  TargetConditions:
+  - fieldofview{angle=90} true
+  Skills:
+  - teleport{spreadh=1;spreadv=0} @target
+  - sound{s=entity.enderman.teleport} @self
+
+  - mmodamage{a=1000;types=SKILL,ON-HIT;pk=true;ia=true} @target{conditions=[  - hasaurastacks{n=Bleed;s=>5} false ]}
+  - skill:Execute @target{conditions=[  - hasaurastacks{n=Bleed;s=>5} true ]}
+
+
+Whirlwind:
+  Skills:
+  - projectile{onTick=Whirlwind-Tick;onHit=Whirlwind-Hit;v=20;i=1;hR=1;vR=1;hnp=true;drawHitbox=true} @targetlocation
+Whirlwind-Tick:
+  Skills:
+  - effect:particles{p=cloud;amount=10;speed=0;hS=1;vS=0} @origin
+  - effect:particles{p=reddust;color=#FDFD96;amount=1;speed=0;hS=0.2;vS=0.2} @origin
+Whirlwind-Hit:
+  Skills:
+  - velocity{m=set;x=0;y=1.5;z=0}
+
+
+Ultimatum:
+  TargetConditions:
+  - fieldofview{angle=90} true
+  Skills:
+  - onDamaged{auraName=Frozen_Tomb;duration=100;multiplier=0} @self
+  - skill:Ultimatum-True @target
+
+Ultimatum-True:
+  Skills:
+  - teleport{spreadh=0;spreadv=0} 
+
+  - delay 5
+  - velocity{m=set;x=0;y=1.5;z=0} 
+  - velocity{m=set;x=0;y=1.5;z=0} @self 
+  - delay 5
+  - sound{s=slash_1} @self
+  - slash{y=1.8;w=4;h=2;mpd=true;a=180;oh=Ultimatum-Hit;oP=[ - effect:particles{p=CRIT} ];roll=45} @self
+  - slash{y=1.8;w=4;h=2;mpd=true;a=180;oh=Ultimatum-Hit;oP=[ - effect:particles{p=CRIT} ];roll=135} @self
+
+  - delay 15
+  - velocity{m=set;x=0;y=1;z=0} 
+  - velocity{m=set;x=0;y=1;z=0} @self 
+  - delay 5
+  - sound{s=slash_2} @self
+  - slash{y=1.8;w=4;h=2;mpd=true;a=90;oh=Ultimatum-Hit;oP=[ - effect:particles{p=CRIT} ];roll=0} @self
+  - slash{y=1.8;w=4;h=2;mpd=true;a=90;oh=Ultimatum-Hit;oP=[ - effect:particles{p=CRIT} ];roll=90} @self
+
+  - delay 15
+  - sound{s=slash_1} @self
+  - velocity{m=set;x=0;y=1;z=0} 
+  - velocity{m=set;x=0;y=1;z=0} @self 
+  - slash{y=1.8;w=4;h=2;mpd=true;a=90;oh=Ultimatum-Hit;oP=[ - effect:particles{p=soul_fire_flame} ];roll=90} @self
+  - slash{y=1.8;w=4;h=2;mpd=true;a=90;oh=Ultimatum-Hit;oP=[ - effect:particles{p=flame} ];roll=180} @self
+  - slash{y=1.8;w=4;h=2;mpd=true;a=90;oh=Ultimatum-Hit;oP=[ - effect:particles{p=crit} ];roll=45} @self
+  - slash{y=1.8;w=4;h=2;mpd=true;a=90;oh=Ultimatum-Hit;oP=[ - effect:particles{p=crit_magic} ];roll=-45} @self
+
+  - delay 10
+  - sound{s=slash_3} @self
+  - slash{y=1.8;w=4;h=2;mpd=true;a=90;oP=[ - effect:particles{p=explosion_large} ];roll=90} @self
+  - velocity{m=set;x=0;y=-2.5;z=0} 
+  - velocity{m=set;x=0;y=-2;z=0} @self 
+
+Ultimatum-Hit:
+  Skills:
+  - mmodamage{a="100 * (<stat.CRITICAL_STRIKE_POWER>/100)";types=PHYSICAl,SKILL,ON-HIT;pk=true;ia=true} @target
+
+
+
+
+
+
+#Armor Skills:
+
+Doomslayer:
+  Skills:
+  - totem{i=4;md=40;onTick=Doomslayer-Tick;onEnd=Doomslayer-Explode;yo=1.5} @target
+Doomslayer-Tick:
+  Skills:
+  - effect:particle{particle=spell_mob;color=#9370DB;amount=1;hS=0;y=0.25} @origin
+  - effect:particle{particle=redstone;color=#9370DB;amount=5;hS=0} @origin
+Doomslayer-Explode:
+  Skills:
+  - effect:particle{particle=reddust;color=#9370DB;amount=200;hS=1;vS=1} @origin
+  - effect:particle{particle=smoke_normal;amount=200;hS=1;vS=1} @origin{yOffset=-0.2}
+  - mmodamage{amount=50;types=SKILL} @EntitiesNearOrigin{r=3;ignore=players}
+  - sound{s=entity.evoker.cast_spell} @origin
+  - potion{type=SLOW;duration=60;level=0} @EntitiesNearOrigin{r=3;ignore=players}
+
+Tradeoff:
+  Skills:
+  - command{c="mythiclib statmod <caster.name> ATTACK_DAMAGE 20% 100"}
+  - command{c="mythiclib statmod <caster.name> ATTACK_SPEED 20% 100"}
+  - command{c="mythiclib statmod <caster.name> CRITICAL_STRIKE_CHANCE 20% 100"}
+  - command{c="mythiclib statmod <caster.name> CRITICAL_STRIKE_POWER 20% 100"}
+  - command{c="mythiclib statmod <caster.name> SKILL_DAMAGE 20% 100"}
+  - command{c="mythiclib statmod <caster.name> PROJECTILE_DAMAGE 20% 100"}
+  - command{c="mythiclib statmod <caster.name> DEFENSE -10% 100"}
+  - command{c="mythiclib statmod <caster.name> TENACITY -10% 100"}
+  - command{c="mythiclib statmod <caster.name> DAMAGE_REDUCTION -10% 100"}
+
+Reposition:
+  Conditions: 
+  - crouching true
+  Skills:
+  - teleport @TargetLocation
+  - sound{s=entity.enderman.teleport} @self
+
+Necromancy:
+  Skills:
+  - effect:particle{particle=spell_witch;amount=200;hS=0.3;vS=0} @target{yOffset=0}
+  - summon{type=HEX_REVENANT;amount=1;radius=1} @target
+  - sound{s=entity.evoker.cast_spell} @self
+Necromancy-Despawn:
+  Skills:
+  - effect:particle{particle=smoke_normal;amount=500;hS=0.3;vS=0} @self
+  - remove @self
+Ice_Reaper:
+  Skills:
+  - summon{type=ICE_REVENANT;amount=1} @target
+
+Icy_Reaper-Tick:
+  Skills:
+  - mmodamage{a=10;types=DOT,ON-HIT;pk=true} @EntitiesInRadius{r=3;ignore=players,animals}
+  - potion{type=SLOW;duration=20;level=1;p=false;i=false} @EntitiesInRadius{r=3;ignore=players,animals}
+  - effect:particlesphere{particle=reddust;color=#d3fafb;amount=200;radius=3} @self
+
+Icy_Reaper-Explode:
+  Skills:
+  - effect:particlesphere{particle=block_crack;material=ICE;amount=200;radius=2} @self
+  - effect:particlesphere{particle=block_crack;material=ICE;amount=100;radius=1} @self
+  - sound{s=block.glass.break} @self
+  - prison{material=ICE;duration=60;breakable=true} @EntitiesInRadius{r=3;ignore=players,animals}
+  - remove @self
+
+Firelord_U:
+  Skills:
+  - skill{s=Firelord_U-Activate} @EntitiesInRadius{r=6;ignore=players,animals}
+  - sound{s=entity.blaze.shoot} @self
+  
+Firelord_U-Activate:
+  TargetConditions:
+  - isburning{} true  
+  Skills:
+  - effect:particles{p=redstone;color=#990000;amount=100;hs=0.5;vs=0.5}
+  - effect:particles{p=lava;amount=20;hs=0.5;vs=0.5}
+  - mmodamage{a=200}
+  - stun{d=60;stopai=true}
+  - effect:particleorbital{p=cloud;a=1;points=15;y=1.75;in=2;r=1;ticks=60;oy=1}
+
+Banish:
+  Skills:
+  - velocity{m=set;x=-2;y=0;z=-2} @EntitiesInRadius{r=2;ignore=players,animals}
+  - sound{s=enchant.thorns.hit} @self
+
+Banish_U:
+  Skills:
+  - potion{type=SLOW;duration=60;level=2} @EntitiesInRadius{r=2;ignore=players,animals}
+  - velocity{m=set;x=-2;y=0;z=-2} @EntitiesInRadius{r=2;ignore=players,animals}
+  - command{c="mythiclib statmod <caster.name> MOVEMENT_SPEED 0.1 100"} @self
+  - sound{s=enchant.thorns.hit} @self
+
+Starborn_Initiate:
+  Conditions:
+  - variableisset{var=caster.starpower} false
+  Skills:
+  - setvariable{var=caster.starpower;value=0}
+Starborn:
+  Conditions:
+  - variableInRange{var=caster.starpower;value=<5}
+  - crouching false
+  Skills:
+  - variableAdd{var=caster.starpower;amount=1}
+  - delay 1
+  - actionmessage{m="<#AEC6CF>ʏᴏᴜ ᴄᴜʀʀᴇɴᴛʟʏ ʜᴀᴠᴇ <gradient:#F8C8DC:#FDFD96><caster.var.starpower> Starpower"} @self
+Starborn_Convert:
+  Conditions:
+  - variableInRange{var=caster.starpower;value=>0}
+  - crouching true
+  TargetConditions:
+  - faction{faction=Boss} false
+  Skills:
+  - summon{type=STARBORNE} @target
+  - effect:particles{p=redstone;color=#F8C8DC;amount=300;hs=0.5;vs=1} @target
+  - effect:particles{p=redstone;color=#FDFD96;amount=300;hs=0.5;vs=1} @target
+  - mmodamage{a=999999} @target
+  - sound{s=entity.illusioner.mirror_move} @target
+  - variableSubtract{var=caster.starpower;amount=1}
+  - delay 1
+  - actionmessage{m="<#AEC6CF>ʏᴏᴜ ᴄᴜʀʀᴇɴᴛʟʏ ʜᴀᴠᴇ <gradient:#F8C8DC:#FDFD96><caster.var.starpower> Starpower"} @self
+
+Bloodthirst_Initiate:
+  Conditions:
+  - variableisset{var=caster.bloodthirst} false
+  Skills:
+  - setvariable{var=caster.bloodthirst;value=0}
+
+Bloodthirst:
+  Conditions:
+  - variableInRange{var=caster.bloodthirst;value=<5}
+  Skills:
+  - variableAdd{var=caster.bloodthirst;amount=1}
+  - delay 1
+  - actionmessage{m="<#AEC6CF>ʏᴏᴜ ᴄᴜʀʀᴇɴᴛʟʏ ʜᴀᴠᴇ <GRADIENT:#dc143c:#880808><caster.var.bloodthirst> Bloodthirst"} @self
+
+Bloodthirst_Activate:
+  Conditions:
+  - variableInRange{var=caster.bloodthirst;value=>0}
+  - crouching false
+  Skills:
+  - healpercent{m=0.01} @self
+  - effect:particles{p=redstone;color=#dc143c;amount=25;hs=0.5;vs=0.5} @self
+  - effect:particles{p=redstone;color=#880808;amount=25;hs=0.5;vs=0.5} @self
+  - sound{s=entity.mooshroom.convert} @self
+  - variableSubtract{var=caster.bloodthirst;amount=1}
+  - delay 1
+  - actionmessage{m="<#AEC6CF>ʏᴏᴜ ᴄᴜʀʀᴇɴᴛʟʏ ʜᴀᴠᴇ <GRADIENT:#dc143c:#880808><caster.var.bloodthirst> Bloodthirst"} @self
+
+Warden_Blessing_Upgraded:
+  Skills:
+  - auraremove{aura=HexFlame} @self
+  - auraremove{aura=BrittleBone} @self
+  - auraremove{aura=Disarmed} @self
+
+Radiation:
+  Skills:
+  - Aura{auraName=Radiation;duration=200;rd=true;onTick=Radiation-Tick;i=20;maxStacks=15} @target
+  - skill{s=RadiationBurst} @target
+
+Radiation-Tick:
+  Skills:
+  - effect:particles{p=reddust;color=#E0FF66;hS=0.5;vS=1;speed=0;y=1}
+  - effect:particles{particle=smoke_normal;amount=20;hS=0.5;vS=1;speed=0}
+
+RadiationBurst:
+  TargetConditions:
+  - hasaurastacks{n=Radiation;s=>14} true
+  Skills:
+  - auraremove{aura=Radiation;stacks=15}
+  - mmodamage{a=1000;types=MAGIC,SKILL,ON-HIT}
+  - sound{s=entity.blaze.shoot} @self
+  - effect:particles{p=reddust;color=#E0FF66;amount=10;hS=0.5;vS=0.5;speed=0;y=1} @self
+  - effect:particles{particle=smoke_normal;amount=50;hS=0.5;vS=0.5;speed=0} @self
+
+Greed:
+  Skills:
+  - multiplydamage{amount="1 + %vault_eco_balance% * 0.01"}
+
+Lord_Of_The_Night:
+  Skills:
+  - multiplydamage{amount="1 + 1.5"} ?night{}
+
+Berserk:
+  Skills:
+  - command{c="mythiclib statmod <caster.name> WEAPON_DAMAGE 1 60"} @self
+  - command{c="mythiclib statmod <caster.name> LIFESTEAL 0.1 60"} @self
+
+Blazing:
+  Skills:
+  - mmodamage{amount="125 + <stat.defense>*0.1";types=SKILL,MAGIC} @EntitiesNearOrigin{r=2;ignore=players}
+  - delay 2
+  - effect:particlering{particle=redstone;color=#FED0B4;radius=1;points=32;amount=2;y=0.2} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#FDB181;radius=1.5;points=32;amount=2;y=0.2} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#FC721D;radius=2;points=32;amount=2;y=0.2} @self
+  - delay 2
+
+Frostburn:
+  Skills:
+  - mmodamage{amount="300 + <stat.defense>*0.15";types=SKILL,MAGIC} @EntitiesNearOrigin{r=2.5;ignore=players}
+  - Aura{auraName=Frosted;onTick=Frosted-Tick;d=200;i=40;rd=true;bt=false;mc=true;ma=true;maxStacks=4} @EntitiesNearOrigin{r=2.5;ignore=players}
+  - onDamaged{auraName=Brittle;duration=200;multiplier=1.15} @EntitiesNearOrigin{r=2.5;ignore=players;conditions=[  - hasaurastacks{n=Frosted;s=>4} true ]}
+  - effect:particlering{particle=redstone;color=#b9e8ea;radius=1;points=32;amount=2;y=0.2} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#86d6d8;radius=1.5;points=32;amount=2;y=0.2} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#3fd0d4;radius=2;points=32;amount=2;y=0.2} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#20c3d0;radius=2.5;points=32;amount=2;y=0.2} @self
+  - delay 2
+
+
+Nurture:
+  Skills:
+  - sound{s=entity.experience_orb.pickup} @self
+  - heal{amount="5"} @PlayersNearOrigin{r=3}
+  - heal{amount="5"} @self
+  - effect:particlering{particle=totem;radius=3;points=32;amount=2;y=0.2} @self
+
+
+Nature_Force:
+  Skills:
+  - sound{s=entity.experience_orb.pickup} @self
+  - healpercent{m=0.02} @PlayersNearOrigin{r=3}
+  - healpercent{m=0.02} @self
+  - potion{type=SLOW;duration=60;level=10;p=false;i=false} @EntitiesNearOrigin{r=3;ignore=players}
+  - effect:particlering{particle=totem;radius=3;points=32;amount=2;y=0.2} @self
+
+Divine_Intervention:
+  Skills:
+  - setvariable{var=skill.myhp;type=integer;value="<caster.php>"}
+
+  - skill:Divine_Intervention-Activate @self ?variableinrange{var=skill.myhp;value=<40}
+Divine_Intervention-Activate:
+  Skills:
+  - sound{s=item.totem.use} @self
+  - healpercent{m=0.1} @self
+  - shieldPercent{multiplier=0.2;mS=0.5} @self
+  - effect:particlering{particle=redstone;color=#F9DF88;radius=0.8;points=32;amount=1;y=1.5} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#F8DA77;radius=1;points=32;amount=1;y=1.3} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#DEC15E;radius=1.2;points=32;amount=1;y=1.1} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#D3B962;radius=1.4;points=32;amount=1;y=0.9} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#AC923C;radius=1.6;points=32;amount=1;y=0.7} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#7B692B;radius=1.8;points=32;amount=1;y=0.5} @self
+  - effect:particles{p=villager_happy;amount=25;hS=1;vS=1} @self
+  - effect:particles{p=heart;amount=25;hS=1;vS=1} @self
+
+
+Soul_Harvester:
+  Skills:
+  - sound{s=entity.mooshroom.convert} @self
+  - setvariable{var=caster.soul;type=INTEGER;value="0";save=true} @self{conditions=[  - variableisset{var=caster.soul} false ]}
+  - variableadd{var=caster.soul;amount=1}
+  - actionmessage{m="<#8fdaff>+1 ꜱᴏᴜʟ! &8(<#1f67ff><caster.var.soul>&8)"} @self
+  - healpercent{m=0.1} @self{conditions=[  - variableInRange{var=caster.soul;value=>1000} true ]}
+  - onDamaged{auraName=soul_invulnerability;duration=60;multiplier=0} @self{conditions=[  - variableInRange{var=caster.soul;value=>10000} true ]}
+Soul_Harvester-On_Hit:
+  Skills:
+  - multiplydamage{amount="1 + <caster.var.soul> * 0.001"}
+
+
+Arcanic_Adapt:
+  Skills:
+  - sound{s=item.armor.equip_iron} @self
+  - setvariable{var=caster.arcanic_adapt;type=INTEGER;value="0";save=true} @self{conditions=[  - variableisset{var=caster.arcanic_adapt} false ]}
+
+  - switch{condition=variableEquals{var=caster.arcanic_adapt;value=<case>};cases=
+      case 0=[
+        - sendtitle{title="";subtitle="&cᴀʀᴄᴀɴᴇ&r&8 - &d&l&nᴇɴꜱᴏʀᴄᴇʟ&r&8 - &3ɢᴜᴀʀᴅɪɴɢ";d=20;cooldown=1} @self
+        - variableadd{var=caster.arcanic_adapt;amount=1;cooldown=1} @self
+        ]
+      case 1=[
+        - sendtitle{title="";subtitle="&cᴀʀᴄᴀɴᴇ &8- &dᴇɴꜱᴏʀᴄᴇʟ&8 - &3&l&nɢᴜᴀʀᴅɪɴɢ";d=20;cooldown=1} @self
+        - variableadd{var=caster.arcanic_adapt;amount=1;cooldown=1} @self
+        ]
+      case 2=[
+        - sendtitle{title="";subtitle="&c&l&nᴀʀᴄᴀɴᴇ&r&8- &dᴇɴꜱᴏʀᴄᴇʟ&8 - &3ɢᴜᴀʀᴅɪɴɢ";d=20;cooldown=1} @self
+        - variablesubtract{var=caster.arcanic_adapt;amount=2;cooldown=1} @self
+        ]
+    } @self
+Arcanic_Adapt-On_Hit:
+  Skills:
+  - mmodamage{amount=100;t=SKILL,ON-HIT;targetisorigin=true} @ENO{r=3} ?variableEquals{var=caster.arcanic_adapt;value="0"}
+  - effect:explosion @target ?variableEquals{var=caster.arcanic_adapt;value="0"}
+
+  - command{c="mythiclib statmod <caster.name> SKILL_DAMAGE 5 100"} @self ?variableEquals{var=caster.arcanic_adapt;value="1"}
+  - command{c="mythiclib statmod <caster.name> SPELL_VAMPIRISM 1 100"} @self ?variableEquals{var=caster.arcanic_adapt;value="1"}
+
+Arcanic_Adapt-On_Damaged:
+  Skills:
+  - velocity{m=set;x=-0.1;y=0;z=-0.1} @EntitiesInRadius{r=2;ignore=players,animals} ?variableEquals{var=caster.arcanic_adapt;value="2"}
+  - sound{s=enchant.thorns.hit} @self ?variableEquals{var=caster.arcanic_adapt;value="2"}
+
+
+Dark_Matter:
+  Skills:
+  - sound{s=entity.mooshroom.convert} @self
+  - setvariable{var=caster.darkmatter;type=INTEGER;value="0";save=true} @self{conditions=[  - variableisset{var=caster.darkmatter} false ]}
+  - variableadd{var=caster.darkmatter;amount=1}
+  - actionmessage{m="<#C3B1E1>+1 ᴅᴀʀᴋ ᴍᴀᴛᴛᴇʀ! &8(<#332155><caster.var.darkmatter>&8)"} @self
+
+
+Howl:
+  Skills:
+  - sound{s=entity.wolf.howl} @self
+  - command{c="mythiclib statmod <caster.name> WEAPON_DAMAGE 25 100"} @self
+  - command{c="mythiclib statmod <caster.name> DAMAGE_REDUCTION 25 100"} @self
+  - command{c="mythiclib statmod <caster.name> WEAPON_DAMAGE 25 100"} @PIR{r=4}
+  - command{c="mythiclib statmod <caster.name> DAMAGE_REDUCTION 25 100"} @PIR{r=4}
+  - effect:particlering{particle=redstone;color=#FED0B4;radius=1;points=32;amount=2;y=0.8} @self
+  - delay 2
+  - effect:particlering{particle=redstone;color=#FDB181;radius=1.5;points=32;amount=2;y=1} @self
+  - delay 1
+  - effect:particlering{particle=redstone;color=#FC721D;radius=2;points=32;amount=2;y=1.2} @self
+  - delay 1
+  - effect:particlering{particle=redstone;color=#FC721D;radius=2.5;points=32;amount=2;y=1.2} @self
+  - delay 1
+  - effect:particlering{particle=redstone;color=#FC721D;radius=3;points=32;amount=2;y=1.2} @self
+  - delay 1
+  - effect:particlering{particle=redstone;color=#FC721D;radius=3.5;points=32;amount=2;y=1.2} @self
+  - delay 1
+  - effect:particlering{particle=redstone;color=#FC721D;radius=4;points=32;amount=2;y=1.2} @self
+
+
+
+
+
+
+Focus:
+  Skills:
+  - command{c="mythiclib statmod <caster.name> PROJECTILE_DAMAGE 35 100"}
+  - command{c="mythiclib statmod <caster.name> DAMAGE_REDUCTION -35 100"}
+  - effect:particlering{particle=villager_angry;amount=50;yOffset=0.8;r=1;p=20} @self
+  - sound{s=entity.ravager.roar} @self
+
+OWTV:
+  Skills:
+  - Aura{auraName=Voidborn;onTick=Voidburn;d=120;i=20;rd=true;bt=false;mc=true;ma=true}
+  - onDeath{od=Voidburn-Death;auraname=Voideath;d=120;i=1} 
+
+Voidburn:
+  Skills:
+  - mmodamage{a=25;types=DOT,ON-HIT;pk=true;ia=true}
+  - effect:particles{p=soul;amount=10;hS=0.5;vS=1;speed=0;y=1}
+  - effect:particles{particle=smoke_normal;amount=20;hS=0.5;vS=1;speed=0}
+
+Voidburn-Death:
+  Skills:
+  - effect:particle{particle=soul;amount=200;hS=0.3;vS=1;y=1}
+  - summon{type=VOIDLING;amount=1;radius=1} @target
+  - sound{s=entity.evoker.cast_spell} @self
+
+Starmarked:
+  Skills:
+  - onDeath{auraName=Starmarked;od=Starmarked-Death;onTick=Starmarked-Tick;d=200;i=20} 
+
+Starmarked-Tick:
+  Skills:
+  - effect:particles{p=fireworks_spark;amount=2;hS=0.5;vS=1;speed=0;y=1}
+  - effect:particles{particle=smoke_normal;amount=20;hS=0.5;vS=1;speed=0}
+
+Starmarked-Death:
+  Skills:
+  - mmodamage{a=250;types=SKILL,MAGIC;pk=true} @ENO{r=4;ignore=players}
+  - effect:particles{p=hugeexplosion;amount=1;speed=0;hS=0.2;vS=0.2} @origin
+  - effect:particles{p=end_rod;amount=100;hs=1;vs=1} @origin
+  - sound{s=entity.generic.explode} @origin
+
+High_Ground:
+  TargetConditions:
+   - distance{d=>15} true
+  Skills:
+  - multiplydamage{amount="1 + 0.15"}
+  - sound{s=entity.experience_orb.pickup} @self
+
+Close_Call:
+  TargetConditions:
+   - distance{d=<7} true
+  Skills:
+  - multiplydamage{amount="1 + 0.5"}
+  - sound{s=entity.experience_orb.pickup} @self
+
+Dragon_Slayer:
+  TargetConditions:
+  - entitytype{t=ENDER_DRAGON} true
+  Skills:
+  - multiplydamage{amount="1 + 2.5"}
+
+HellWraith:
+  Skills:
+  - missile{BulletType=MOB;mob=VEX;ot=HellWraith-Tick;oh=HellWraith-Hit;v=10;i=1;hR=1;vR=1;in=0.75} @ENO{r=15;ignore=players;limit=1;sort=NEAREST}
+HellWraith-Tick:
+  Skills:
+  - effect:particles{p=lava;amount=1;speed=0;hS=1;vS=0} @origin
+  - effect:particles{p=reddust;color=#4A0404;amount=5;speed=0;hS=0.5;vS=0.5} @origin
+  - effect:particles{p=reddust;color=#C41E3A;amount=5;speed=0;hS=0.5;vS=0.5} @origin
+HellWraith-Hit:
+  Skills:
+  - mmodamage{a=150;t=PROJECTILE,SKILL}
+
+
+#GENERAL SKILLS:
+Cleanse:
+  Skills:
+  - auraremove{aura=ANY}
+
+Stun:
+  Skills:
+  - stun{d=<skill.duration>;stopai=true}
+  - effect:particleorbital{p=cloud;a=1;points=15;y=1.75;in=2;r=1;ticks=<skill.duration>;oy=1}
+
+Execution:
+  Skills:
+  - effect:particles{particle=block_crack;material=REDSTONE_BLOCK;amount=100;hS=0.5;vS=0.5;y=1}
+  - effect:particlesphere{particle=redstone;color=#C0606E;amount=50;radius=1;y=1}
+  - delay 2
+  - effect:particlesphere{particle=redstone;color=#9E3040;amount=50;radius=1.25;y=1}
+  - delay 2
+  - effect:particlesphere{particle=redstone;color=#63111D;amount=50;radius=1.5;y=1}
+  - sound{s=block.anvil.land}
+  - mmodamage{amount="999999999";pk=true}

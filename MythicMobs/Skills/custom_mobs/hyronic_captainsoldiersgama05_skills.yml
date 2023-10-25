@@ -1,0 +1,451 @@
+soldiercaptainangrygama05_attack:
+    Conditions:
+        - incombat true
+    TargetConditions:
+        - distance{d=0to5} true
+    Skills:
+        - damage{a=12} 
+        - throw{v=2;vy=1} 
+
+soldiercaptainnarcisi_attackmarti:
+    Conditions:
+        - incombat true
+    TargetConditions:
+        - distance{d=0to5} true
+    Skills:
+        - damage{a=15} 
+        - throw{v=1;vy=2} 
+
+soldiercaptainnarcisi_attackmarti2:
+    Skills:
+        - damage{a=16} 
+        - throw{v=1;vy=2} 
+
+soldiercaptainangrygama05_attack1:
+    Conditions:
+        - offgcd true
+        - incombat true
+    TargetConditions:
+        - distance{d=0to4} true
+    Skills:
+        - potion{type=SLOW;l=99;d=1112;p=false} @self
+        - gcd{ticks=28}         
+        - state{s=attack1} @self
+        - delay 9
+        - potionclear{} @self
+        - delay 1
+        - lunge{v=1} @target
+        - delay 4
+        - skill{s=soldiercaptainangrygama05_attack} @target
+        - potion{type=SLOW;l=99;d=120;p=false} @self
+        - delay 14
+        - potionclear{} @self
+
+soldiercaptainangrygama05_attack2:
+    Conditions:
+        - offgcd true
+        - incombat true
+    TargetConditions:
+        - distance{d=0to3} true
+    Skills:
+        - potion{type=SLOW;l=99;d=1112;p=false} @self
+        - gcd{ticks=27}         
+        - state{s=attack2} @self
+        - delay 7
+        - potionclear{} @self
+        - delay 1
+        - effect:sound{s=entity.villager.death;v=1;p=1.45} @self
+        - lunge{v=0.5} @target
+        - delay 5
+        - skill{s=soldiercaptainangrygama05_attack} @target
+        - potion{type=SLOW;l=99;d=120;p=false} @self
+        - delay 13
+        - potionclear{} @self
+
+soldiercaptainangrygama05_jumpfire:
+    Cooldown: 8
+    Conditions:
+        - offgcd true
+        - incombat true
+    TargetConditions:
+        - distance{d=0to6} true
+    Skills:
+        - potion{type=SLOW;l=99;d=11112;p=false} @self
+        - gcd{ticks=28}         
+        - state{s=jumpfire} @self
+        - delay 9
+        - potionclear{} @self
+        - delay 1
+        - lunge{v=1} @target
+        - delay 6
+        - ignite{ticks=100} @PIR{r=5}
+        - effect:particles{particle=flame;amount=200;hS=5;vS=0.3;speed=5} @self
+        - effect:particles{particle=reddust;color=#cf3a40;amount=200;hS=5;vS=1;speed=5;size=2} @self
+        - damage{a=15} @PIR{r=5}
+        - throw{v=2;vy=1} @PIR{r=5}
+        - potion{type=SLOW;l=99;d=120;p=false} @self
+        - delay 12
+        - potionclear{} @self
+
+soldiercaptainangrygama05_supertajo1:
+    Conditions:
+        - offgcd true
+        - incombat true
+    TargetConditions:
+        - distance{d=0to7} true
+    Skills:
+        - potion{type=SLOW;l=99;d=1112;p=false} @self
+        - gcd{ticks=54}         
+        - state{s=supertajo1} @self
+        - delay 15
+        - setspeed{s=2;type=WALKING} @self
+        - potionclear{} @self
+        - lunge{v=1} @target
+        - delay 7
+        - delay 2
+        - setspeed{s=1;type=WALKING} @self
+        - ignite{ticks=100} @PIR{r=5}
+        - effect:particles{particle=reddust;color=#cf3a40;amount=200;hS=1;vS=3;forwardOffset=1.3;speed=5} @self
+        - damage{a=17} @PIR{r=5}
+        - throw{v=2;vy=1} @PIR{r=5}
+        - potion{type=SLOW;l=99;d=120;p=false} @self
+        - delay 30
+        - potionclear{} @self
+
+soldiercaptainangrygama05_saltotajo1:
+    Conditions:
+        - offgcd true
+        - incombat true
+    TargetConditions:
+        - distance{d=6to22} true
+    Skills:
+        - potion{type=SLOW;l=99;d=1112;p=false} @self
+        - gcd{ticks=54}         
+        - state{s=saltotajo1} @self
+        - delay 15
+        - setspeed{s=2;type=WALKING} @self
+        - potionclear{} @self
+        - lunge{v=1} @target
+        - delay 25
+        - delay 2
+        - setspeed{s=1;type=WALKING} @self
+        - ignite{ticks=100} @PLIR{r=5}
+        - effect:particles{particle=flame;amount=150;hS=5;vS=0.3;speed=5} @self
+        - damage{a=17} @PIR{r=5}
+        - throw{v=2;vy=1} @PIR{r=5}
+        - potion{type=SLOW;l=99;d=120;p=false} @self
+        - delay 30
+        - potionclear{} @self
+
+captain_estocadaangry_gama05:
+  Cooldown: 10
+  Conditions:
+    - offgcd true
+    - incombat true
+  TargetConditions:
+        - distance{d=6to40} true
+  Skills:
+    - potion{type=SLOW;l=99;d=1112;p=false} @self
+    - setspeed{s=0.0001;type=WALKING} @self
+    - gcd{ticks=71}
+    - state{state=impulsotajo} @Self
+    - delay 25
+    - effect:particles{p=campfire_signal_smoke;a=35;hs=1;vs=1;yOffset=0.2;size=2} @self
+    - delay 1
+    - setAI{ai=false} @self
+    - lockmodel{l=true} @self
+    - teleport{spreadh=0;spreadv=0} @target
+    - delay 1
+    - lockmodel{l=false} @self
+    - setAI{ai=true} @self
+    - effect:particles{p=reddust;color=#ff4040;a=150;hs=1;vs=15;yOffset=1;size=2} @self
+    - effect:particles{p=reddust;color=#cc0000;a=50;hs=3;vs=0.2;yOffset=0.2;size=2} @self
+    - damage{a=18} @PlayersInRadius{r=4}
+    - potion{type=SLOW;l=99;d=1112;p=false} @self
+    - delay 44
+    - potionclear{} @self
+    - setspeed{s=1;type=WALKING} @self
+
+magicangrycaptain_1skillcaptainangry1_gama05:
+    Conditions:
+        - offgcd
+        - incombat true
+    TargetConditions:
+        - distance{d=4to26} true
+    Skills:
+        - gcd{ticks=57} @self
+        - sendtitle{title="";subtitle="&c&lMagic Swords I";d=7;fi=5;fo=5;repeat=7;repeatinterval=10} @PIR{r=50}
+        - state{s=magic1swords} @self
+        - potion{type=SLOW;l=99;d=3272;p=false;os=true} @self
+        - potion{t=DAMAGE_RESISTANCE;l=10;d=200} @self
+        - delay 20
+        - summon{type=1skillcaptainangry1_gama05;a=1;r=0;yu=true} @NearestPlayer{r=44}
+        - delay 37
+        - potionclear{} @self
+
+magicangrycaptain_1skillcaptainangry1_gama05_spawn:
+    Skills:
+        - stun{d=20;f=true} @PIR{r=5}
+        - potion{type=SLOW;l=99;d=1272;p=false;os=true} @self
+        - lunge{vy=-15} @self
+        - delay 15
+        - effect:sound{s=entity.generic.explode;v=2;p=1.7;repeat=7;repeatinterval=1} @origin
+        - damage{a=16} @PlayersInRadius{r=4}
+        - effect:particles{p=reddust;color=#c7000b;a=50;hs=1;vs=1;yOffset=1;size=2}  @PlayersInRadius{r=4}
+        - delay 10
+        - remove @self
+
+magicangrycaptain_2skillcaptainangry2_gama05:
+    Cooldown: 15
+    Conditions:
+        - offgcd
+        - incombat true
+    TargetConditions:
+        - distance{d=0to34} true
+    Skills:
+        - gcd{ticks=87} @self
+        - sendtitle{title="";subtitle="&c&lSuper Magic Sword II";d=7;fi=5;fo=5;repeat=11;repeatinterval=10} @PIR{r=50}
+        - state{s=magic2ultimatesword} @self
+        - potion{type=SLOW;l=99;d=3272;p=false;os=true} @self
+        - potion{t=DAMAGE_RESISTANCE;l=10;d=200} @self
+        - delay 6
+        - effect:particles{p=reddust;color=#c7000b;a=10;hs=1;vs=1;yOffset=1;size=2} @ModelPart{mid=captain_angry_gama05;part=arma;z=-0.6;y=-0.6}
+        - effect:particles{p=reddust;color=#c7000b;a=10;hs=1;vs=1;yOffset=1;size=2} @self
+        - effect:particleorbital{r=2;points=16;t=75;i=1;vy=20;p=reddust;color=#c7000b} @self
+        - delay 48
+        - summon{type=2skillcaptainangry2_gama05_gama05;a=1;r=0;yu=true} @NearestPlayer{r=44}
+        - delay 27
+        - potionclear{} @self
+
+magicangrycaptain_2skillcaptainangry2_gama05_spawn:
+    Skills:
+        - potion{type=SLOW;l=99;d=1272;p=false;os=true} @self
+        - lunge{vy=-15} @self
+        - effect:particles{p=reddust;color=#ff0000;a=30;hs=0.4;vs=1;yOffset=1;repeat=12;repeatinterval=2} @ModelPart{mid=2skillcaptainangry2_gama05;part=arma}
+        - delay 7
+        - effect:sound{s=entity.generic.explode;v=2;p=1} @origin
+        - damage{a=26} @PlayersInRadius{r=5}
+        - throw{v=5;vy=5} @PlayersInRadius{r=6}
+        - effect:particles{p=reddust;color=#ff0000;a=50;hs=0.3;vs=0.5;yOffset=1;size=2} @self
+        - delay 11
+        - effect:particles{p=reddust;color=#ff0000;a=25;hs=2;vs=2;yOffset=1;size=2;repeat=2;repeatinterval=3} @self
+        - delay 20
+        - effect:particles{p=reddust;color=#ff0000;a=250;hs=6;vs=3;yOffset=1;size=3} @self
+        - skill{s=submagicangrycaptain_2skillcaptainangry2_gama05_spawn} @PlayersInRadius{r=6}
+        - effect:sound{s=entity.generic.explode;v=2;p=0.6} @origin
+        - delay 1
+        - remove @self
+
+submagicangrycaptain_2skillcaptainangry2_gama05_spawn:
+    Skills:
+        - damage{a=16}
+        - throw{v=5;vy=5} 
+
+soldiercaptainnarcissisticgama05_golpeton1:
+    Conditions:
+        - offgcd true
+        - incombat true
+    TargetConditions:
+        - distance{d=0to4} true
+    Skills:
+        - potion{type=SLOW;l=99;d=1112;p=false} @self
+        - gcd{ticks=48}         
+        - state{s=golpeton1} @self
+        - delay 22
+        - potionclear{} @self
+        - delay 1
+        - lunge{v=1} @target
+        - delay 5
+        - effect:sound{s=entity.generic.explode;v=0.6;p=0.8}
+        - skill{s=soldiercaptainnarcisi_attackmarti} @target
+        - damage{a=6} @PlayersInRadius{r=5}
+        - throw{v=2;vy=1} @PlayersInRadius{r=5}
+        - potion{type=SLOW;l=99;d=120;p=false} @self
+        - delay 20
+        - potionclear{} @self
+
+soldiercaptainnarcissisticgama05_supergolpe:
+  Cooldown: 15
+  Conditions:
+    - offgcd true
+    - incombat true
+  TargetConditions:
+    - distance{d=0to10} true
+  Skills:
+    - potion{type=SLOW;l=99;d=195;p=false} @self 
+    - gcd{ticks=67}
+    - state{state=supergolpe} @Self
+    - delay 26
+    - projectile{StopAtEntity=false;ot=ot_captain_narcissistic_gama05_supergolpe;oh=hit_soldier_narcissistic_gama05_supergolpe;v=16;i=3;hR=1;vR=1;in=1;syo=2;hR=1} @Forward{f=9;y=0.0;sideOffset=0.0}
+    - delay 1
+    - damage{amount=9.5} @PlayersInRadius{r=5}
+    - throw{v=3;vy=6} @PlayersInRadius{r=5}
+    - delay 40
+    - potionclear{} @self
+
+ot_captain_narcissistic_gama05_supergolpe:
+  Skills:
+  - summon{type=captainnacisistagama05skill;amount=1;radius=0;yRadius=0;onSurface=true} @origin
+
+hit_captain_narcissistic_gama05_supergolpe:
+  Skills:
+  - damage{a=5;i=false} 
+  - throw{v=3;vy=6}
+
+captainskilspawnnacisistagama05skillmob:
+  Skills:
+  - effect:particles{particle=explosion_large;amount=12;hS=1;vS=1;speed=5} @self
+  - effect:sound{s=entity.generic.explode;v=0.6;p=0.8}
+  - damage{a=9;i=false} @PIR{r=6}
+  - throw{v=3;vy=6} @PIR{r=6}
+  - stun{d=20;f=true} @PIR{r=5}
+
+soldiercaptainnarcissisticgama05_saltosupergolpe2:
+    Conditions:
+        - offgcd true
+        - incombat true
+    TargetConditions:
+        - distance{d=0to7} true
+    Skills:
+        - potion{type=SLOW;l=99;d=1112;p=false} @self
+        - gcd{ticks=84}         
+        - state{s=saltosupergolpe2} @self
+        - delay 15
+        - setspeed{s=2;type=WALKING} @self
+        - potionclear{} @self
+        - lunge{v=1} @target
+        - delay 7
+        - delay 18
+        - effect:sound{s=entity.generic.explode;v=0.6;p=0.8}
+        - setspeed{s=1;type=WALKING} @self
+        - effect:particles{particle=campfire_cosy_smoke;amount=200;hS=5;vS=0.3;speed=5} @self
+        - effect:particles{particle=explosion_large;amount=2;hS=5;vS=1;speed=5;size=2} @self
+        - damage{a=17} @PIR{r=5}
+        - throw{v=2;vy=7} @PIR{r=5}
+        - stun{d=20;f=true} @PIR{r=5}
+        - potion{type=SLOW;l=99;d=120;p=false} @self
+        - delay 44
+        - potionclear{} @self
+
+soldiercaptainnarcissisticgama05_shieldfriends:
+    Cooldown: 45
+    Conditions:
+        - offgcd true
+        - incombat true
+    Skills:
+        - potion{type=SLOW;l=99;d=1112;p=false} @self
+        - gcd{ticks=57}         
+        - state{s=shieldfriends} @self
+        - sendtitle{title="";subtitle="&e&lSuper Shield II";d=7;fi=5;fo=5;repeat=11;repeatinterval=10} @PIR{r=50}
+        - delay 30
+        - potion{type=DAMAGE_RESISTANCE;duration=200;level=2;repeat=32;repeatinterval=20} @self
+        - changepart{m=captain_narcissistic_gama05;pid=shield;nm=captain_shield_gama05;npid=shield} @self
+        - delay 27
+        - potionclear{} @self
+        - delay 600
+        - changepart{m=captain_narcissistic_gama05;pid=shield;nm=captain_narcissistic_gama05;npid=shield} @self
+
+soldiercaptainnarcissisticgama05_girogolpeton:
+    Cooldown: 15
+    Conditions:
+        - offgcd true
+        - incombat true
+    TargetConditions:
+        - distance{d=0to10} true
+    Skills:
+        - potion{type=SLOW;l=99;d=195;p=false} @self 
+        - gcd{ticks=70}
+        - state{state=girogolpeton} @Self
+        - delay 14
+        - damage{a=7;repeat=7;repeatinterval=2} @PIR{r=5}
+        - setspeed{s=2;type=WALKING} @self
+        - potionclear{} @self
+        - lunge{v=1} @target
+        - delay 31
+        - delay 1
+        - effect:sound{s=entity.generic.explode;v=0.6;p=0.8}
+        - setspeed{s=1;type=WALKING} @self
+        - effect:particles{particle=campfire_cosy_smoke;amount=200;hS=5;vS=0.3;speed=5} @self
+        - effect:particles{particle=explosion_large;amount=2;hS=5;vS=1;speed=5;size=2} @self
+        - skill{s=soldnarcgama05_girogolpetonsubskill;sync=true} @PIR{r=5}
+        - potion{type=SLOW;l=99;d=120;p=false} @self
+        - delay 24
+        - potionclear{} @self
+
+soldnarcgama05_girogolpetonsubskill:
+    Skills:
+        - damage{a=17} 
+        - throw{v=7;vy=3} 
+
+soldnarcgama05_girogolpetonsubskill2agarre:
+    Skills:
+        - skill{s=subsoldnarcgama05_girogolpetonsubskill2agarre;sync=true} @PlayersInRadius{r=5}
+
+subsoldnarcgama05_girogolpetonsubskill2agarre:
+    Skills:
+        - damage{a=17} 
+        - throw{v=9;vy=1}
+
+soldiercaptainnarcissisticgama05_agarre1:
+    Cooldown: 20
+    Conditions:
+        - incombat true
+        - offgcd
+    TargetConditions:
+        - distance{d=0to7} true
+    Skills:
+        - potion{type=SLOW;l=99;d=1195;p=false} @self 
+        - bodyclamp{mh=0;mb=0;m=captain_narcissistic_gama05} @self
+        - setspeed{s=0.0001;type=WALKING} @self
+        - gcd{ticks=102}
+        - state{state=agarre1} @Self
+        - delay 8
+        - effect:particles{p=cloud;a=45;hs=1;vs=1;yOffset=0.2;size=2} @self
+        - delay 1
+        - lockmodel{l=true} @self
+        - teleport{spreadh=0;spreadv=0} @target
+        - delay 1
+        - setAI{ai=false} @self
+        - delay 1
+        - mountmodel{driver=false;mode=force;pbone=mount;dmg=true;mid=captain_narcissistic_gama05;repeat=15;repeatinterval=2} @PIR{r=5}
+        - delay 63
+        - dismountall{mid=captain_narcissistic_gama05;p=mount} @self
+        - delay 1
+        - effect:sound{s=entity.generic.explode;v=2;p=0.7}
+        - totem{ch=1;md=2;oH=soldnarcgama05_girogolpetonsubskill2agarre;repeat=5;repeatInterval=1;hnp=true} @modelpart{m=captain_narcissistic_gama05;p=mount;off=LOCAL}
+        - delay 19
+        - setspeed{s=1;type=WALKING} @self
+        - lockmodel{l=false} @self
+        - setAI{ai=true} @self
+        - potionclear{} @self
+
+soldiercaptainnarcissisticgama05_magic2ultihammer:
+    Cooldown: 12
+    Conditions:
+        - offgcd
+        - incombat true
+    TargetConditions:
+        - distance{d=4to26} true
+    Skills:
+        - gcd{ticks=80} @self
+        - sendtitle{title="";subtitle="&e&lMagic Hammer I";d=7;fi=5;fo=5;repeat=7;repeatinterval=10} @PIR{r=50}
+        - state{s=magic2ultihammer} @self
+        - potion{type=SLOW;l=99;d=3272;p=false;os=true} @self
+        - potion{t=DAMAGE_RESISTANCE;l=10;d=200} @self
+        - effect:particleorbital{r=2;points=16;t=75;i=1;vy=20;p=reddust;color=#e4e437} @self
+        - effect:particleorbital{r=4;points=16;t=75;i=1;vy=20;p=reddust;color=#f0f082} @self
+        - delay 30
+        - effect:particles{p=reddust;color=#fefe53;a=10;hs=1;vs=1;yOffset=1;size=2} @ModelPart{mid=captain_narcissistic_gama05;part=arma;z=-0.6;y=-0.6}
+        - delay 24
+        - summon{type=magichammernarcisssistchability_gama05;a=1;r=0;yu=true} @NearestPlayer{r=44}
+        - delay 26
+        - potionclear{} @self
+
+submagihammerskillcaptainarciss2_gama05:
+    Skills:
+        - damage{a=20} 
+        - throw{v=4;vy=7}
+
+
+
+
