@@ -21,9 +21,7 @@ HyronicSB-TLongDSM vẫn đang trong quá trình phát triển, nhưng bản set
 HyronicSB-TLongDSM là một bản setup Skyblock hoàn thiện và hấp dẫn. Bản setup này là sự kết hợp giữa những tinh hoa của Hyronic Skyblock và những cải tiến mới của tôi. Tôi hy vọng rằng bản setup này sẽ mang lại cho người chơi những trải nghiệm tuyệt vời.
 
 ## Lưu ý
-- Mình chỉ làm Server vì sở thích và chia sẻ chúng cho người khác, những người có nhu cầu chỉ chơi cùng bạn bè của mình.
-- Không sử dụng để kinh doanh dưới mọi hình thức.
-- Mọi vấn đề về bản quyền và tranh chấp mình sẽ không chịu trách nhiệm.
+Tôi xây dựng server HyronicSB-TLongDSM với mục đích phi lợi nhuận, chỉ dành cho mục đích giải trí cá nhân. Server này không được sử dụng cho mục đích thương mại dưới bất kỳ hình thức nào. Tôi không chịu trách nhiệm về bất kỳ vấn đề bản quyền hoặc tranh chấp nào phát sinh từ việc sử dụng server này.
 
 ***
 
